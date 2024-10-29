@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white; 
+            color: black; 
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 700px; 
+            height: auto; 
+            padding: 20px 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: yellow;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .hotline {
+            font-size: 14px;
+            color: #666;
+            margin-right: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            flex-grow: 1;
+            color: #E91E63;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logo p {
+            margin: 0;
+            font-size: 12px;
+            color: #E91E63;
+        }
+
+        .header-right a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            width: 150px;
+            transition: width 0.3s ease;
+        }
+
+        .search-bar input[type="text"]:focus {
+            width: 200px;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .nav-bar {
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-bar ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar li {
+            margin: 0 10px;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #f7f7f7;
+            color: #000;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .banner {
+            padding : 0 0 0 0;
+            max-width: 100%;
+            height: 700px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="hotline">HOTLINE: (028)38305570</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100009526723686">
+                    <img src="Images/FB_icon.jpg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.instagram.com/">
+                    <img src="Images/Instagram_icon.png" alt="Instagram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://telegram.org/">
+                    <img src="Images/Telegram_icon.png" alt="Telegram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://x.com/">
+                    <img src="Images/X_icon.png" alt="X Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.whatsapp.com/">
+                    <img src="Images/whatsapp_icon.png" alt="WhatsApp Icon" style="width: 20px; height: 20px;">
+                </a>
+            </div>
+        </div>
+        <div class="logo">
+            <a href ="Mainpage.html"> <img src="Images/FlowerShop.png"></a>
+        </div>
+        <div class="header-right">
+            <a href="#">Tài khoản</a>
+            <a href="#" class="cart">
+                <i class="cart-icon fas fa-shopping-bag"></i>
+            </a>
+            <a href="#">Thanh toán</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <ul>
+            <li><a href="#">Hoa tặng sinh nhật mẹ</a></li>
+            <li><a href="#">Hoa tặng sinh nhật bạn</a></li>
+            <li><a href="#">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
+            <li><a href="#">Hoa sinh nhật sang trọng</a></li>
+            <li><a href="#">Hoa sinh nhật giá rẻ</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <img class="banner" src="Images/Banner2.jpg" alt="Banner">
+</body>
+</html>
