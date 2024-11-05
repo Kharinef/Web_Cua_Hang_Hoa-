@@ -1,0 +1,114 @@
+.content {
+    padding: 20px;
+}
+
+.banner {
+    max-width: 100%;
+    height: 600px;
+    display: block;
+    margin: 0 auto;
+}
+
+.product-order {
+    display: flex; /* Sử dụng flexbox */
+    align-items: flex-start; /* Căn chỉnh các phần tử ở trên cùng */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px; /* Tăng chiều rộng tối đa để cải thiện diện mạo */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    flex: 0 0 150px; /* Cố định chiều rộng cho hình ảnh */
+    margin-right: 20px; /* Khoảng cách giữa hình ảnh và chi tiết sản phẩm */
+}
+
+.product-image img {
+    width: 100%; /* Đảm bảo hình ảnh chiếm 100% chiều rộng của khối */
+    height: auto; /* Giữ tỷ lệ hình ảnh */
+    border-radius: 10px;
+    object-fit: cover; /* Đảm bảo hình ảnh đẹp hơn */
+}
+
+.product-details {
+    padding: 20px;
+    background-color: #f9f9f9; /* Màu nền sáng */
+    border-radius: 8px; /* Bo tròn các góc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+}
+
+.product-details-content {
+    display: flex; /* Sử dụng flexbox cho bố cục */
+    gap: 20px; /* Khoảng cách giữa hình ảnh và thông tin sản phẩm */
+}
+
+.product-image img {
+    border-radius: 8px; /* Bo tròn hình ảnh */
+}
+
+.product-info {
+    flex: 1; /* Cho phép phần thông tin chiếm không gian còn lại */
+    display: flex;
+    flex-direction: column; /* Sắp xếp theo cột */
+    justify-content: space-between; /* Căn chỉnh các mục trong phần thông tin */
+}
+
+.product-qty {
+    display: flex;
+    align-items: center; /* Căn giữa dọc */
+    margin: 15px 0; /* Khoảng cách trên và dưới */
+}
+
+.qty {
+    display: flex; /* Sử dụng flexbox */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    gap: 10px; /* Khoảng cách giữa các nút và ô nhập liệu */
+}
+
+.qtyminus, .qtyplus {
+    width: 40px; /* Đặt chiều rộng cho nút */
+    height: 40px; /* Đặt chiều cao cho nút */
+    background-color: #FFB6C1; /* Màu nền cho nút */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bo tròn góc */
+    cursor: pointer; /* Con trỏ chuột dạng tay khi di chuột qua */
+    font-size: 20px; /* Kích thước chữ */
+    padding: 5px;
+}
+
+#qty {
+    width: 60px; /* Đặt chiều rộng cho ô nhập liệu */
+    text-align: center; /* Căn giữa văn bản trong ô */
+    padding: 10px; /* Khoảng cách bên trong ô */
+    border: 1px solid #ddd; /* Viền cho ô nhập liệu */
+    border-radius: 5px; /* Bo tròn góc */
+}
+
+
+.qtyminus:hover, .qtyplus:hover {
+    background-color: #FF9AA2; /* Màu nền khi hover */
+}
+
+.btn-orders {
+    background-color: #5935e7; /* Màu nền cho nút đặt hàng */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; /* Bo tròn góc */
+    cursor: pointer; /* Con trỏ chuột dạng tay khi di chuột qua */
+    margin-top: 10px; /* Khoảng cách trên nút */
+}
+
+.btn-orders:hover {
+    background-color: #f51629; /* Màu nền khi hover */
+}
+
+.product-details-description {
+    margin-top: 20px; /* Khoảng cách trên phần mô tả chi tiết */
+}
