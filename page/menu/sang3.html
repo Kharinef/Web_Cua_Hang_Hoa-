@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop - Trang 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white; 
+            color: black;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #FFB6C1;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .hotline {
+            font-size: 14px;
+            color: #666;
+            margin-right: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .center {
+            max-width: 700px; 
+            padding: 20px 150px;
+        }
+
+        .header-right a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px; 
+            display: flex;
+            align-items: center;
+        }
+        
+        #searchInput {
+            flex-grow: 1; 
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding-right: 40px; 
+        }
+
+        #searchIcon {
+            position: absolute;
+            right: 5px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            cursor: pointer;    
+            width: 20px; 
+            height: 15px; 
+        }
+        
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 1px solid #ddd;
+            background: white;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 10;
+        }
+        
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-bar {
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-bar ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #f7f7f7;
+            color: #FFB6C1;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-container select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .product-item {
+            width: 22%;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        .product-item img { 
+            width: 100%;
+            height: 275px; 
+            object-fit: cover; 
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+         }
+        .product-info { padding: 10px; }
+        
+        .product-info a { text-decoration: none; color: #333; }
+        
+        .product-info h3 { font-size: 18px; color: #333; margin: 10px 0; }
+        .price { font-size: 16px; color: #e74c3c; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 14px; }
+
+        .order-button {
+            background-color: #ffc0cb;
+            color: #d6336c; 
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .pagination { text-align: center; margin-top: 20px; }
+        .pagination a { color: #333; padding: 10px 15px; border: 1px solid #ccc; margin: 0 5px; border-radius: 5px; text-decoration: none; }
+        .pagination a.active { background-color: #e74c3c; color: #fff; }
+        .footer { text-align: center; padding: 10px; color: #666; }
+        .footer-content { text-align: center; padding: 20px; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="https://www.sgu.edu.vn/"><img src="../../images/SGU-LOGO.png" style="width: 60px; height: 60px;" class="social-icons"></a>
+            <div class="hotline">HOTLINE: (028)38305570</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100009526723686">
+                    <img src="../../images/FB_icon.jpg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100089018237035">
+                    <img src="../../images/Instagram_icon.png" alt="Instagram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/dtp.clo">
+                    <img src="../../images/Telegram_icon.png" alt="Telegram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100036720456189">
+                    <img src="../../images/X_icon.png" alt="X Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/vinhthieu.nguyen.982">
+                    <img src="../../images/whatsapp_icon.png" alt="WhatsApp Icon" style="width: 20px; height: 20px;">
+                </a>
+            </div>
+        </div>
+        <div>
+            <a class="center" href="../../mainpage.html"><img src="../../images/FlowerShop.png" alt="Logo"></a>
+        </div>
+        <div class="header-right">
+            <a href="Account.html">Tài khoản</a>
+            <a href="Cart.html" class="cart">
+                <i class="cart-icon fas fa-shopping-bag"></i> Giỏ hàng
+            </a>
+            <a href="Checkout.html">Thanh toán</a>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
+                <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
+                <div id="suggestions"></div>
+            </div>
+            <script src="scripts.js"></script>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <ul>
+            <li><a href="mainpage.html">Trang Chính</a></li>
+            <li><a href="me1.html">Hoa tặng sinh nhật mẹ</a></li>
+            <li><a href="ban1.html">Hoa tặng sinh nhật bạn</a></li>
+            <li><a href="ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
+            <li><a href="sang1.html">Hoa sinh nhật sang trọng</a></li>
+            <li><a href="re1.html">Hoa sinh nhật giá rẻ</a></li>
+        </ul>
+    </div>
+    
+    <div class="content">
+        <h1 style="text-align: center; color: #333;">Hoa Sinh Nhật Sang Trọng - Trang 3</h1>
+        
+        <div class="filter-bar">
+            <div class="filter-container">
+                <label for="sortBy">Sắp xếp theo:</label>
+                <select id="sortBy">
+                    <option value="default">Mặc định</option>
+                    <option value="priceLowToHigh">Giá từ thấp đến cao</option>
+                    <option value="priceHighToLow">Giá từ cao đến thấp</option>
+                    <option value="popularity">Phổ biến</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="itemsPerPage">Số lượng:</label>
+                <select id="itemsPerPage">
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="16">16</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-item">
+                <a href="sanpham9.html"><img src="../../images/hoa22.jpeg" alt="Hẹn Hò" /></a>
+                <div class="product-info">
+                    <a href="sanpham9.html"><h3>Hẹn Hò</h3></a>
+                    <div class="price">370,000 VND <span class="old-price">500,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <a href="sanpham10.html"><img src="../../images/hoa24.jpg" alt="Your Day" /></a>
+                <div class="product-info">
+                    <a href="sanpham10.html"><h3>Your Day</h3></a>
+                    <div class="price">620,000 VND <span class="old-price">700,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <a href="sanpham11.html"><img src="../../images/hoa26.jpg" alt="Hương Ngày Nắng" /></a>
+                <div class="product-info">
+                    <a href="sanpham11.html"><h3>Hương Ngày Nắng</h3></a>
+                    <div class="price">980,000 VND</div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <a href="sanpham12.html"><img src="../../images/hoa28.jpg" alt="Em Bé Xinh" /></a>
+                <div class="product-info">
+                    <a href="sanpham12.html"><h3>Em Bé Xinh</h3></a>
+                    <div class="price">720,000 VND</div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="sang1.html">1</a>
+            <a href="sang2.html">2</a>
+            <a href="sang3.html" class="active">3</a>
+        </div>
+        <div class="footer">
+            <p>Hiển thị từ 9 đến 12 / 12 (1 Trang)</p>
+        </div>
+    </div>
+
+    <div class="footer-content" style="text-align: center; padding: 20px; color: #333;">
+        <h2>Hoa Sinh Nhật Sang Trọng Tặng Đối Tác</h2>
+        <p>Bạn đang tìm những mẫu hoa đẹp sang trọng để gửi tặng ba mẹ, cấp trên hay đối tác nhân dịp sinh nhật? Bạn đã tham khảo nhiều shop hoa tươi nhưng vẫn chưa lựa chọn được một mẫu hoa ưng ý?</p>
+        <p>Sinh nhật là dịp để bạn thể hiện sự quan tâm và cũng là cơ hội để bạn xây dựng mối quan hệ với cấp trên, đối tác.... Nhân dịp này, hãy gửi tặng một mẫu hoa thật đẹp, sang trọng để thay cho lời cảm ơn và lời chúc may mắn, thành công. Tham khảo ngay bộ sưu tập những mẫu lẵng hoa sinh nhật sang trọng được thiết kế bởi shop hoa tươi FlowerShop.</p>
+        <p>Ngoài những mẫu hoa có sẵn trên website, FlowerShop cũng nhận thiết kế hoa chúc mừng sinh nhật theo yêu cầu với mức giá chỉ từ 1k.</p>
+    </div>
+</body>
+</html>
