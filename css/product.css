@@ -29,7 +29,7 @@
 .product-image img {
     width: 100%; /* Đảm bảo hình ảnh chiếm 100% chiều rộng của khối */
     height: auto; /* Giữ tỷ lệ hình ảnh */
-    border-radius: 10px;
+    border-radius: 8px; /* Bo tròn hình ảnh */
     object-fit: cover; /* Đảm bảo hình ảnh đẹp hơn */
 }
 
@@ -46,15 +46,27 @@
     gap: 20px; /* Khoảng cách giữa hình ảnh và thông tin sản phẩm */
 }
 
-.product-image img {
-    border-radius: 8px; /* Bo tròn hình ảnh */
-}
+
 
 .product-info {
     flex: 1; /* Cho phép phần thông tin chiếm không gian còn lại */
     display: flex;
     flex-direction: column; /* Sắp xếp theo cột */
-    justify-content: space-between; /* Căn chỉnh các mục trong phần thông tin */
+    justify-content: space-around; /* Căn chỉnh các mục trong phần thông tin */
+    justify-content: space-between;
+    font-size: large;
+
+}
+
+.old-price { 
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px; 
+}
+
+.price { 
+    font-size: 16px;
+    color: #e74c3c;
 }
 
 .product-qty {
@@ -68,6 +80,7 @@
     align-items: center; /* Căn giữa theo chiều dọc */
     justify-content: center; /* Căn giữa theo chiều ngang */
     gap: 10px; /* Khoảng cách giữa các nút và ô nhập liệu */
+    padding-left: 20px;
 }
 
 .qtyminus, .qtyplus {
