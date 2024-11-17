@@ -1,0 +1,171 @@
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Flower Shop - Customer Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+    <div class="sticky top-0 z-50 bg-[#FFB6C1] border-b border-gray-300">
+        <div class="flex flex-wrap justify-between items-center p-4">
+            <div class="flex items-center space-x-4">
+                <a href="https://www.sgu.edu.vn/">
+                    <img alt="SGU Logo" class="w-15 h-15" height="60" src="images/SGU-LOGO.png" width="60"/>
+                </a>
+                <div class="text-gray-600 text-sm">
+                    HOTLINE: (028)38305570
+                </div>
+                <div class="flex space-x-2">
+                    <a href="https://www.facebook.com/profile.php?id=100009526723686">
+                        <img alt="Facebook Icon" class="w-5 h-5" height="20" src="images/FB_icon.jpg" width="20"/>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089018237035">
+                        <img alt="Instagram Icon" class="w-5 h-5" height="20" src="images/Instagram_icon.png" width="20"/>
+                    </a>
+                    <a href="https://www.facebook.com/dtp.clo">
+                        <img alt="Telegram Icon" class="w-5 h-5" height="20" src="images/Telegram_icon.png" width="20"/>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100036720456189">
+                        <img alt="X Icon" class="w-5 h-5" height="20" src="images/X_icon.png" width="20"/>
+                    </a>
+                    <a href="https://www.facebook.com/vinhthieu.nguyen.982">
+                        <img alt="WhatsApp Icon" class="w-5 h-5" height="20" src="images/whatsapp_icon.png" width="20"/>
+                    </a>
+                </div>
+            </div>
+            <div class="flex items-center justify-center w-full md:w-auto">
+                <a class="mx-auto" href="Mainpage.html">
+                    <img alt="Flower Shop Logo" class="w-40 h-15" height="60" src="../../images/FlowerShop.png" width="150"/>
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a class="text-gray-600 text-sm" href="Account.html">Tài khoản</a>
+                <a class="text-gray-600 text-sm flex items-center" href="Cart.html">
+                    <i class="fas fa-shopping-bag mr-1"></i> Giỏ hàng
+                </a>
+                <a class="text-gray-600 text-sm" href="Checkout.html">Thanh toán</a>
+                <div class="relative">
+                    <input class="border border-gray-300 rounded px-3 py-2 w-64" id="searchInput" placeholder="Tìm kiếm sản phẩm..." type="text"/>
+                    <img alt="Search Icon" class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer w-5 h-5" height="20" id="searchIcon" src="../../images/search-icon.png" width="20"/>
+                    <div class="absolute top-full left-0 right-0 border border-gray-300 bg-white max-h-48 overflow-y-auto hidden z-10" id="suggestions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white shadow-md">
+        <ul class="flex flex-wrap justify-center space-x-4 p-4">
+            <li><a class="text-gray-800 hover:bg-gray-100 hover:text-pink-200 px-3 py-2 rounded" href="mainpage.html">Trang Chính</a></li>
+            <li><a class="text-gray-800 hover:bg-gray-100 hover:text-pink-200 px-3 py-2 rounded" href="page/menu/me1.html">Hoa tặng sinh nhật mẹ</a></li>
+            <li><a class="text-gray-800 hover:bg-gray-100 hover:text-pink-200 px-3 py-2 rounded" href="page/menu/ban1.html">Hoa tặng sinh nhật bạn</a></li>
+            <li><a class="text-gray-800 hover:bg-gray-100 hover:text-pink-200 px-3 py-2 rounded" href="page/menu/ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
+            <li><a class="text-gray-800 hover:bg-gray-100 hover:text-pink-200 px-3 py-2 rounded" href="page/menu/sang1.html">Hoa sinh nhật sang trọng</a></li>
+            <li><a class="text-gray-800 hover:bg-gray-100 hover:text-pink-200 px-3 py-2 rounded" href="page/menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
+        </ul>
+    </div>
+    <div class="container mx-auto p-4">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Thông Tin Khách Hàng</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-700">Họ và Tên:</label>
+                    <input class="border border-gray-300 rounded px-3 py-2 w-full" type="text" id="name" value="Nguyễn Văn A" readonly/>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Email:</label>
+                    <input class="border border-gray-300 rounded px-3 py-2 w-full" type="email" id="email" value="nguyenvana@example.com" readonly/>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Số Điện Thoại:</label>
+                    <input class="border border-gray-300 rounded px-3 py-2 w-full" type="text" id="phone" placeholder="Nhập số điện thoại của bạn" readonly/>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Địa Chỉ:</label>
+                    <input class="border border-gray-300 rounded px-3 py-2 w-full" type="text" id="address" placeholder="Nhập địa chỉ của bạn" readonly/>
+                </div>
+            </div>
+            <div class="flex space-x-4 mt-4">
+                <button class="bg-pink-500 text-white px-4 py-2 rounded" id="saveButton" onclick="saveInfo()" disabled>Lưu</button>
+                <button class="bg-gray-500 text-white px-4 py-2 rounded" id="editButton" onclick="editInfo()">Chỉnh Sửa</button>
+            </div>
+            <h3 class="text-xl font-bold mt-6 mb-4">Lịch Sử Đơn Hàng</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-300">Mã Đơn Hàng</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Ngày Đặt</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Tổng Tiền</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderHistory">
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSuggestions() {
+            const suggestions = document.getElementById("suggestions");
+            const query = document.getElementById("searchInput").value;
+            if (query.trim()) {
+                suggestions.style.display = "block";
+                
+            } else {
+                suggestions.style.display = "none";
+            }
+        }
+
+        document.getElementById("searchIcon").addEventListener("click", function() {
+            performSearch();
+        });
+
+        function performSearch() {
+            const query = document.getElementById("searchInput").value;
+            if (query.trim()) {
+                window.location.href = `/search?query=${encodeURIComponent(query)}`;
+            } else {
+                alert("Vui lòng nhập từ khóa để tìm kiếm.");
+            }
+        }
+
+        function saveInfo() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+
+            if (name.trim() && email.trim() && phone.trim() && address.trim()) {
+                if (confirm("Bạn có chắc chắn muốn lưu thông tin này không?")) {
+                    alert("Thông tin đã được lưu.");
+                   
+                    document.getElementById("name").readOnly = true;
+                    document.getElementById("email").readOnly = true;
+                    document.getElementById("phone").readOnly = true;
+                    document.getElementById("address").readOnly = true;
+                    document.getElementById("saveButton").disabled = true;
+                    document.getElementById("editButton").disabled = false;
+                }
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin.");
+            }
+        }
+
+        function editInfo() {
+            document.getElementById("name").readOnly = false;
+            document.getElementById("email").readOnly = false;
+            document.getElementById("phone").readOnly = false;
+            document.getElementById("address").readOnly = false;
+            document.getElementById("saveButton").disabled = false;
+            document.getElementById("editButton").disabled = true;
+        }
+    </script>
+</body>
+</html>
