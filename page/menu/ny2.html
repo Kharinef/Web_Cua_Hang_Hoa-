@@ -235,7 +235,7 @@
             <a class="center" href="../../mainpage.html"><img src="../../images/FlowerShop.png" alt="Logo"></a>
         </div>
         <div class="header-right">
-            <a href="Account.html">Tài khoản</a>
+            <a href="../../Account.html">Tài khoản</a>
             <a href="Cart.html" class="cart">
                 <i class="cart-icon fas fa-shopping-bag"></i> Giỏ hàng
             </a>
@@ -251,7 +251,7 @@
 
     <div class="nav-bar">
         <ul>
-            <li><a href="mainpage.html">Trang Chính</a></li>
+            <li><a href="../../mainpage.html">Trang Chính</a></li>
             <li><a href="me1.html">Hoa tặng sinh nhật mẹ</a></li>
             <li><a href="ban1.html">Hoa tặng sinh nhật bạn</a></li>
             <li><a href="ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
@@ -266,20 +266,19 @@
         <div class="filter-bar">
             <div class="filter-container">
                 <label for="sortBy">Sắp xếp theo:</label>
-                <select id="sortBy">
+                <select id="sortBy" onchange="sortProducts()">
                     <option value="default">Mặc định</option>
                     <option value="priceLowToHigh">Giá từ thấp đến cao</option>
                     <option value="priceHighToLow">Giá từ cao đến thấp</option>
-                    <option value="popularity">Phổ biến</option>
+                    <option value="nameAsc">Tên (A - Z)</option>
+                    <option value="nameDesc">Tên (Z - A)</option>
                 </select>
             </div>
             <div class="filter-container">
                 <label for="itemsPerPage">Số lượng:</label>
-                <select id="itemsPerPage">
+                <select id="itemsPerPage" onchange="updateItemsPerPage()">
                     <option value="4">4</option>
-                    <option value="8">8</option>
                     <option value="12">12</option>
-                    <option value="16">16</option>
                 </select>
             </div>
         </div>
@@ -288,32 +287,32 @@
             <div class="product-item">
                 <a href="sanpham5.html"><img src="../../images/hoa15.jpg" alt="Hẹn Hò" /></a>
                 <div class="product-info">
-                    <a href="sanpham5.html"><h3>Hẹn Hò</h3></a>
-                    <div class="price">499,000 VND <span class="old-price">710,000 VND</span></div>
+                    <a href="sanpham5.html"><h3>Nàng Thơ</h3></a>
+                    <div class="price">249,000 VND <span class="old-price">449,000 VND</span></div>
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
             <div class="product-item">
-                <a href="sanpham6.html"><img src="../../images/hoa13.jpg" alt="Your Day" /></a>
+                <a href="sanpham6.html"><img src="../../images/hoa61.jpg" alt="Your Day" /></a>
                 <div class="product-info">
-                    <a href="sanpham6.html"><h3>Your Day</h3></a>
-                    <div class="price">399,000 VND <span class="old-price">499,000 VND</span></div>
+                    <a href="sanpham6.html"><h3>Đông Kiếm Em</h3></a>
+                    <div class="price">349,000 VND <span class="old-price">499,000 VND</span></div>
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
             <div class="product-item">
                 <a href="sanpham7.html"><img src="../../images/hoa11.jpg" alt="Hương Ngày Nắng" /></a>
                 <div class="product-info">
-                    <a href="sanpham7.html"><h3>Hương Ngày Nắng</h3></a>
-                    <div class="price">1,090,000 VND</div>
+                    <a href="sanpham7.html"><h3>Summer</h3></a>
+                    <div class="price">499,000 VND <span class="old-price">699,000 VND</span></div>
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
             <div class="product-item">
                 <a href="sanpham8.html"><img src="../../images/hoa9.jpg" alt="Em Bé Xinh" /></a>
                 <div class="product-info">
-                    <a href="sanpham8.html"><h3>Em Bé Xinh</h3></a>
-                    <div class="price">820,000 VND</div>
+                    <a href="sanpham8.html"><h3>My Lover</h3></a>
+                    <div class="price">200,000 VND <span class="old-price">410,000 VND</span></div>
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
@@ -329,11 +328,20 @@
         </div>
         <div class="footer-content" style="text-align: center; padding: 20px; color: #333;">
             <h2>Hoa Dành Cho Bạn Gái</h2>
-            <p>Tặng hoa cho nàng không chỉ là món quà, mà còn là cách bạn nói rằng nàng là bông hoa xinh đẹp và duy nhất trong lòng bạn</p>
-            <p>Mỗi bông hoa mang một lời hứa – hứa yêu thương, hứa trân trọng, và hứa sẽ mãi bên cạnh. Để những đóa hoa thay lời trái tim bạn</p>
-            <p>Ngoài những mẫu hoa có sẵn trên website, FlowerShop cũng nhận thiết kế hoa chúc mừng sinh nhật theo yêu cầu với mức giá chỉ từ 1k.</p>    
-        </div>
-    </div>
+            <p>Tặng hoa cho nàng không chỉ là một món quà, mà là cách bạn nói rằng nàng là bông hoa xinh đẹp và duy nhất trong lòng bạn. Mỗi bông hoa là một thông điệp, là tình cảm chân thành mà bạn muốn gửi gắm. Hoa không chỉ tươi đẹp, mà còn ẩn chứa những lời yêu thương, ngọt ngào từ trái tim bạn.</p>
+            
+            <p><i>"Mỗi bông hoa nở là một lời yêu chưa thể nói,  
+            Là lời hứa yêu thương mãi mãi không phai nhòa."</i></p>
+            
+            <p>Mỗi bông hoa mang trong mình một lời hứa – hứa yêu thương, hứa trân trọng, và hứa sẽ mãi bên cạnh nàng, dù thời gian có trôi đi. Những đóa hoa từ FlowerShop chính là cách để bạn gửi gắm những lời trái tim không thể diễn tả bằng lời, là những khoảnh khắc ngọt ngào, những kỷ niệm đẹp mà bạn muốn cùng nàng chia sẻ.</p>
+            
+            <p>Hãy để những đóa hoa từ FlowerShop trở thành món quà ngọt ngào và ý nghĩa nhất trong ngày đặc biệt của nàng. Không chỉ dừng lại ở những mẫu hoa có sẵn trên website, FlowerShop còn nhận thiết kế hoa theo yêu cầu của bạn, giúp bạn tạo ra một bó hoa riêng biệt, mang dấu ấn của tình yêu đích thực. Và điều đặc biệt hơn, bạn có thể sở hữu những lẵng hoa tuyệt đẹp này chỉ từ 100k.</p>
+            
+            <p>Đừng ngần ngại – hãy để từng bông hoa gửi gắm lời yêu thương, để mỗi lần nàng nhìn thấy, nàng lại nhớ về tình cảm chân thành mà bạn dành cho. Những đóa hoa sẽ thay bạn nói lên tất cả!</p>
+            <p>Hãy gọi ngay <a href="tel:02838305570" style="color: #FFC0CB;">02838305570</a> để được tư vấn và lựa chọn những mẫu hoa phù hợp, hoặc đặt hoa nhanh chóng, để mang niềm vui, sự tươi mới đến người thân yêu, vì đôi khi, hạnh phúc chính là một bó hoa giản dị nhưng đầy ắp yêu thương.</p>
+            
+                    </div>
+                </div>
 
     <script>
         function performSearch() {
