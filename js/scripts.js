@@ -1,5 +1,3 @@
-<p>
-
 // === PHẦN 1: Xử lý Carousel (Trình chiếu ảnh) ===
 function initCarousel() {
     let carousel = document.querySelector('#product-img-carousel');
@@ -108,5 +106,3 @@ function initializePage() {
 
 // Chạy tất cả chức năng khi DOM đã sẵn sàng
 document.addEventListener('DOMContentLoaded', initializePage);
-
-</p>
