@@ -139,6 +139,100 @@
             display: block;
             margin: 0 auto;
         }
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .product-item {
+            width: 22%;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        .product-item img { 
+            width: 100%;
+            height: 275px; 
+            object-fit: cover; 
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .product-info { padding: 10px; }
+        
+        .product-info a { text-decoration: none; color: #333; }
+        
+        .product-info h3 { font-size: 18px; color: #333; margin: 10px 0; }
+        .price { font-size: 16px; color: #e74c3c; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 14px; }
+
+        .order-button {
+            background-color: #ffc0cb;
+            color: #d6336c; 
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin-top: 30px;
+        }
+
+        .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        }
+
+        .footer-content p {
+        margin: 5px 0;
+        font-size: 14px;
+        }
+
+        .footer-social {
+        margin-top: 10px;
+        }
+
+        .social-icon {
+        margin: 0 10px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        }
+
+        .social-icon:hover {
+        color: #ff4081;
+        }
+
+        @media (max-width: 768px) {
+        .footer-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-social {
+            margin-top: 20px;
+        }
+        }
+
     </style>
 </head>
 <body>
@@ -207,5 +301,102 @@
             }
         }
     </script>
+<br><br><br><br><br><br>
+    <div>Sản phẩm mới</div>
+    <div>--------------------------------------------------</div>
+<br><br>
+    <div class="product-grid">
+        <div class="product-item">
+            <a href="page/product/ban/aurora.html"><img src="../../images/hoa25.jpg" alt="Aurora" /></a>
+            <div class="product-info">
+                <a href="page/product/ban/aurora.html"><h3>Aurora</h3></a>
+                <div class="price">499,000 VND <span class="old-price">710,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+        <div class="product-item">
+            <a href="page/product/me/canday-date.html"><img src="../../images/hoa39.jpg" alt="Candy Date" /></a>
+            <div class="product-info">
+                <a href="page/product/me/canday-date.html"><h3>Candy Date</h3></a>
+                <div class="price">299,000 VND <span class="old-price">400,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+        <div class="product-item">
+            <a href="page/product/ny/nang-tho.html"><img src="../../images/hoa15.jpg" alt="Nàng Thơ" /></a>
+            <div class="product-info">
+                <a href="page/product/ny/nang-tho.html"><h3>Nàng Thơ</h3></a>
+                <div class="price">249,000 VND <span class="old-price">449,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+        <div class="product-item">
+            <a href="page/product/sang/beauty.html"><img src="../../images/hoa12.jpg" alt="Beauty" /></a>
+            <div class="product-info">
+                <a href="page/product/sang/beauty.html"><h3>Beauty</h3></a>
+                <div class="price">449,000 VND <span class="old-price">710,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+    </div>
+<br><br><br><br><br><br>
+    <div>Sản phẩm bán chạy</div>
+    <div>--------------------------------------------------</div>
+<br><br>
+    <div class="product-grid">
+        <div class="product-item">
+            <a href="../product/ban/huong-ngay-nang.html"><img src="../../images/hoa5.jpg" alt="Hương Ngày Nắng" /></a>
+            <div class="product-info">
+                <a href="../product/ban/huong-ngay-nang.html"><h3>Hương Ngày Nắng</h3></a>
+                <div class="price">425,000 VND <span class="old-price">600,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+        <div class="product-item">
+            <a href="../product/me/dieu-uoc.html"><img src="../../images/hoa47.jpg" alt="Điều Ước" /></a>
+            <div class="product-info">
+                <a href="../product/me/dieu-uoc.html"><h3>Điều Ước</h3></a>
+                <div class="price">450,000 VND <span class="old-price">600,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+        <div class="product-item">
+            <a href="../product/ny/my-princess.html"><img src="../../images/hoa23.jpg" alt="My Princess" /></a>
+            <div class="product-info">
+                <a href="../product/ny/my-princess.html"><h3>My Princess</h3></a>
+                <div class="price">420,000 VND <span class="old-price">600,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+        <div class="product-item">
+            <a href="../product/sang/peony.html"><img src="../../images/hoa2.jpg" alt="Peony" /></a>
+            <div class="product-info">
+                <a href="../product/sang/peony.html"><h3>Peony</h3></a>
+                <div class="price">599,000 VND <span class="old-price">600,000 VND</span></div>
+                <button class="order-button">ĐẶT HÀNG</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-column">
+            <h4>Về chúng tôi</h4>
+            <p>Công ty TNHH 1 Thành Viên</p>
+            <p>Hotline:(028)38305570</p>
+            <p>Email:FLowerShop@gmail.com</p>
+          </div>
+          <div class="footer-column">
+            <h4>Theo dõi chúng tôi</h4>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://youtube.com" target="_blank">YouTube</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 SGU Univercity</p>
+        </div>
+      </footer>
+      
 </body>
 </html>
