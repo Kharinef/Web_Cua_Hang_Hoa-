@@ -73,7 +73,19 @@
             }
         }
 
+        function saveAccount(username, email, password) {
+            const account = {
+                username: username,
+                email: email,
+                password: password
+            };
+            localStorage.setItem('account', JSON.stringify(account));
+            alert('Account saved successfully!');
+        }
+
         document.getElementById('signup-form').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
             const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
@@ -84,6 +96,8 @@
             } else if (!passwordPattern.test(password)) {
                 event.preventDefault();
                 alert('Password must be at least 8 characters long and contain at least one uppercase letter or one special character.');
+            } else {
+                saveAccount(username, email, password);
             }
         });
     </script>

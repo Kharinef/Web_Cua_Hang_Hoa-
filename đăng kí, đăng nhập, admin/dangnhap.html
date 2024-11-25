@@ -64,12 +64,20 @@
         }
 
         document.getElementById('signin-form').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+            const storedAccount = JSON.parse(localStorage.getItem('account'));
 
-            if (!passwordPattern.test(password)) {
+            if (storedAccount) {
+                if (username === storedAccount.username && password === storedAccount.password) {
+                    alert('Sign in successful!');
+                } else {
+                    event.preventDefault();
+                    alert('Invalid username or password.');
+                }
+            } else {
                 event.preventDefault();
-                alert('Password must be at least 8 characters long and contain at least one uppercase letter or one special character.');
+                alert('No account found. Please sign up.');
             }
         });
     </script>
