@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: black;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #FFB6C1;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .hotline {
+            font-size: 14px;
+            color: #666;
+            margin-right: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .center {
+            max-width: 700px;
+            padding: 20px 150px;
+        }
+
+        .header-right a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+        }
+
+        #searchInput {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding-right: 40px;
+        }
+        #searchIcon {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 15px;
+        }
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 1px solid #ddd;
+            background: white;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 10;
+        }
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-bar {
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-bar ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #f7f7f7;
+            color: #FFB6C1;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .banner {
+            max-width: 100%;
+            height: 600px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Popup Đăng nhập */
+        #loginPopup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loginPopup form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            position: relative;
+        }
+
+        #loginPopup input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #loginPopup button {
+            background-color: #FFB6C1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #loginPopup button:hover {
+            background-color: #e8a2b3;
+        }
+
+        /* Đóng Popup */
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #999;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .close-popup:hover {
+            color: #333;
+        }
+
+        .signup-link {
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .signup-link a {
+            text-decoration: none;
+            color: #FFB6C1;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="https://www.sgu.edu.vn/"><img src="../images/SGU-LOGO.png" style="width: 60px; height: 60px;" class="social-icons"></a>
+            <div class="hotline">HOTLINE: (028)38305570</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100009526723686">
+                    <img src="../images/FB_icon.jpg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100089018237035">
+                    <img src="../images/Instagram_icon.png" alt="Instagram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/dtp.clo">
+                    <img src="../images/Telegram_icon.png" alt="Telegram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100036720456189">
+                    <img src="../images/X_icon.png" alt="X Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/vinhthieu.nguyen.982">
+                    <img src="../images/whatsapp_icon.png" alt="WhatsApp Icon" style="width: 20px; height: 20px;">
+                </a>
+            </div>
+        </div>
+        <div>
+            <a class="center" href="../Mainpage.html"><img src="../Images/FlowerShop.png" alt="Logo"></a>
+        </div>
+        <div class="header-right">
+            <a href="#" onclick="showLoginPopup()">Tài khoản</a>
+            <a href="Cart.html" class="cart">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Giỏ hàng
+            </a>
+            <a href="Checkout.html">Thanh toán</a>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
+                <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
+                <div id="suggestions"></div>
+            </div>
+            <script src="../js/scripts.js"></script>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <ul>
+            <li><a href="../mainpage.html">Trang Chính</a></li>
+            <li><a href="../page/menu/me1.html">Hoa tặng sinh nhật mẹ</a></li>
+            <li><a href="../page/menu/ban1.html">Hoa tặng sinh nhật bạn</a></li>
+            <li><a href="../page/menu/ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
+            <li><a href="../page/menu/sang1.html">Hoa sinh nhật sang trọng</a></li>
+            <li><a href="../page/menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <img class="banner" src="../images/banner.jpg" alt="Banner">
+    </div>
+
+    <!-- Popup Đăng Nhập -->
+    <div id="loginPopup">
+        <form id="loginForm" action="/mainpage.html" method="post">
+            <button type="button" class="close-popup" onclick="closePopup()">×</button>
+            <h3>Đăng nhập</h3>
+            <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
+            <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
+            <button type="submit">Đăng nhập</button>
+            <div class="signup-link">
+                Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Kiểm tra trạng thái đăng nhập
+        function checkLogin() {
+            const loggedIn = document.cookie.indexOf('userLoggedIn=true') !== -1;
+            if (!loggedIn) {
+                showLoginPopup(); // Hiển thị popup đăng nhập nếu chưa đăng nhập
+            }
+        }
+
+        // Hiển thị popup đăng nhập
+        function showLoginPopup() {
+            document.getElementById('loginPopup').style.display = 'flex';
+        }
+
+        // Đóng popup đăng nhập
+        function closePopup() {
+            document.getElementById('loginPopup').style.display = 'none';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    const users = JSON.parse(localStorage.getItem('users')) || []; // Lấy danh sách người dùng từ localStorage
+
+    const account = users.find(user => user.username === username && user.password === password);
+if (account) {
+    alert('Đăng nhập thành công!');
+    localStorage.setItem('currentUser', JSON.stringify(account)); // Lưu thông tin người dùng vào localStorage
+    console.log(localStorage.getItem('currentUser')); // Kiểm tra xem thông tin đã lưu chưa
+    document.cookie = 'userLoggedIn=true; path=/'; // Đánh dấu trạng thái đã đăng nhập
+    closePopup();
+    window.location.href = '/Mainpage.html'; // Chuyển đến trang chính
+} else {
+    alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+}
+
+});
+
+
+    </script>
+</body>
+</html>
