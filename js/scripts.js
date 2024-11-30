@@ -106,3 +106,32 @@ function initializePage() {
 
 // Chạy tất cả chức năng khi DOM đã sẵn sàng
 document.addEventListener('DOMContentLoaded', initializePage);
+// === PHẦN 7: Sắp xếp sản phẩm theo giá ===
+function initSortByPrice() {
+    const sortBySelect = document.getElementById('sortBy');
+    const productGrid = document.querySelector('.product-grid');
+    const products = Array.from(document.querySelectorAll('.product-item'));
+
+    if (sortBySelect && productGrid) {
+        sortBySelect.addEventListener('change', () => {
+            const sortBy = sortBySelect.value;
+
+            products.sort((a, b) => {
+                const priceA = parseInt(a.querySelector('.price').innerText.replace(/[^\d]/g, ''));
+                const priceB = parseInt(b.querySelector('.price').innerText.replace(/[^\d]/g, ''));
+
+                if (sortBy === 'priceLowToHigh') {
+                    return priceA - priceB; // Sắp xếp tăng dần
+                } else if (sortBy === 'priceHighToLow') {
+                    return priceB - priceA; // Sắp xếp giảm dần
+                }
+                return 0; // Mặc định không thay đổi
+            });
+
+            // Cập nhật DOM với danh sách sản phẩm đã sắp xếp
+            productGrid.innerHTML = '';
+            products.forEach(product => productGrid.appendChild(product));
+        });
+    }
+}
+

@@ -85,9 +85,12 @@
         }
 
         .nav-bar {
-            background-color: #ffffff;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 80px; 
+        z-index: 1000; 
         }
 
         .nav-bar ul {
@@ -223,7 +226,7 @@
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="scripts.js"></script>
+            <script src="../../js/scripts.js"></script>
         </div>
     </div>
 
@@ -262,7 +265,7 @@
         </div>
 
         <div class="product-grid">
-            <div class="product-item">
+            <div class="product-item" data-price="170000">
                 <a href="../product/me/hoa-nu-cuoi.html"><img src="../../images/hoa31.jpg" alt="Hoa Nụ Cười" /></a>
                 <div class="product-info">
                     <a href="../product/me/hoa-nu-cuoi.html"><h3>Hoa Nụ Cười</h3></a>
@@ -270,7 +273,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="320000">
                 <a href="../product/me/nang-som-ban-mai.html"><img src="../../images/hoa29.jpg" alt="Nắng Sớm Ban Mai" /></a>
                 <div class="product-info">
                     <a href="../product/me/nang-som-ban-mai.html"><h3>Nắng Sớm Ban Mai</h3></a>
@@ -278,7 +281,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="379000">
                 <a href="../product/me/dream.html"><img src="../../images/hoa27.jpg" alt="Dream" /></a>
                 <div class="product-info">
                     <a href="../product/me/dream.html"><h3>Dream</h3></a>
@@ -286,7 +289,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="270000">
                 <a href="../product/me/cau-vong.html"><img src="../../images/hoa25.jpg" alt="Cầu Vồng" /></a>
                 <div class="product-info">
                     <a href="../product/me/cau-vong.html"><h3>Cầu Vồng</h3></a>
@@ -321,15 +324,43 @@
                     </div>
                 </div>
 
-    <script>
-        function performSearch() {
-            const query = document.getElementById("searchInput").value;
-            if (query.trim()) {
-                window.location.href = `/search?query=${encodeURIComponent(query)}`;
-            } else {
-                alert("Vui lòng nhập từ khóa để tìm kiếm.");
-            }
-        }
-    </script>
+                <script>
+                    function performSearch() {
+                        const query = document.getElementById("searchInput").value;
+                        if (query.trim()) {
+                            window.location.href = `/search?query=${encodeURIComponent(query)}`;
+                        } else {
+                            alert("Vui lòng nhập từ khóa để tìm kiếm.");
+                        }
+                    }
+                    function sortProducts() {
+                    const sortBy = document.getElementById('sortBy').value;
+                    const productGrid = document.querySelector('.product-grid');
+                    const productItems = Array.from(productGrid.children);
+            
+                    // Sắp xếp sản phẩm dựa trên giá trị được chọn
+                    if (sortBy === 'priceLowToHigh') {
+                        productItems.sort((a, b) => {
+                            return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+                        });
+                    } else if (sortBy === 'priceHighToLow') {
+                        productItems.sort((a, b) => {
+                            return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+                        });
+                    } else if (sortBy === 'nameAsc') {
+                        productItems.sort((a, b) => {
+                            return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
+                        });
+                    } else if (sortBy === 'nameDesc') {
+                        productItems.sort((a, b) => {
+                            return b.querySelector('h3').innerText.localeCompare(a.querySelector('h3').innerText);
+                        });
+                    }
+            
+                    // Xóa nội dung cũ và thêm lại các sản phẩm đã sắp xếp
+                    productGrid.innerHTML = '';
+                    productItems.forEach(item => productGrid.appendChild(item));
+                }
+                </script>
 </body>
 </html>

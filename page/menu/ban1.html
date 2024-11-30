@@ -107,9 +107,12 @@
         }
 
         .nav-bar {
-            background-color: #ffffff;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 80px; 
+        z-index: 1000; 
         }
 
         .nav-bar ul {
@@ -285,7 +288,7 @@
         
 
         <div class="product-grid">
-            <div class="product-item">
+            <div class="product-item" data-price="425000">
                 <a href="../product/ban/huong-ngay-nang.html"><img src="../../images/hoa5.jpg" alt="Hương Ngày Nắng" /></a>
                 <div class="product-info">
                     <a href="../product/ban/huong-ngay-nang.html"><h3>Hương Ngày Nắng</h3></a>
@@ -293,7 +296,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="150000">
                 <a href="../product/ban/em-be-xinh.html"><img src="../../images/hoa10.jpg" alt="Em Bé Xinh" /></a>
                 <div class="product-info">
                     <a href="../product/ban/em-be-xinh.html"><h3>Em Bé Xinh</h3></a>
@@ -301,7 +304,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="370000">
                 <a href="../product/ban/hen-ho.html"><img src="../../images/hoa15.jpg" alt="Hẹn Hò" /></a>
                 <div class="product-info">
                     <a href="../product/ban/hen-ho.html"><h3>Hẹn Hò</h3></a>
@@ -309,7 +312,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="350000">
                 <a href="../product/ban/your-day.html"><img src="../../images/hoa20.jpg" alt="Your Day" /></a>
                 <div class="product-info">
                     <a href="../product/ban/your-day.html"><h3>Your Day</h3></a>
@@ -343,8 +346,7 @@
         </div>
     </div>
 
-
-    <script>
+            <script>
         function performSearch() {
             const query = document.getElementById("searchInput").value;
             if (query.trim()) {
@@ -353,6 +355,34 @@
                 alert("Vui lòng nhập từ khóa để tìm kiếm.");
             }
         }
+        function sortProducts() {
+        const sortBy = document.getElementById('sortBy').value;
+        const productGrid = document.querySelector('.product-grid');
+        const productItems = Array.from(productGrid.children);
+
+        // Sắp xếp sản phẩm dựa trên giá trị được chọn
+        if (sortBy === 'priceLowToHigh') {
+            productItems.sort((a, b) => {
+                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            });
+        } else if (sortBy === 'priceHighToLow') {
+            productItems.sort((a, b) => {
+                return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            });
+        } else if (sortBy === 'nameAsc') {
+            productItems.sort((a, b) => {
+                return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
+            });
+        } else if (sortBy === 'nameDesc') {
+            productItems.sort((a, b) => {
+                return b.querySelector('h3').innerText.localeCompare(a.querySelector('h3').innerText);
+            });
+        }
+
+        // Xóa nội dung cũ và thêm lại các sản phẩm đã sắp xếp
+        productGrid.innerHTML = '';
+        productItems.forEach(item => productGrid.appendChild(item));
+    }
     </script>
 </body>
 </html>

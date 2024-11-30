@@ -107,11 +107,14 @@
         }
 
         .nav-bar {
-            background-color: #ffffff;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 80px; 
+        z-index: 1000; 
         }
-
+        
         .nav-bar ul {
             display: flex;
             justify-content: center;
@@ -245,7 +248,7 @@
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="scripts.js"></script>
+            <script src="../../js/scripts.js"></script>
         </div>
     </div>
 
@@ -284,7 +287,7 @@
         </div>
 
         <div class="product-grid">
-            <div class="product-item">
+            <div class="product-item" data-price="200000">
                 <a href="../product/re/ngot-ngao.html"><img src="../../images/hoa42.jpg" alt="Ngọt Ngào" /></a>
                 <div class="product-info">
                     <a href="../product/re/ngot-ngao.html"><h3>Ngọt Ngào</h3></a>
@@ -292,7 +295,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="149000">
                 <a href="../product/re/diu-dang.html"><img src="../../images/hoa44.jpg" alt="Dịu Dàng" /></a>
                 <div class="product-info">
                     <a href="../product/re/diu-dang.html"><h3>Dịu Dàng</h3></a>
@@ -300,7 +303,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="219000">
                 <a href="../product/re/nhe-nhang.html"><img src="../../images/hoa48.jpg" alt="Nhẹ Nhàng" /></a>
                 <div class="product-info">
                     <a href="../product/re/nhe-nhang.html"><h3>Nhẹ Nhàng</h3></a>
@@ -308,7 +311,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="299000">
                 <a href="../product/re/tinh-dau.html"><img src="../../images/hoa52.jpg" alt="Tình Đầu" /></a>
                 <div class="product-info">
                     <a href="../product/re/tinh-dau.html"><h3>Tình Đầu</h3></a>
@@ -349,6 +352,34 @@
                 alert("Vui lòng nhập từ khóa để tìm kiếm.");
             }
         }
+        function sortProducts() {
+        const sortBy = document.getElementById('sortBy').value;
+        const productGrid = document.querySelector('.product-grid');
+        const productItems = Array.from(productGrid.children);
+
+        // Sắp xếp sản phẩm dựa trên giá trị được chọn
+        if (sortBy === 'priceLowToHigh') {
+            productItems.sort((a, b) => {
+                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            });
+        } else if (sortBy === 'priceHighToLow') {
+            productItems.sort((a, b) => {
+                return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            });
+        } else if (sortBy === 'nameAsc') {
+            productItems.sort((a, b) => {
+                return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
+            });
+        } else if (sortBy === 'nameDesc') {
+            productItems.sort((a, b) => {
+                return b.querySelector('h3').innerText.localeCompare(a.querySelector('h3').innerText);
+            });
+        }
+
+        // Xóa nội dung cũ và thêm lại các sản phẩm đã sắp xếp
+        productGrid.innerHTML = '';
+        productItems.forEach(item => productGrid.appendChild(item));
+    }
     </script>
 </body>
 </html>

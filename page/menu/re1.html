@@ -107,9 +107,12 @@
         }
 
         .nav-bar {
-            background-color: #ffffff;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 80px; 
+        z-index: 1000; 
         }
 
         .nav-bar ul {
@@ -245,7 +248,7 @@
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="scripts.js"></script>
+            <script src="../../js/scripts.js"></script>
         </div>
     </div>
 
@@ -284,7 +287,7 @@
         </div>
 
         <div class="product-grid">
-            <div class="product-item">
+            <div class="product-item" data-price="449000">
                 <a href="../product/re/simple.html"><img src="../../images/hoa54.jpg" alt="Simple" /></a>
                 <div class="product-info">
                     <a href="../product/re/simple.html"><h3>Simple</h3></a>
@@ -292,7 +295,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="150000">
                 <a href="../product/re/hope.html"><img src="../../images/hoa56.png" alt="Hope" /></a>
                 <div class="product-info">
                     <a href="../product/re/hope.html"><h3>Hope</h3></a>
@@ -300,7 +303,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="299000">
                 <a href="../product/re/thuot-tha.html"><img src="../../images/hoa58.jpg" alt="Thướt Tha" /></a>
                 <div class="product-info">
                     <a href="../product/re/thuot-tha.html"><h3>Thướt Tha</h3></a>
@@ -308,7 +311,7 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-            <div class="product-item">
+            <div class="product-item" data-price="199000">
                 <a href="../product/re/ngo-loi.html"><img src="../../images/hoa61.jpg" alt="Ngỏ Lời" /></a>
                 <div class="product-info">
                     <a href="../product/re/ngo-loi.html"><h3>Ngỏ Lời</h3></a>
@@ -350,6 +353,34 @@
                 alert("Vui lòng nhập từ khóa để tìm kiếm.");
             }
         }
+        function sortProducts() {
+        const sortBy = document.getElementById('sortBy').value;
+        const productGrid = document.querySelector('.product-grid');
+        const productItems = Array.from(productGrid.children);
+
+        // Sắp xếp sản phẩm dựa trên giá trị được chọn
+        if (sortBy === 'priceLowToHigh') {
+            productItems.sort((a, b) => {
+                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            });
+        } else if (sortBy === 'priceHighToLow') {
+            productItems.sort((a, b) => {
+                return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            });
+        } else if (sortBy === 'nameAsc') {
+            productItems.sort((a, b) => {
+                return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
+            });
+        } else if (sortBy === 'nameDesc') {
+            productItems.sort((a, b) => {
+                return b.querySelector('h3').innerText.localeCompare(a.querySelector('h3').innerText);
+            });
+        }
+
+        // Xóa nội dung cũ và thêm lại các sản phẩm đã sắp xếp
+        productGrid.innerHTML = '';
+        productItems.forEach(item => productGrid.appendChild(item));
+    }
     </script>
 </body>
 </html>
