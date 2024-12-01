@@ -1,3 +1,4 @@
+/* General styling for body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,6 +7,7 @@ body {
     color: black;
 }
 
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -18,7 +20,7 @@ body {
     z-index: 1000;
 }
 
-.header-left,.header-right {
+.header-left, .header-right {
     display: flex;
     align-items: center;
 }
@@ -42,7 +44,7 @@ body {
 
 .center {
     max-width: 700px;
-    padding: 20px 150px;
+    padding: 20px 100%;
 }
 
 .header-right a {
@@ -52,6 +54,14 @@ body {
     margin-left: 10px;
 }
 
+.search-container {
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Search Container */
 .search-container {
     position: relative;
     max-width: 400px;
@@ -99,6 +109,7 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Navbar */
 .nav-bar {
     background-color: #ffffff;
     padding: 10px;
@@ -126,10 +137,12 @@ body {
     color: #FFB6C1;
 }
 
+/* Content */
 .content {
     padding: 20px;
 }
 
+/* Banner */
 .banner {
     max-width: 100%;
     height: 600px;
@@ -137,27 +150,96 @@ body {
     margin: 0 auto;
 }
 
+/* Footer */
 footer {
-    background-color: #FFB6C1;
-    padding: 30px;
-    color: #333;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
     text-align: center;
+    font-family: Arial, sans-serif;
+    margin-top: 30px;
 }
 
-.footer-content {
-    max-width: 800px;
+.footer-container {
+    max-width: 1200px;
     margin: 0 auto;
-}
-
-.footer-content h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .footer-content p {
-    font-size: 16px;
     margin: 5px 0;
-    color: #333;
-    line-height: 1.5;
+    font-size: 14px;
+}
+
+.footer-social {
+    margin-top: 10px;
+}
+
+.social-icon {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.social-icon:hover {
+    color: #ff4081;
+}
+
+/* Responsive Design - Mobile-First */
+@media (max-width: 768px) {
+    /* Header */
+    .header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Giảm kích thước các biểu tượng trên mobile */
+    .social-icons a img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .center img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-social {
+        margin-top: 20px;
+    }
+}
+
+/* Responsive Design for larger screens */
+@media (min-width: 768px) {
+    .header {
+        justify-content: space-between;
+    }
+
+    .header-left, .header-right {
+        flex: 1;
+    }
+
+    .header-left {
+        flex: 2;
+    }
+
+    .header-right {
+        flex: 3;
+        justify-content: flex-end;
+    }
 }
