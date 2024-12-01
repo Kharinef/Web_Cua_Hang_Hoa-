@@ -44,3 +44,28 @@ function toggleDescription() {
     button.textContent = "Thu gọn"; // Thay đổi chữ của nút thành "Thu gọn"
   }
 }
+
+// Chức năng cuộn ngang
+const scrollContainer = document.querySelector('.related-products-list');
+const scrollLeftButton = document.querySelector('.scroll-left');
+const scrollRightButton = document.querySelector('.scroll-right');
+
+// Tính toán số lượng sản phẩm hiển thị
+const productWidth = 300; // Kích thước mỗi sản phẩm (bao gồm margin/padding)
+const visibleProducts = 5; // Số sản phẩm hiển thị trong khung
+let currentScroll = 0; // Vị trí cuộn hiện tại
+
+scrollLeftButton.addEventListener('click', () => {
+    if (currentScroll > 0) {
+        currentScroll--;
+        scrollContainer.style.transform = `translateX(-${currentScroll * productWidth}px)`;
+    }
+});
+
+scrollRightButton.addEventListener('click', () => {
+    const maxScroll = document.querySelectorAll('.product-card').length - visibleProducts;
+    if (currentScroll < maxScroll) {
+        currentScroll++;
+        scrollContainer.style.transform = `translateX(-${currentScroll * productWidth}px)`;
+    }
+});
