@@ -1,4 +1,4 @@
-/* General styling */
+/* General styling for body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,6 +6,7 @@ body {
     background-color: #f8f8f8;
 }
 
+/* Product Details Section */
 .product-details {
     margin-top: 40px;
     padding: 20px;
@@ -14,23 +15,27 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Product Content Layout */
 .product-details-content {
     display: flex;
-    gap: 30px;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
 }
 
+/* Product Image */
 .product-image {
-    flex: 1 1 50%;
+    width: 100%;
     max-width: 500px;
+    margin: 0 auto;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Product Information */
 .product-info {
-    flex: 1 1 45%;
+    flex-grow: 1;
 }
 
 .product-info h3 {
@@ -56,6 +61,7 @@ body {
     color: #777;
 }
 
+/* Product Quantity Section */
 .product-qty {
     margin-top: 20px;
 }
@@ -88,6 +94,7 @@ body {
     background-color: #c0392b;
 }
 
+/* Button for Orders */
 .btn-orders {
     display: inline-block;
     margin-top: 20px;
@@ -105,6 +112,7 @@ body {
     background-color: #e74c3c;
 }
 
+/* Product Details Description */
 .product-details-description {
     margin-top: 20px;
 }
@@ -120,6 +128,7 @@ body {
     line-height: 1.6;
 }
 
+/* Read More Button */
 .read-more {
     background-color: #FFB6C1;
     color: white;
@@ -134,6 +143,19 @@ body {
     background-color: #e74c3c;
 }
 
+/* Ẩn phần mô tả chi tiết */
+.product-details-description p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+.product-details-description.expanded p {
+    white-space: normal; /* Cho phép hiển thị toàn bộ văn bản */
+}
+
+/* Modal Styles */
 .modal-content {
     border-radius: 10px;
 }
@@ -150,12 +172,188 @@ body {
     padding: 10px 20px;
 }
 
+/* Carousel Image */
 .carousel-inner img {
     object-fit: cover;
     height: 400px;
 }
 
-/* Mobile responsive */
+/* Related Products Section */
+.related-products {
+    margin-top: 30px;
+}
+
+.related-products-list {
+    display: flex;
+    gap: 15px;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+}
+
+.product-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.btn-add-cart {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-add-cart:hover {
+    background-color: #218838;
+}
+
+/* Button for Orders (Override if needed) */
+.btn-orders {
+    background-color: #6c686a;
+    color: white;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-orders:hover {
+    background-color: #3914f3;
+}
+
+.related-products {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.related-products h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.related-products-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 sản phẩm trong mỗi hàng */
+    gap: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px); /* Khi hover, sản phẩm nhấc lên một chút */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-card p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.product-card p:last-child {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.related-products {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.related-products h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.related-products-list {
+    display: flex;
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    gap: 20px;
+    padding-bottom: 20px; /* Khoảng cách dưới cùng */
+}
+
+.product-card {
+    width: 250px; /* Chỉnh kích thước sản phẩm */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px); /* Khi hover, sản phẩm nhấc lên một chút */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-card p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.product-card p:last-child {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* Nút "Xem thêm" */
+.show-more {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.show-more:hover {
+    background-color: #c0392b;
+}
+
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
     .product-details-content {
         flex-direction: column;
@@ -164,5 +362,35 @@ body {
     .product-image, .product-info {
         flex: 1 1 100%;
         max-width: 100%;
+    }
+}
+
+/* Tablet and Larger Screens */
+@media (min-width: 768px) {
+    .product-details-content {
+        flex-direction: row;
+    }
+
+    .product-image {
+        width: 40%;
+    }
+
+    .product-info {
+        width: 60%;
+    }
+}
+
+/* Desktop and Larger Screens */
+@media (min-width: 1024px) {
+    .product-details-content {
+        gap: 40px;
+    }
+
+    .product-image {
+        width: 50%;
+    }
+
+    .product-info {
+        width: 50%;
     }
 }

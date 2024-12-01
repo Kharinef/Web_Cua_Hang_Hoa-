@@ -14,7 +14,8 @@
     <!-- HEADER -->
     <div class="header">
         <div class="header-left">
-            <a href="https://www.sgu.edu.vn/"><img src="../../../Images/SGU-LOGO.png" style="width: 60px; height: 60px;" class="social-icons"></a>
+            <a href="https://www.sgu.edu.vn/"><img src="../../../Images/SGU-LOGO.png" style="width: 60px; height: 60px;"
+                    class="social-icons"></a>
             <div class="hotline">HOTLINE: (028)38305570</div>
             <div class="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=100009526723686">
@@ -107,71 +108,84 @@
                         </div>
                     </form>
                 </div>
-                <button class="btn-orders" data-bs-toggle="modal" data-bs-target="#Modalcheck-user"> Đặt hoa </button>
-                <div class="product-details-description">
-                    <h4>Thông tin chi tiết</h4>
-                    <p>
-                        Những bông hoa tươi mới nhất được tuyển chọn từ vườn. Chúng sẽ mang lại không khí tươi mới và
-                        niềm
-                        vui cho mọi dịp lễ.
-                    </p>
-                    <button class="read-more">Xem thêm</button>
-                </div>
+                <button id="add-to-cart" class="btn-orders" data-bs-toggle="modal" data-bs-target="#Modalcheck-user">Đặt
+                    hoa</button>
+                    <div class="product-details-description"> 
+                        <h4>Thông tin chi tiết</h4> 
+                        <p id="product-description">
+                            Những bông hoa tươi mới nhất được tuyển chọn từ vườn. Chúng sẽ mang lại không khí tươi mới và niềm vui cho mọi dịp lễ.
+                        </p>  
+                        <button class="read-more" onclick="toggleDescription()">Xem thêm</button>
+                    </div>
+                    
             </div>
         </div>
+
+        <!-- Sản phẩm tương tự -->
+        <div class="related-products">
+            <h4>Sản phẩm tương tự</h4>
+            <div class="related-products-list">
+                <div class="product-card">
+                    <img src="/images/hoa26.jpg" alt="Hoa Tương Tự 1">
+                    <p>Hoa Tương Tự 1</p>
+                    <p>350,000 VND</p>
+                </div>
+                <div class="product-card">
+                    <img src="/images/hoa27.jpg" alt="Hoa Tương Tự 2">
+                    <p>Hoa Tương Tự 2</p>
+                    <p>400,000 VND</p>
+                </div>
+                <div class="product-card">
+                    <img src="/images/hoa28.jpg" alt="Hoa Tương Tự 3">
+                    <p>Hoa Tương Tự 3</p>
+                    <p>450,000 VND</p>
+                </div>
+                <div class="product-card">
+                    <img src="/images/hoa29.jpg" alt="Hoa Tương Tự 4">
+                    <p>Hoa Tương Tự 4</p>
+                    <p>500,000 VND</p>
+                </div>
+                <div class="product-card">
+                    <img src="/images/hoa30.jpg" alt="Hoa Tương Tự 5">
+                    <p>Hoa Tương Tự 5</p>
+                    <p>550,000 VND</p>
+                </div>
+                <div class="product-card">
+                    <img src="/images/hoa31.jpg" alt="Hoa Tương Tự 6">
+                    <p>Hoa Tương Tự 6</p>
+                    <p>600,000 VND</p>
+                </div>
+            </div>
+            <button class="show-more" onclick="showMoreProducts()">Xem thêm</button>
+        </div>
+
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
-          <div class="footer-column">
-            <h4>Về chúng tôi</h4>
-            <p>Công ty TNHH 1 Thành Viên</p>
-            <p>Hotline:(028)38305570</p>
-            <p>Email:FLowerShop@gmail.com</p>
-          </div>
-          <div class="footer-column">
-            <h4>Theo dõi chúng tôi</h4>
-            <a href="https://facebook.com" target="_blank">Facebook</a>
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-            <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://youtube.com" target="_blank">YouTube</a>
-          </div>
+            <div class="footer-column">
+                <h4>Về chúng tôi</h4>
+                <p>Công ty TNHH 1 Thành Viên</p>
+                <p>Hotline:(028)38305570</p>
+                <p>Email:FLowerShop@gmail.com</p>
+            </div>
+            <div class="footer-column">
+                <h4>Theo dõi chúng tôi</h4>
+                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://youtube.com" target="_blank">YouTube</a>
+            </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 SGU Univercity</p>
+            <p>&copy; 2024 SGU Univercity</p>
         </div>
-      </footer>
-      
-    <script>
-        function performSearch() {
-            const query = document.getElementById("searchInput").value;
-            if (query.trim()) {
-                window.location.href = `/search?query=${encodeURIComponent(query)}`;
-            } else {
-                alert("Vui lòng nhập từ khóa để tìm kiếm.");
-            }
-        }
-    </script>
+    </footer>
 
-    <script>
-        document.querySelector('.qtyplus').addEventListener('click', function () {
-            var qtyInput = document.getElementById('qty');
-            var currentValue = parseInt(qtyInput.value);
-            if (currentValue < 20) {
-                qtyInput.value = currentValue + 1; // Tăng số lượng
-            }
-        });
-
-        document.querySelector('.qtyminus').addEventListener('click', function () {
-            var qtyInput = document.getElementById('qty');
-            var currentValue = parseInt(qtyInput.value);
-            if (currentValue > 1) {
-                qtyInput.value = currentValue - 1; // Giảm số lượng
-            }
-        });
-    </script>
-
+    <script src="/js/scripts.js"></script>
+    <script src="/js/product.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 
 </html>
