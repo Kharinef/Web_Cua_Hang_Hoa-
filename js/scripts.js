@@ -22,6 +22,15 @@ function showSuggestions() {
     suggestionsBox.innerHTML = "";
   }
 }
+
+// Placeholder: Gợi ý sản phẩm (có thể fetch từ API trong thực tế)
+function loadRelatedProducts() {
+  console.log("Gợi ý sản phẩm đã được tải.");
+  // Thêm logic fetch dữ liệu nếu cần
+}
+
+document.addEventListener("DOMContentLoaded", loadRelatedProducts);
+
 //read more
 function toggleDescription() {
   var description = document.querySelector(".product-details-description");

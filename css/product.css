@@ -334,25 +334,6 @@ body {
     color: #e74c3c;
 }
 
-/* Nút "Xem thêm" */
-.show-more {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.show-more:hover {
-    background-color: #c0392b;
-}
-
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
     .product-details-content {

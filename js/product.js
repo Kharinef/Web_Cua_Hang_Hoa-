@@ -1,6 +1,5 @@
-// product.js
 
-// Tăng số lượng
+// <>Tăng số lượng
 document.querySelector(".qtyplus").addEventListener("click", function () {
   var qtyInput = document.getElementById("qty");
   var currentValue = parseInt(qtyInput.value);
@@ -18,7 +17,7 @@ document.querySelector(".qtyminus").addEventListener("click", function () {
   }
 });
 
-// Chức năng Thêm vào giỏ hàng khi nhấn nút "Đặt hoa"
+//<> Chức năng Thêm vào giỏ hàng khi nhấn nút "Đặt hoa"
 document.getElementById("add-to-cart").addEventListener("click", function () {
   // Lấy thông tin sản phẩm
   const product = {
@@ -51,49 +50,3 @@ document.getElementById("add-to-cart").addEventListener("click", function () {
   $("#Modalcheck-user").modal("hide");
 });
 
-// Placeholder: Gợi ý sản phẩm (có thể fetch từ API trong thực tế)
-function loadRelatedProducts() {
-  console.log("Gợi ý sản phẩm đã được tải.");
-  // Thêm logic fetch dữ liệu nếu cần
-}
-
-document.addEventListener("DOMContentLoaded", loadRelatedProducts);
-
-// Sản phẩm tương tự
-function showMoreProducts() {
-  const productList = document.querySelector(".related-products-list");
-
-  const newProducts = [
-    {
-      img: "/images/hoa32.jpg",
-      name: "Hoa Tương Tự 7",
-      price: "650,000 VND",
-    },
-    {
-      img: "/images/hoa33.jpg",
-      name: "Hoa Tương Tự 8",
-      price: "700,000 VND",
-    },
-    {
-      img: "/images/hoa34.jpg",
-      name: "Hoa Tương Tự 9",
-      price: "750,000 VND",
-    },
-    {
-      img: "/images/hoa35.jpg",
-      name: "Hoa Tương Tự 10",
-      price: "800,000 VND",
-    },
-  ];
-
-  newProducts.forEach((product) => {
-    const productCard = document.createElement("div");
-    productCard.classList.add("product-card");
-    productCard.innerHTML = `
-                <img src="${product.img}" alt="${product.name}">
-                <p>${product.name}</p>
-                <p>${product.price}</p>
-            `;
-    productList.appendChild(productCard);
-  });
-}
