@@ -258,3 +258,6 @@ footer {
 .footer-links a:active {
     color: #ccc;
 }
+.cart{
+    padding-right:5px;
+}
