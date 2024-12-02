@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link rel="stylesheet" href="/css/Menu.css">
+    <link rel="stylesheet" href="/css/Menu.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower Shop - Trang 2</title>
-</head>
+    <title>Flower Shop</title>
 <body>
     <div class="header">
         <div class="header-left">
@@ -40,7 +39,7 @@
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="../../js/scripts.js"></script>
+           <script src="../../js/scripts.js"></script>
         </div>
     </div>
 
@@ -56,7 +55,7 @@
     </div>
     
     <div class="content">
-        <h1 class="title">Hoa Sinh Nhật Sang Trọng - Trang 2</h1>
+        <h1 class="title">Hoa Sinh Nhật Sang Trọng</h1>
         
         <div class="filter-bar">
             <div class="filter-container">
@@ -72,13 +71,49 @@
             <div class="filter-container">
                 <label for="itemsPerPage">Số lượng:</label>
                 <select id="itemsPerPage" onchange="updateItemsPerPage()">
-                    <option value="4" selected>4</option> 
-                    <option value="12">12</option>
+                    <option value="4">4</option>
+                    <option value="12" selected>12</option> 
                 </select>
             </div>
         </div>
+        
 
         <div class="product-grid">
+            <!-- Dòng 1 -->
+            <div class="product-item" data-price="599000">
+                <a href="../product/sang/peony.html"><img src="../../images/hoa2.jpg" alt="Peony" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/peony.html"><h3>Peony</h3></a>
+                    <div class="price">599,000 VND <span class="old-price">600,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="799000">
+                <a href="../product/sang/thanh-nha.html"><img src="../../images/hoa4.jpg" alt="Thanh Nhã" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/thanh-nha.html"><h3>Thanh Nhã</h3></a>
+                    <div class="price">799,000 VND <span class="old-price">1,000,000, VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="699000">
+                <a href="../product/sang/tram-nam.html"><img src="../../images/hoa6.jpg" alt="Trăm Năm" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/tram-nam.html"><h3>Trăm Năm</h3></a>
+                    <div class="price">699,000 VND <span class="old-price">800,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="499000">
+                <a href="../product/sang/flexing.html"><img src="../../images/hoa8.jpg" alt="Flexing" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/flexing.html"><h3>Flexing</h3></a>
+                    <div class="price">499,000 VND <span class="old-price">500,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+
+            <!-- Dòng 2 -->
             <div class="product-item" data-price="449000">
                 <a href="../product/sang/beauty.html"><img src="../../images/hoa12.jpg" alt="Beauty" /></a>
                 <div class="product-info">
@@ -111,15 +146,49 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
+
+            <!-- Dòng 3 -->
+            <div class="product-item" data-price="399000">
+                <a href="../product/sang/rainy-day.html"><img src="../../images/hoa22.jpg" alt="Rainy Day" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/rainy-day.html"><h3>Rainy Day</h3></a>
+                    <div class="price">399,000 VND <span class="old-price">500,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="639000">
+                <a href="../product/sang/first-lover.html"><img src="../../images/hoa24.jpg" alt="First Lover" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/first-lover.html"><h3>First Lover</h3></a>
+                    <div class="price">639,000 VND <span class="old-price">700,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="679000">
+                <a href="../product/sang/thanh-xuan.html"><img src="../../images/hoa26.jpg" alt="Thanh Xuân" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/thanh-xuan.html"><h3>Thanh Xuân</h3></a>
+                    <div class="price">679,000 VND <span class="old-price">899,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="519000">
+                <a href="../product/sang/mong-mer.html"><img src="../../images/hoa28.jpg" alt="Mộng Mer" /></a>
+                <div class="product-info">
+                    <a href="../product/sang/mong-mer.html"><h3>Mộng Mer</h3></a>
+                    <div class="price">519,000 VND <span class="old-price">520,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
         </div>
+    </div>
+
 
         <div class="pagination">
-            <a href="sang1.html">1</a>
-            <a href="sang2.html" class="active">2</a>
-            <a href="sang3.html">3</a>
+            <a href="sang4.html" class="active">1</a>
         </div>
         <div class="footer-text" style="text-align: center; padding: 20px 0; font-family: Arial, sans-serif;">
-            <p>Hiển thị từ 5 đến 8 / 12 (3 Trang)</p>
+            <p>Hiển thị từ 1 đến 12 / 12 (1 Trang)</p>
         </div>
         <div class="footer-content" style="background-color: #FFC0CB; color: #fff; text-align: center; padding: 20px 0; font-family: Arial, sans-serif; width: 103%; box-sizing: border-box; margin-bottom: -20px; margin-left: -18px;">
             <h2>Hoa Sinh Nhật Sang Trọng Tặng Đối Tác</h2>
@@ -130,45 +199,44 @@
         </div>
     </div>
 
-                <script>
-                    function performSearch() {
-                        const query = document.getElementById("searchInput").value;
-                        if (query.trim()) {
-                            window.location.href = `/search?query=${encodeURIComponent(query)}`;
-                        } else {
-                            alert("Vui lòng nhập từ khóa để tìm kiếm.");
-                        }
-                    }
-                    function sortProducts() {
-                    const sortBy = document.getElementById('sortBy').value;
-                    const productGrid = document.querySelector('.product-grid');
-                    const productItems = Array.from(productGrid.children);
-            
-                    // Sắp xếp sản phẩm dựa trên giá trị được chọn
-                    if (sortBy === 'priceLowToHigh') {
-                        productItems.sort((a, b) => {
-                            return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
-                        });
-                    } else if (sortBy === 'priceHighToLow') {
-                        productItems.sort((a, b) => {
-                            return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
-                        });
-                    } else if (sortBy === 'nameAsc') {
-                        productItems.sort((a, b) => {
-                            return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
-                        });
-                    } else if (sortBy === 'nameDesc') {
-                        productItems.sort((a, b) => {
-                            return b.querySelector('h3').innerText.localeCompare(a.querySelector('h3').innerText);
-                        });
-                    }
-            
-                    // Xóa nội dung cũ và thêm lại các sản phẩm đã sắp xếp
-                    productGrid.innerHTML = '';
-                    productItems.forEach(item => productGrid.appendChild(item));
-                }
-                </script>
-                <script src="/js/login.js"></script>
-                <script src="/js/sp.js"></script>
+            <script>
+        function performSearch() {
+            const query = document.getElementById("searchInput").value;
+            if (query.trim()) {
+                window.location.href = `/search?query=${encodeURIComponent(query)}`;
+            } else {
+                alert("Vui lòng nhập từ khóa để tìm kiếm.");
+            }
+        }
+        function sortProducts() {
+        const sortBy = document.getElementById('sortBy').value;
+        const productGrid = document.querySelector('.product-grid');
+        const productItems = Array.from(productGrid.children);
+
+        // Sắp xếp sản phẩm dựa trên giá trị được chọn
+        if (sortBy === 'priceLowToHigh') {
+            productItems.sort((a, b) => {
+                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            });
+        } else if (sortBy === 'priceHighToLow') {
+            productItems.sort((a, b) => {
+                return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            });
+        } else if (sortBy === 'nameAsc') {
+            productItems.sort((a, b) => {
+                return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
+            });
+        } else if (sortBy === 'nameDesc') {
+            productItems.sort((a, b) => {
+                return b.querySelector('h3').innerText.localeCompare(a.querySelector('h3').innerText);
+            });
+        }
+
+        // Xóa nội dung cũ và thêm lại các sản phẩm đã sắp xếp
+        productGrid.innerHTML = '';
+        productItems.forEach(item => productGrid.appendChild(item));
+    }
+    setItemsPerPageSelected(12);
+    </script>
 </body>
 </html>
