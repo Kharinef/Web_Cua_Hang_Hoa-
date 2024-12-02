@@ -1,4 +1,4 @@
-/* General styling for body */ 
+/* General styling for body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -36,13 +36,15 @@ body {
 .product-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Cắt ảnh để chiếm toàn bộ diện tích mà không bị méo */
+    object-fit: cover;
+    /* Cắt ảnh để chiếm toàn bộ diện tích mà không bị méo */
 }
 
 /* Màn hình lớn hơn */
 @media (min-width: 768px) {
     .product-image img {
-        width: 80%;  /* Giảm kích thước hình ảnh */
+        width: 80%;
+        /* Giảm kích thước hình ảnh */
         height: auto;
     }
 }
@@ -50,7 +52,8 @@ body {
 /* Màn hình desktop */
 @media (min-width: 1024px) {
     .product-image img {
-        width: 60%;  /* Giảm thêm kích thước */
+        width: 60%;
+        /* Giảm thêm kích thước */
         height: auto;
     }
 }
@@ -101,7 +104,8 @@ body {
     padding: 5px;
 }
 
-.qtyminus, .qtyplus {
+.qtyminus,
+.qtyplus {
     font-size: 20px;
     cursor: pointer;
     padding: 5px 10px;
@@ -112,7 +116,8 @@ body {
     transition: background-color 0.3s;
 }
 
-.qtyminus:hover, .qtyplus:hover {
+.qtyminus:hover,
+.qtyplus:hover {
     background-color: #c0392b;
 }
 
@@ -174,7 +179,8 @@ body {
 }
 
 .product-details-description.expanded p {
-    white-space: normal; /* Cho phép hiển thị toàn bộ văn bản */
+    white-space: normal;
+    /* Cho phép hiển thị toàn bộ văn bản */
 }
 
 /* Modal Styles */
@@ -268,7 +274,8 @@ body {
 
 .related-products-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 sản phẩm trong mỗi hàng */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 sản phẩm trong mỗi hàng */
     gap: 20px;
 }
 
@@ -283,7 +290,8 @@ body {
 }
 
 .product-card:hover {
-    transform: translateY(-10px); /* Khi hover, sản phẩm nhấc lên một chút */
+    transform: translateY(-10px);
+    /* Khi hover, sản phẩm nhấc lên một chút */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -311,7 +319,8 @@ body {
         flex-direction: column;
     }
 
-    .product-image, .product-info {
+    .product-image,
+    .product-info {
         flex: 1 1 100%;
         max-width: 100%;
     }
@@ -368,25 +377,31 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 /* Container để cuộn sản phẩm ngang */
 .related-products-container {
     display: flex;
     align-items: center;
     gap: 20px;
-    overflow: hidden; /* Ẩn phần tử ngoài khung hiển thị */
-    position: relative; /* Đặt nút mũi tên trong khung */
+    overflow: hidden;
+    /* Ẩn phần tử ngoài khung hiển thị */
+    position: relative;
+    /* Đặt nút mũi tên trong khung */
 }
 
 .related-products-list {
     display: flex;
     gap: 20px;
-    transition: transform 0.5s ease; /* Hiệu ứng cuộn */
-    position: relative; /* Duy trì trạng thái phần tử */
+    transition: transform 0.5s ease;
+    /* Hiệu ứng cuộn */
+    position: relative;
+    /* Duy trì trạng thái phần tử */
     padding: 10px 0;
 }
 
 /* Mũi tên cuộn */
-.scroll-left, .scroll-right {
+.scroll-left,
+.scroll-right {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -412,12 +427,14 @@ body {
     right: -10px;
 }
 
-.scroll-left:hover, .scroll-right:hover {
+.scroll-left:hover,
+.scroll-right:hover {
     background-color: #e74c3c;
     transform: translateY(-50%) scale(1.1);
 }
 
-.scroll-left img, .scroll-right img {
+.scroll-left img,
+.scroll-right img {
     width: 20px;
     height: 20px;
     filter: invert(1);
@@ -426,14 +443,19 @@ body {
 /* Container để cuộn sản phẩm ngang */
 .related-products-container {
     display: flex;
-    align-items: center; /* Canh giữa các phần tử trong container */
-    gap: 20px; /* Khoảng cách giữa các sản phẩm */
-    overflow-x: hidden; /* Ẩn các phần tử ngoài vùng hiển thị */
-    position: relative; /* Để có thể đặt nút mũi tên */
+    align-items: center;
+    /* Canh giữa các phần tử trong container */
+    gap: 20px;
+    /* Khoảng cách giữa các sản phẩm */
+    overflow-x: hidden;
+    /* Ẩn các phần tử ngoài vùng hiển thị */
+    position: relative;
+    /* Để có thể đặt nút mũi tên */
 }
 
 .product-card {
-    width: 250px; /* Kích thước sản phẩm */
+    width: 250px;
+    /* Kích thước sản phẩm */
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
@@ -444,7 +466,8 @@ body {
 }
 
 .product-card:hover {
-    transform: translateY(-10px); /* Khi hover, sản phẩm nhấc lên một chút */
+    transform: translateY(-10px);
+    /* Khi hover, sản phẩm nhấc lên một chút */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -467,14 +490,17 @@ body {
 }
 
 /* Điều chỉnh kích thước và kiểu dáng cho hình ảnh */
-.scroll-left img, .scroll-right img {
+.scroll-left img,
+.scroll-right img {
     width: 30px;
     height: 30px;
     transition: transform 0.3s ease;
 }
 
-.scroll-left:hover img, .scroll-right:hover img {
-    transform: scale(1.2); /* Phóng to khi hover */
+.scroll-left:hover img,
+.scroll-right:hover img {
+    transform: scale(1.2);
+    /* Phóng to khi hover */
 }
 
 /* Chỉ hiển thị 5 sản phẩm đầu tiên */
@@ -484,23 +510,52 @@ body {
     transition: transform 0.3s ease;
 }
 
+/* Xóa mọi nền của nút scroll */
+.related-products .scroll-left,
+.related-products .scroll-right {
+    background: transparent; /* Xóa nền */
+    border: none; /* Bỏ viền */
+    display: flex; /* Đảm bảo mũi tên hiển thị bên trong nút */
+    justify-content: center; /* Canh giữa mũi tên */
+    align-items: center; /* Canh giữa mũi tên theo chiều dọc */
+    cursor: pointer; /* Con trỏ dạng click */
+    padding: 5px; /* Khoảng cách xung quanh */
+}
+
+/* Đảm bảo hình ảnh mũi tên có kích thước hợp lý */
+.related-products .scroll-left img,
+.related-products .scroll-right img {
+    width: 30px; /* Kích thước ảnh */
+    height: 30px; /* Kích thước ảnh */
+}
+
+/* Thêm hiệu ứng hover cho các nút */
+.related-products .scroll-left:hover,
+.related-products .scroll-right:hover {
+    background-color: #f0f0f0; /* Màu nền khi hover */
+    border-radius: 50%; /* Tạo hình tròn */
+}
+
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
     .product-card {
-        width: 200px; /* Điều chỉnh kích thước sản phẩm trên điện thoại */
+        width: 200px;
+        /* Điều chỉnh kích thước sản phẩm trên điện thoại */
     }
 }
 
 /* Tablet and Larger Screens */
 @media (min-width: 768px) {
     .product-card {
-        width: 250px; /* Điều chỉnh kích thước sản phẩm trên tablet */
+        width: 250px;
+        /* Điều chỉnh kích thước sản phẩm trên tablet */
     }
 }
 
 /* Desktop and Larger Screens */
 @media (min-width: 1024px) {
     .product-card {
-        width: 300px; /* Tăng kích thước sản phẩm trên desktop */
+        width: 300px;
+        /* Tăng kích thước sản phẩm trên desktop */
     }
 }
