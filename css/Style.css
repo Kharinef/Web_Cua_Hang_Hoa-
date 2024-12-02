@@ -1,10 +1,13 @@
-/* General styling for body */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: white;
     color: black;
+    width: 1024px; 
+    margin: 0 auto; 
+    overflow-x: hidden;
 }
 
 /* Header */
@@ -43,9 +46,9 @@ body {
     font-size: 20px;
 }
 
-.center {
-    max-width: 700px;
-    padding: 20px 100%;
+.center img {
+    max-width: 100%;
+    padding: 20px 0;
 }
 
 .header-right a {
@@ -58,7 +61,7 @@ body {
 /* Search Container */
 .search-container {
     position: relative;
-    max-width: 400px;
+    width: 300px; 
     display: flex;
     align-items: center;
 }
@@ -108,9 +111,6 @@ body {
     background-color: #ffffff;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 80px;
-    z-index: 1000;
 }
 
 .nav-bar ul {
@@ -147,7 +147,7 @@ body {
     margin: 0 auto;
 }
 
-/*product*/
+/* Product Grid */
 .product-grid {
     display: flex;
     flex-wrap: wrap;
@@ -212,7 +212,13 @@ body {
     cursor: pointer;
     font-size: 16px;
 }
-
+.title {
+    font-size: 36px;
+    color: #FF1493;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
 /* Footer */
 footer {
     background-color: #FFB6C1;
@@ -224,40 +230,16 @@ footer {
 }
 
 .footer-container {
-    max-width: 1200px;
+    max-width: 1024px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .footer-content p {
     margin: 5px 0;
     font-size: 14px;
-}
-
-.footer-social {
-    margin-top: 10px;
-}
-
-.social-icon {
-    margin: 0 10px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.social-icon:hover {
-    color: #ff4081;
-}
-
-.title {
-    font-size: 36px;
-    color: #FF1493;
-    text-align: center;
-    margin-top: 20px;
-    font-weight: bold;
 }
 
 .footer-links a {
@@ -275,66 +257,4 @@ footer {
 
 .footer-links a:active {
     color: #ccc;
-}
-
-.cart {
-    margin-right: 20px;
-}
-
-/* Responsive Design - Mobile-First */
-@media (max-width: 768px) {
-
-    /* Header */
-    .header {
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .header-left,
-    .header-right {
-        display: flex;
-        align-items: center;
-    }
-
-    /* Giảm kích thước các biểu tượng trên mobile */
-    .social-icons a img {
-        width: 20px;
-        height: 20px;
-    }
-
-    .center img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    /* Footer */
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-social {
-        margin-top: 20px;
-    }
-}
-
-/* Responsive Design for larger screens */
-@media (min-width: 768px) {
-    .header {
-        justify-content: space-between;
-    }
-
-    .header-left,
-    .header-right {
-        flex: 1;
-    }
-
-    .header-left {
-        flex: 2;
-    }
-
-    .header-right {
-        flex: 3;
-        justify-content: flex-end;
-    }
 }
