@@ -384,18 +384,14 @@ body {
     align-items: center;
     gap: 20px;
     overflow: hidden;
-    /* Ẩn phần tử ngoài khung hiển thị */
     position: relative;
-    /* Đặt nút mũi tên trong khung */
 }
 
 .related-products-list {
     display: flex;
     gap: 20px;
     transition: transform 0.5s ease;
-    /* Hiệu ứng cuộn */
     position: relative;
-    /* Duy trì trạng thái phần tử */
     padding: 10px 0;
 }
 
