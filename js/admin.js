@@ -1,18 +1,11 @@
 // Function to load users from localStorage and display them in the table
 function loadUsers() {
-    // Get users data from localStorage (if any)
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    
-    // Get the table body where user data will be displayed
     const userTableBody = document.getElementById('userTableBody');
-    
-    // Clear existing table rows (if any)
     userTableBody.innerHTML = '';
-    
-    // Loop through the users and add them to the table
+
     users.forEach((user, index) => {
         const row = document.createElement('tr');
-        
         row.innerHTML = `
             <td>${user.username}</td>
             <td>${user.name}</td>
@@ -21,50 +14,94 @@ function loadUsers() {
             <td>
                 <button onclick="toggleUserStatus(${index})">${user.status === 'Active' ? 'Khóa' : 'Mở khóa'}</button>
                 <button onclick="deleteUser(${index})">Xóa</button>
+                <button onclick="showAddUserPopup(${index})">Sửa</button>
             </td>
         `;
-        
         userTableBody.appendChild(row);
     });
 }
 
 // Function to toggle (lock/unlock) a user status
 function toggleUserStatus(index) {
-    // Get current users from localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    
-    const user = users[index];
-    
-    // Toggle user status (Active <-> Locked)
-    if (user.status === 'Active') {
-        user.status = 'Locked'; // Lock the user
-    } else {
-        user.status = 'Active'; // Unlock the user
-    }
-    
-    // Save the updated users array to localStorage
+    users[index].status = users[index].status === 'Active' ? 'Locked' : 'Active';
     localStorage.setItem('users', JSON.stringify(users));
-    
-    // Reload users to update the table
     loadUsers();
 }
 
 // Function to delete a user
 function deleteUser(index) {
-    // Get current users from localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    
-    // Remove the user at the specified index
     users.splice(index, 1);
-    
-    // Save the updated users array to localStorage
     localStorage.setItem('users', JSON.stringify(users));
-    
-    // Reload users to update the table
+    loadUsers();
+}
+
+
+
+
+// Function to show a popup for adding or editing a user
+function showAddUserPopup(index = null) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const isEditing = index !== null;
+
+    const user = isEditing ? users[index] : { username: '', name: '', email: '' };
+
+    let username, name, email;
+
+    // Validate and prompt for username
+    do {
+        username = prompt('Nhập tên đăng nhập:', user.username);
+        if (!username) {
+            alert('Tên đăng nhập không được để trống!');
+        } else if (!isEditing && users.some(user => user.username === username)) {
+            alert('Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.');
+            username = null; // Reset để buộc nhập lại
+        }
+    } while (!username);
+
+    // Validate and prompt for name
+    do {
+        name = prompt('Nhập họ và tên:', user.name);
+        const nameRegex = /^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$/;
+        if (!name) {
+            alert('Họ và tên không được để trống!');
+        } else if (!nameRegex.test(name)) {
+            alert('Họ và tên không hợp lệ. Vui lòng không chứa số hoặc ký tự đặc biệt.');
+            name = null; // Reset để buộc nhập lại
+        }
+    } while (!name);
+
+    // Validate and prompt for email
+    do {
+        email = prompt('Nhập email:', user.email);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            alert('Email không được để trống!');
+        } else if (!emailRegex.test(email)) {
+            alert('Email không hợp lệ. Vui lòng nhập lại.');
+            email = null; // Reset để buộc nhập lại
+        } else if (!isEditing && users.some(user => user.email === email)) {
+            alert('Email đã tồn tại. Vui lòng sử dụng email khác.');
+            email = null; // Reset để buộc nhập lại
+        }
+    } while (!email);
+
+    // Set status to 'Active' by default
+    const status = 'Active';
+
+    const newUser = { username, name, email, status };
+
+    if (isEditing) {
+        users[index] = newUser; // Update existing user
+    } else {
+        users.push(newUser); // Add new user
+    }
+
+    localStorage.setItem('users', JSON.stringify(users));
     loadUsers();
 }
 
 // Initial load of users when the page is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    loadUsers();
-});
+document.addEventListener('DOMContentLoaded', loadUsers);
+

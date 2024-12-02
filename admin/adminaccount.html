@@ -137,7 +137,6 @@ button.btn-primary:hover {
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 Giỏ hàng
             </a>
-            <a href="Checkout.html">Thanh toán</a>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
@@ -162,6 +161,7 @@ button.btn-primary:hover {
             <!-- Quản lý Người Dùng -->
             <section id="user-management" class="section-box">
                 <h2>Quản Lý Người Dùng</h2>
+                <!-- Bảng Quản Lý Người Dùng -->
                 <table id="userTable">
                     <thead>
                         <tr>
@@ -176,10 +176,10 @@ button.btn-primary:hover {
                         <!-- Các dòng người dùng sẽ được chèn vào đây -->
                     </tbody>
                 </table>
+                <br><button type="button" class="btn-primary" onclick="showAddUserPopup()">Thêm Người Dùng</button>
             </section>
         </div>
-    
-
+        
             <!-- Quản lý Sản Phẩm -->
             <section id="product-management" class="section-box">
                 <h2>Quản Lý Sản Phẩm</h2>
