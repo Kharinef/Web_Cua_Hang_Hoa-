@@ -1,9 +1,9 @@
 const data = [
-    { name: "Hoa tặng sinh nhật mẹ", url: "/products/hoa-sinh-nhat-me.html" },
-    { name: "Hoa tặng sinh nhật bạn", url: "/products/hoa-sinh-nhat-ban.html" },
-    { name: "Hoa tặng người yêu", url: "/products/hoa-sinh-nhat-nguoi-yeu.html" },
-    { name: "Hoa sinh nhật sang trọng", url: "/products/hoa-sang-trong.html" },
-    { name: "Hoa sinh nhật giá rẻ", url: "/products/hoa-gia-re.html" }
+    { name: "Điều Ước", url: "page/product/me/dieu-uoc.html" },
+    { name: "Hương Ngày Nắng", url: "page/product/ban/huong-ngay-nang.html" },
+    { name: "My Princess", url: "page/product/ny/my-princess.html" },
+    { name: "Peony", url: "page/product/sang/peony.html" },
+    { name: "Simple", url: "page/product/re/simple.html" }
 ];
 function showSuggestions() {
     const query = document.getElementById("searchInput").value.trim().toLowerCase();
