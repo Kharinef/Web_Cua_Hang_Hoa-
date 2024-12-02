@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Flower Shop</title>
 </head>
+
 <body>
     <div class="header">
         <div class="header-left">
@@ -57,21 +58,10 @@
             <li><a href="page/menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
         </ul>
     </div>
-    </div>
+
     <div class="content">
         <img class="banner" src="images/banner.jpg" alt="Banner">
     </div>
-
-    <script>
-        function performSearch() {
-            const query = document.getElementById("searchInput").value;
-            if (query.trim()) {
-                window.location.href = `/search?query=${encodeURIComponent(query)}`;
-            } else {
-                alert("Vui lòng nhập từ khóa để tìm kiếm.");
-            }
-        }
-    </script>
     <h1 class="title">Sản Phẩm Mới</h1>
     <br><br>
     <div class="product-grid">
@@ -161,12 +151,12 @@
     </div>
     <footer class="footer">
         <div class="footer-container">
-          <div class="footer-column">
-            <h4>Về chúng tôi</h4>
-            <p>Công ty TNHH Bình Bá Dơ</p>
-            <p>Hotline:(028)38305570</p>
-            <p>Email:FLowerShop@gmail.com</p>
-        </div>
+            <div class="footer-column">
+                <h4>Về chúng tôi</h4>
+                <p>Công ty TNHH Bình Bá Dơ</p>
+                <p>Hotline:(028)38305570</p>
+                <p>Email:FLowerShop@gmail.com</p>
+            </div>
             <div class="footer-links">
                 <h4>Theo dõi chúng tôi</h4>
                 <a href="https://facebook.com" target="_blank">Facebook</a>
@@ -179,6 +169,17 @@
             <p>&copy; 2024 SGU Univercity</p>
         </div>
     </footer>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById("searchInput").value;
+            if (query.trim()) {
+                window.location.href = `/search?query=${encodeURIComponent(query)}`;
+            } else {
+                alert("Vui lòng nhập từ khóa để tìm kiếm.");
+            }
+        }
+    </script>
 
 </body>
 
