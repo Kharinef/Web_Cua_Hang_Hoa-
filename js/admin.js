@@ -34,7 +34,6 @@ function loadUsers() {
             <td>
                 <button class="btn-primary" onclick="toggleUserStatus(${index})">${user.status === 'Active' ? 'Khóa' : 'Mở khóa'}</button>
                 <button class="btn-primary" onclick="showAddUserPopup(${index})">Chỉnh Sửa</button>
-                <button class="btn-primary" onclick="deleteProduct(${index})">Xóa</button>
             </td>
         `;
         userTableBody.appendChild(row);
@@ -49,13 +48,6 @@ function toggleUserStatus(index) {
     loadUsers();
 }
 
-// Function to delete a user
-function deleteUser(index) {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.splice(index, 1);
-    localStorage.setItem('users', JSON.stringify(users));
-    loadUsers();
-}
 
 
 
@@ -69,9 +61,18 @@ function showAddUserPopup(index = null) {
 
     let username, name, email;
 
+    // Hàm kiểm tra nếu người dùng nhấn hủy
+    function promptWithCancel(message, defaultValue) {
+        const input = prompt(message, defaultValue);
+        return input === null ? 'cancel' : input; // Nếu nhấn Cancel, trả về 'cancel'
+    }
+
     // Validate and prompt for username
     do {
-        username = prompt('Nhập tên đăng nhập:', user.username);
+        username = promptWithCancel('Nhập tên đăng nhập:', user.username);
+        if (username === 'cancel') {
+            return; // Nếu người dùng chọn Cancel, dừng lại
+        }
         if (!username) {
             alert('Tên đăng nhập không được để trống!');
         } else if (!isEditing && users.some(user => user.username === username)) {
@@ -82,7 +83,10 @@ function showAddUserPopup(index = null) {
 
     // Validate and prompt for name
     do {
-        name = prompt('Nhập họ và tên:', user.name);
+        name = promptWithCancel('Nhập họ và tên:', user.name);
+        if (name === 'cancel') {
+            return; // Nếu người dùng chọn Cancel, dừng lại
+        }
         const nameRegex = /^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$/;
         if (!name) {
             alert('Họ và tên không được để trống!');
@@ -94,7 +98,10 @@ function showAddUserPopup(index = null) {
 
     // Validate and prompt for email
     do {
-        email = prompt('Nhập email:', user.email);
+        email = promptWithCancel('Nhập email:', user.email);
+        if (email === 'cancel') {
+            return; // Nếu người dùng chọn Cancel, dừng lại
+        }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email) {
             alert('Email không được để trống!');
@@ -113,15 +120,14 @@ function showAddUserPopup(index = null) {
     const newUser = { username, name, email, status };
 
     if (isEditing) {
-        users[index] = newUser; // Update existing user
+        users[index] = newUser; // Cập nhật người dùng hiện tại
     } else {
-        users.push(newUser); // Add new user
+        users.push(newUser); // Thêm người dùng mới
     }
 
     localStorage.setItem('users', JSON.stringify(users));
     loadUsers();
 }
-
 // Initial load of users when the page is loaded
 document.addEventListener('DOMContentLoaded', loadUsers);
 
@@ -160,7 +166,7 @@ function loadProducts() {
 
         cellActions.innerHTML = `
             <button class="btn-primary" onclick="openEditModal(${index})">Chỉnh Sửa</button>
-            <button class="btn-danger" onclick="deleteProduct(${index})">Xóa</button>
+            <button class="btn-primary" onclick="deleteProduct(${index})">Xóa</button>
         `;
 
         row.appendChild(cellGiftFor);
@@ -275,3 +281,107 @@ window.onload = function() {
     document.getElementById('editProductForm').addEventListener('submit', saveProductEditToLocalStorage);
 };
 
+
+
+
+
+
+
+//
+document.addEventListener('DOMContentLoaded', function () {
+    const orders = [
+        { id: 1, customer: 'Nguyễn Văn A', date: '2024-12-01', address: 'Hà Nội, Quận Ba Đình', status: 'new', details: 'order1.html' },
+        { id: 2, customer: 'Trần Thị B', date: '2024-12-02', address: 'Hồ Chí Minh, Quận 1', status: 'confirmed', details: 'order2.html' },
+        { id: 3, customer: 'Lê Minh C', date: '2024-12-03', address: 'Đà Nẵng, Quận Hải Châu', status: 'delivered', details: 'order3.html' },
+        { id: 4, customer: 'Phan Thị D', date: '2024-12-04', address: 'Hà Nội, Quận Cầu Giấy', status: 'cancelled', details: 'order4.html' },
+    ];
+
+    // Hàm hiển thị tất cả đơn hàng
+    function displayOrders(filteredOrders) {
+        const tableBody = document.getElementById('orderTableBody');
+        tableBody.innerHTML = '';  // Xóa hết các dòng hiện tại
+
+        filteredOrders.forEach(order => {
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td>${order.id}</td>
+                <td>${order.customer}</td>
+                <td>${order.date}</td>
+                <td>${order.address}</td>
+                <td>${getStatusText(order.status)}</td>
+                <td>
+                    <a href="${order.details}">Xem chi tiết</a>
+                    <button onclick="updateOrderStatus(${order.id}, 'new')">Chưa xử lý</button>
+                    <button onclick="updateOrderStatus(${order.id}, 'confirmed')">Đã xác nhận</button>
+                    <button onclick="updateOrderStatus(${order.id}, 'delivered')">Đã giao</button>
+                    <button onclick="updateOrderStatus(${order.id}, 'cancelled')">Đã hủy</button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Hàm lấy tên trạng thái
+    function getStatusText(status) {
+        const statusMap = {
+            new: 'Chưa xử lý',
+            confirmed: 'Đã xác nhận',
+            delivered: 'Đã giao',
+            cancelled: 'Đã hủy'
+        };
+        return statusMap[status] || 'Không xác định';
+    }
+
+    // Cập nhật trạng thái đơn hàng
+    function updateOrderStatus(orderId, newStatus) {
+        const order = orders.find(order => order.id === orderId);
+        if (order) {
+            order.status = newStatus;
+            filterOrders();  // Sau khi cập nhật trạng thái, lọc lại danh sách
+        }
+    }
+
+    // Lọc đơn hàng theo thời gian và trạng thái
+    function filterOrders() {
+        const startDate = document.getElementById('filterStartDate').value;
+        const endDate = document.getElementById('filterEndDate').value;
+        const statusFilter = document.getElementById('filterStatus').value;
+
+        const filteredOrders = orders.filter(order => {
+            const orderDate = new Date(order.date);
+            const isDateInRange = (!startDate || orderDate >= new Date(startDate)) && (!endDate || orderDate <= new Date(endDate));
+            const isStatusMatch = !statusFilter || order.status === statusFilter;
+            return isDateInRange && isStatusMatch;
+        });
+
+        // Hiển thị đơn hàng đã lọc
+        displayOrders(filteredOrders);
+    }
+
+    // Hàm sắp xếp đơn hàng theo địa chỉ (quận)
+    function sortOrdersByAddress() {
+        const sortedOrders = [...orders].sort((a, b) => {
+            const addressA = a.address.split(',')[1];  // Lấy phần quận
+            const addressB = b.address.split(',')[1];
+            return addressA.localeCompare(addressB);
+        });
+
+        displayOrders(sortedOrders);
+    }
+
+    // Thêm sự kiện lọc khi thay đổi thông tin lọc
+    document.getElementById('filterForm').addEventListener('submit', function (event) {
+        event.preventDefault();  // Ngừng việc gửi form
+        filterOrders();  // Lọc đơn hàng
+    });
+
+    // Sắp xếp đơn hàng theo địa chỉ khi cần
+    document.getElementById('sortButton').addEventListener('click', function () {
+        sortOrdersByAddress();
+    });
+
+    // Hiển thị tất cả đơn hàng khi mới tải trang
+    displayOrders(orders);
+});
