@@ -71,7 +71,7 @@
             <div class="filter-container">
                 <label for="itemsPerPage">Số lượng:</label>
                 <select id="itemsPerPage" onchange="updateItemsPerPage()">
-                    <option value="4">4</option>
+                    <option value="4" selected>4</option> 
                     <option value="12">12</option>
                 </select>
             </div>
@@ -168,6 +168,7 @@
         productGrid.innerHTML = '';
         productItems.forEach(item => productGrid.appendChild(item));
     }
+    setItemsPerPageSelected(4);
     </script>
 </body>
 </html>

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link rel="stylesheet" href="/css/Menu.css">
+    <link rel="stylesheet" href="/css/Menu.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower Shop - Hoa Tặng Sinh Nhật Mẹ</title>
-</head>
+    <title>Flower Shop</title>
 <body>
     <div class="header">
         <div class="header-left">
@@ -40,7 +39,7 @@
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="../../js/scripts.js"></script>
+           <script src="../../js/scripts.js"></script>
         </div>
     </div>
 
@@ -56,7 +55,7 @@
     </div>
     
     <div class="content">
-        <h1 class="title">Hoa Tặng Sinh Nhật Mẹ </h1>
+        <h1 class="title">Hoa Tặng Sinh Nhật Bạn</h1>
         
         <div class="filter-bar">
             <div class="filter-container">
@@ -72,13 +71,15 @@
             <div class="filter-container">
                 <label for="itemsPerPage">Số lượng:</label>
                 <select id="itemsPerPage" onchange="updateItemsPerPage()">
-                    <option value="4" selected>4</option> 
-                    <option value="12">12</option>
+                    <option value="4">4</option>
+                    <option value="12" selected>12</option> 
                 </select>
             </div>
         </div>
+        
 
         <div class="product-grid">
+            <!-- Dòng 1 -->
             <div class="product-item" data-price="450000">
                 <a href="../product/me/dieu-uoc.html"><img src="../../images/hoa47.jpg" alt="Điều Ước" /></a>
                 <div class="product-info">
@@ -111,15 +112,83 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
+
+            <!-- Dòng 2 -->
+            <div class="product-item" data-price="299000">
+                <a href="../product/me/canday-date.html"><img src="../../images/hoa39.jpg" alt="Candy Date" /></a>
+                <div class="product-info">
+                    <a href="../product/me/canday-date.html"><h3>Candy Date</h3></a>
+                    <div class="price">299,000 VND <span class="old-price">400,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="180000">
+                <a href="../product/me/giac-mo-than-tien.html"><img src="../../images/hoa37.jpg" alt="Giấc Mơ Thần Tiên" /></a>
+                <div class="product-info">
+                    <a href="../product/me/giac-mo-than-tien.html"><h3>Giấc Mơ Thần Tiên</h3></a>
+                    <div class="price">180,000 VND <span class="old-price">299,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="499000">
+                <a href="../product/me/angel.html"><img src="../../images/hoa35.jpg" alt="Angel" /></a>
+                <div class="product-info">
+                    <a href="../product/me/angel.html"><h3>Angel</h3></a>
+                    <div class="price">499,000 VND <span class="old-price">799,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="250000">
+                <a href="../product/me/be-happy.html"><img src="../../images/hoa33.png" alt="Be Happy" /></a>
+                <div class="product-info">
+                    <a href="../product/me/be-happy.html"><h3>Be Happy</h3></a>
+                    <div class="price">250,000 VND <span class="old-price">399,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+
+            <!-- Dòng 3 -->
+            <div class="product-item" data-price="170000">
+                <a href="../product/me/hoa-nu-cuoi.html"><img src="../../images/hoa31.jpg" alt="Hoa Nụ Cười" /></a>
+                <div class="product-info">
+                    <a href="../product/me/hoa-nu-cuoi.html"><h3>Hoa Nụ Cười</h3></a>
+                    <div class="price">170,000 VND <span class="old-price">300,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="320000">
+                <a href="../product/me/nang-som-ban-mai.html"><img src="../../images/hoa29.jpg" alt="Nắng Sớm Ban Mai" /></a>
+                <div class="product-info">
+                    <a href="../product/me/nang-som-ban-mai.html"><h3>Nắng Sớm Ban Mai</h3></a>
+                    <div class="price">320,000 VND <span class="old-price">450,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="379000">
+                <a href="../product/me/dream.html"><img src="../../images/hoa27.jpg" alt="Dream" /></a>
+                <div class="product-info">
+                    <a href="../product/me/dream.html"><h3>Dream</h3></a>
+                    <div class="price">379,000 VND <span class="old-price">499,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="270000">
+                <a href="../product/me/cau-vong.html"><img src="../../images/hoa25.jpg" alt="Cầu Vồng" /></a>
+                <div class="product-info">
+                    <a href="../product/me/cau-vong.html"><h3>Cầu Vồng</h3></a>
+                    <div class="price">270,000 VND <span class="old-price">450,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
         </div>
+    </div>
+
 
         <div class="pagination">
-            <a href="me1.html" class="active">1</a>
-            <a href="me2.html">2</a>
-            <a href="me3.html">3</a>
+            <a href="me4.html" class="active">1</a>
         </div>
         <div class="footer-text" style="text-align: center; padding: 20px 0; font-family: Arial, sans-serif;">
-            <p>Hiển thị từ 1 đến 4 / 12 (3 Trang)</p>
+            <p>Hiển thị từ 1 đến 12 / 12 (1 Trang)</p>
         </div>
         <div class="footer-content" style="background-color: #FFC0CB; color: #fff; text-align: center; padding: 20px 0; font-family: Arial, sans-serif; width: 103%; box-sizing: border-box; margin-bottom: -20px; margin-left: -18px;">
             <h2>Hoa Tặng Mẹ</h2>
@@ -130,7 +199,7 @@
         </div>
     </div>
 
-    <script>
+            <script>
         function performSearch() {
             const query = document.getElementById("searchInput").value;
             if (query.trim()) {
@@ -167,7 +236,7 @@
         productGrid.innerHTML = '';
         productItems.forEach(item => productGrid.appendChild(item));
     }
-    setItemsPerPageSelected(4);
+    setItemsPerPageSelected(12);
     </script>
 </body>
 </html>

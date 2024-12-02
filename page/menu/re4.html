@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link rel="stylesheet" href="/css/Menu.css">
+    <link rel="stylesheet" href="/css/Menu.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower Shop - Trang 2</title>
-</head>
+    <title>Flower Shop</title>
 <body>
     <div class="header">
         <div class="header-left">
@@ -40,7 +39,7 @@
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="../../js/scripts.js"></script>
+           <script src="../../js/scripts.js"></script>
         </div>
     </div>
 
@@ -56,7 +55,7 @@
     </div>
     
     <div class="content">
-        <h1 class="title">Hoa Sinh Nhật Giá Rẻ - Trang 2</h1>
+        <h1 class="title">Hoa Sinh Nhật Giá Rẻ</h1>
         
         <div class="filter-bar">
             <div class="filter-container">
@@ -72,13 +71,49 @@
             <div class="filter-container">
                 <label for="itemsPerPage">Số lượng:</label>
                 <select id="itemsPerPage" onchange="updateItemsPerPage()">
-                    <option value="4" selected>4</option> 
-                    <option value="12">12</option>
+                    <option value="4">4</option>
+                    <option value="12" selected>12</option> 
                 </select>
             </div>
         </div>
+        
 
         <div class="product-grid">
+            <!-- Dòng 1 -->
+            <div class="product-item" data-price="449000">
+                <a href="../product/re/simple.html"><img src="../../images/hoa54.jpg" alt="Simple" /></a>
+                <div class="product-info">
+                    <a href="../product/re/simple.html"><h3>Simple</h3></a>
+                    <div class="price">449,000 VND <span class="old-price">600,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="150000">
+                <a href="../product/re/hope.html"><img src="../../images/hoa56.png" alt="Hope" /></a>
+                <div class="product-info">
+                    <a href="../product/re/hope.html"><h3>Hope</h3></a>
+                    <div class="price">150,000 VND <span class="old-price">300,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="299000">
+                <a href="../product/re/thuot-tha.html"><img src="../../images/hoa58.jpg" alt="Thướt Tha" /></a>
+                <div class="product-info">
+                    <a href="../product/re/thuot-tha.html"><h3>Thướt Tha</h3></a>
+                    <div class="price">299,000 VND <span class="old-price">410,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="199000">
+                <a href="../product/re/ngo-loi.html"><img src="../../images/hoa61.jpg" alt="Ngỏ Lời" /></a>
+                <div class="product-info">
+                    <a href="../product/re/ngo-loi.html"><h3>Ngỏ Lời</h3></a>
+                    <div class="price">199,000 VND <span class="old-price">349,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+
+            <!-- Dòng 2 -->
             <div class="product-item" data-price="200000">
                 <a href="../product/re/ngot-ngao.html"><img src="../../images/hoa42.jpg" alt="Ngọt Ngào" /></a>
                 <div class="product-info">
@@ -111,25 +146,61 @@
                     <button class="order-button">ĐẶT HÀNG</button>
                 </div>
             </div>
-        </div>
 
-        <div class="pagination">
-            <a href="re1.html">1</a>
-            <a href="re2.html" class="active">2</a>
-            <a href="re3.html">3</a>
-        </div>
-        <div class="footer-text" style="text-align: center; padding: 20px 0; font-family: Arial, sans-serif;">
-            <p>Hiển thị từ 5 đến 8 / 12 (3 Trang)</p>
-        </div>
-        <div class="footer-content" style="background-color: #FFC0CB; color: #fff; text-align: center; padding: 20px 0; font-family: Arial, sans-serif; width: 103%; box-sizing: border-box; margin-bottom: -30px; margin-left: -18px;">
-            <h2>Hoa Sinh Nhật Giá Rẻ Dành Cho Mọi Người</h2>
-            <p>Hoa đẹp không nhất thiết phải đắt đỏ, vì đôi khi hạnh phúc chỉ cần một bó hoa giản đơn nhưng đầy ắp yêu thương. Mỗi bông hoa, dù là hoa hồng thắm hay hoa cúc nhạt, đều mang theo một câu chuyện riêng – câu chuyện của sự quan tâm, của những lời chúc tốt đẹp gửi đến người thân yêu trong ngày đặc biệt.</p>         
-            <p>Vẻ đẹp của hoa không chỉ nằm ở giá trị vật chất, mà chính là tình cảm, những cảm xúc thầm lặng mà chúng ta dành tặng cho nhau. Mỗi bó hoa là một lời chúc, một sự quan tâm mà chúng ta muốn gửi gắm, để người nhận cảm nhận được sự yêu thương, dù chỉ là một khoảnh khắc ngắn ngủi.</p>
-            <p>Hãy gọi ngay <a href="tel:02838305570" style="color: #fff;">02838305570</a> để được tư vấn và lựa chọn những mẫu hoa phù hợp, hoặc đặt hoa nhanh chóng, để mang niềm vui, sự tươi mới đến người thân yêu, vì đôi khi, hạnh phúc chính là một bó hoa giản dị nhưng đầy ắp yêu thương.</p>
+            <!-- Dòng 3 -->
+            <div class="product-item" data-price="159000">
+                <a href="../product/re/pinky.html"><img src="../../images/hoa32.jpg" alt="Pinky" /></a>
+                <div class="product-info">
+                    <a href="../product/re/pinky.html"><h3>Pinky</h3></a>
+                    <div class="price">159,000 VND <span class="old-price">349,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="189000">
+                <a href="../product/re/tinh-khiet.html"><img src="../../images/hoa34.jpg" alt="Tinh Khiết" /></a>
+                <div class="product-info">
+                    <a href="../product/re/tinh-khiet.html"><h3>Tinh Khiết</h3></a>
+                    <div class="price">189,000 VND <span class="old-price">300,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="229000">
+                <a href="../product/re/chuyen-doi-ta.html"><img src="../../images/hoa36.jpg" alt="Chuyện Đôi Ta" /></a>
+                <div class="product-info">
+                    <a href="../product/re/chuyen-doi-ta.html"><h3>Chuyện Đôi Ta</h3></a>
+                    <div class="price">229,000 VND <span class="old-price">399,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
+            <div class="product-item" data-price="239000">
+                <a href="../product/re/xuan-dong-day.html"><img src="../../images/hoa38.jpg" alt="Xuân Đong Đầy" /></a>
+                <div class="product-info">
+                    <a href="../product/re/xuan-dong-day.html"><h3>Xuân Đong Đầy</h3></a>
+                    <div class="price">239,000 VND <span class="old-price">499,000 VND</span></div>
+                    <button class="order-button">ĐẶT HÀNG</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
+
+        <div class="pagination">
+            <a href="re4.html" class="active">1</a>
+        </div>
+        <div class="footer-text" style="text-align: center; padding: 20px 0; font-family: Arial, sans-serif;">
+            <p>Hiển thị từ 1 đến 12 / 12 (1 Trang)</p>
+        </div>
+    </div>
+
+    <div class="footer-content" style="background-color: #FFC0CB; color: #fff; text-align: center; padding: 20px 0; font-family: Arial, sans-serif; width: 103%; box-sizing: border-box; margin-bottom: -30px; margin-left: -18px;">
+        <h2>Hoa Sinh Nhật Giá Rẻ Dành Cho Mọi Người</h2>
+        <p>Hoa đẹp không nhất thiết phải đắt đỏ, vì đôi khi hạnh phúc chỉ cần một bó hoa giản đơn nhưng đầy ắp yêu thương. Mỗi bông hoa, dù là hoa hồng thắm hay hoa cúc nhạt, đều mang theo một câu chuyện riêng – câu chuyện của sự quan tâm, của những lời chúc tốt đẹp gửi đến người thân yêu trong ngày đặc biệt.</p>         
+        <p>Vẻ đẹp của hoa không chỉ nằm ở giá trị vật chất, mà chính là tình cảm, những cảm xúc thầm lặng mà chúng ta dành tặng cho nhau. Mỗi bó hoa là một lời chúc, một sự quan tâm mà chúng ta muốn gửi gắm, để người nhận cảm nhận được sự yêu thương, dù chỉ là một khoảnh khắc ngắn ngủi.</p>
+        <p>Hãy gọi ngay <a href="tel:02838305570" style="color: #fff;">02838305570</a> để được tư vấn và lựa chọn những mẫu hoa phù hợp, hoặc đặt hoa nhanh chóng, để mang niềm vui, sự tươi mới đến người thân yêu, vì đôi khi, hạnh phúc chính là một bó hoa giản dị nhưng đầy ắp yêu thương.</p>
+    </div>
+</div>
+
+            <script>
         function performSearch() {
             const query = document.getElementById("searchInput").value;
             if (query.trim()) {
@@ -166,6 +237,7 @@
         productGrid.innerHTML = '';
         productItems.forEach(item => productGrid.appendChild(item));
     }
+    setItemsPerPageSelected(12);
     </script>
 </body>
 </html>
