@@ -1,20 +1,14 @@
 // Kiểm tra trạng thái đăng nhập của người dùng khi trang được tải lại
 window.onload = function() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const accountLink = document.getElementById('accountLink');
+    
     if (userInfo) {
-        document.getElementById('accountLink').textContent = 'Tài khoản'; // Đổi liên kết thành "Thông tin tài khoản"
+        accountLink.textContent = 'Thông tin tài khoản'; // Đổi liên kết thành "Thông tin tài khoản"
     } else {
-        document.getElementById('accountLink').textContent = 'Tài khoản'; // Nếu chưa đăng nhập, hiển thị "Tài khoản"
+        accountLink.textContent = 'Tài khoản'; // Nếu chưa đăng nhập, hiển thị "Tài khoản"
     }
 };
-
-// Đóng các popup
-function closePopup(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
-        popup.style.display = 'none';
-    }
-}
 
 // Hiển thị popup đăng nhập
 function showLoginPopup() {
@@ -23,20 +17,16 @@ function showLoginPopup() {
     closePopup('accountPopup'); // Đảm bảo popup tài khoản bị ẩn khi mở popup đăng nhập
 }
 
-// Hiển thị popup đăng ký
-function showSignupPopup() {
-    document.getElementById('signupPopup').style.display = 'flex';
-    closePopup('loginPopup'); // Đóng popup đăng nhập nếu đang mở
-    closePopup('accountPopup'); // Đảm bảo popup tài khoản bị ẩn khi mở popup đăng ký
-}
-
 // Hiển thị popup thông tin tài khoản
 function showAccountPopup() {
     const accountPopup = document.getElementById('accountPopup');
     const accountDetails = document.getElementById('accountDetails');
 
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const accountLink = document.getElementById('accountLink');
+
     if (userInfo) {
+        // Hiển thị thông tin tài khoản
         accountDetails.innerHTML = `
             <p><strong>Họ tên:</strong> ${userInfo.name}</p>
             <p><strong>Email:</strong> ${userInfo.email}</p>
@@ -44,16 +34,17 @@ function showAccountPopup() {
             <p><strong>Tên đăng nhập:</strong> ${userInfo.username}</p>
         `;
         accountPopup.style.display = 'flex'; // Hiển thị popup thông tin tài khoản
-        document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết "Tài khoản"
+        accountLink.textContent = 'Tài khoản'; // Cập nhật liên kết thành "Tài khoản"
     } else {
         alert('Bạn chưa đăng nhập!');
         closePopup('accountPopup'); // Ẩn popup tài khoản nếu chưa đăng nhập
+        showLoginPopup(); // Hiển thị popup đăng nhập
     }
 }
 
 // Đăng nhập
 document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Chặn tải lại trang
+    event.preventDefault(); // Ngừng hành động mặc định (không gửi form)
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
     const users = JSON.parse(localStorage.getItem('users')) || []; // Lấy danh sách người dùng từ localStorage
@@ -64,7 +55,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         localStorage.setItem('userInfo', JSON.stringify(account)); // Lưu thông tin người dùng vào localStorage
         closePopup('loginPopup');
         showAccountPopup(); // Hiển thị popup thông tin tài khoản
-        document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết "Tài khoản"
+        document.getElementById('accountLink').textContent = 'Thông tin tài khoản'; // Cập nhật lại liên kết tài khoản
     } else {
         alert('Tên đăng nhập hoặc mật khẩu không đúng!');
     }
@@ -127,7 +118,7 @@ function saveAccountData() {
     alert("Đăng ký thành công!");
     closePopup('signupPopup');
     showAccountPopup(); // Hiển thị popup thông tin tài khoản
-    document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết "Tài khoản"
+    document.getElementById('accountLink').textContent = 'Thông tin tài khoản'; // Cập nhật liên kết tài khoản
     return false; // Ngăn chặn form gửi lại và tải lại trang
 }
 
@@ -138,4 +129,9 @@ function logout() {
     alert('Bạn đã đăng xuất thành công!');
     document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật lại liên kết "Tài khoản"
     showLoginPopup(); // Quay lại popup đăng nhập khi đăng xuất
+}
+
+// Đóng popup
+function closePopup(popupId) {
+    document.getElementById(popupId).style.display = 'none';
 }
