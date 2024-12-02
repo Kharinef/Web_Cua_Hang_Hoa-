@@ -16,6 +16,13 @@ function showLoginPopup() {
     closePopup('signupPopup'); // Đóng popup đăng ký nếu đang mở
     closePopup('accountPopup'); // Đảm bảo popup tài khoản bị ẩn khi mở popup đăng nhập
 }
+// Hiển thị popup đăng ký
+function showSignupPopup() {
+    document.getElementById('signupPopup').style.display = 'flex';
+    closePopup('loginPopup'); // Đóng popup đăng nhập nếu đang mở
+    closePopup('accountPopup'); // Đảm bảo popup tài khoản bị ẩn khi mở popup đăng ký
+}
+
 
 // Hiển thị popup thông tin tài khoản
 function showAccountPopup() {
