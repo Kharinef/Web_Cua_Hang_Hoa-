@@ -67,47 +67,48 @@
     </div>
 
     <!-- Popup Đăng Nhập -->
-    <div id="loginPopup">
-        <form id="loginForm">
-            <button type="button" class="close-popup" onclick="closePopup('loginPopup')">×</button>
-            <h3>Đăng nhập</h3>
-            <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
-            <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
-            <button type="submit">Đăng nhập</button>
-            <div class="signup-link">
-                Chưa có tài khoản? <a href="#" onclick="showSignupPopup()">Đăng ký ngay</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Popup Đăng Ký -->
-    <div id="signupPopup">
-        <form id="signupForm" onsubmit="return saveAccountData()">
-            <button type="button" class="close-popup" onclick="closePopup('signupPopup')">×</button>
-            <h3>Đăng ký tài khoản</h3>
-            <input type="text" id="name" placeholder="Tên khách hàng" required><br>
-            <input type="text" id="username" placeholder="Tên đăng nhập" required><br>
-            <input type="email" id="email" placeholder="Email" required><br>
-            <input type="text" id="phone" placeholder="Số điện thoại" required><br>
-            <input type="password" id="password" placeholder="Mật khẩu" required><br>
-            <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required><br>
-            <div class="error-message" id="passwordError"></div>
-            <button type="submit">Đăng ký</button>
-            <div class="login-link">
-                Đã có tài khoản? <a href="#" onclick="showLoginPopup()">Đăng nhập</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Popup Thông Tin Tài Khoản -->
-    <div id="accountPopup" style="display: none;">
-        <div class="account-content">
-            <button type="button" class="close-popup" onclick="closePopup('accountPopup')">×</button>
-            <h3>Thông tin tài khoản</h3>
-            <div id="accountDetails"></div>
-            <button onclick="logout()">Đăng xuất</button>
+<div id="loginPopup" style="display: none;">
+    <form onsubmit="handleLogin(); return false;">
+        <button type="button" class="close-popup" onclick="closePopup('loginPopup')">×</button>
+        <h3>Đăng nhập</h3>
+        <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
+        <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
+        <button type="submit">Đăng nhập</button>
+        <div class="signup-link">
+            Chưa có tài khoản? <a href="#" onclick="showSignupPopup()">Đăng ký ngay</a>
         </div>
+    </form>
+</div>
+
+<!-- Popup Đăng Ký -->
+<div id="signupPopup" style="display: none;">
+    <form id="signupForm" onsubmit="return saveAccountData()">
+        <button type="button" class="close-popup" onclick="closePopup('signupPopup')">×</button>
+        <h3>Đăng ký tài khoản</h3>
+        <input type="text" id="name" placeholder="Tên khách hàng" required><br>
+        <input type="text" id="username" placeholder="Tên đăng nhập" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="text" id="phone" placeholder="Số điện thoại" required><br>
+        <input type="password" id="password" placeholder="Mật khẩu" required><br>
+        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required><br>
+        <div class="error-message" id="passwordError"></div>
+        <button type="submit">Đăng ký</button>
+        <div class="login-link">
+            Đã có tài khoản? <a href="#" onclick="showLoginPopup()">Đăng nhập</a>
+        </div>
+    </form>
+</div>
+
+<!-- Popup Thông Tin Tài Khoản -->
+<div id="accountPopup" style="display: none;">
+    <div class="account-content">
+        <button type="button" class="close-popup" onclick="closePopup('accountPopup')">×</button>
+        <h3>Thông tin tài khoản</h3>
+        <div id="accountDetails"></div>
+        <button onclick="logout()">Đăng xuất</button>
     </div>
+</div>
+
 
     <h1 class="title">Sản Phẩm Mới</h1>
     <br><br>

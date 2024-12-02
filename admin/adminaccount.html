@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Account</title>
+    <link rel="stylesheet" href="/css/Style.css">
+    <style>
+/* Container for all sections */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Common box style for all sections */
+.section-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style for tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f7f7f7;
+}
+
+table td {
+    background-color: #fafafa;
+}
+
+/* Form and buttons */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button.btn-primary {
+    background-color: #FFB6C1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.btn-primary:hover {
+    background-color: #e89eb1;
+}
+
+/* Filter form */
+.filter-form .form-group {
+    display: inline-block;
+    width: 30%;
+    margin-right: 2%;
+}
+
+.filter-form .form-group input, 
+.filter-form .form-group select {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .filter-form .form-group {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="https://www.sgu.edu.vn/"><img src="../images/SGU-LOGO.png" style="width: 60px; height: 60px;" class="social-icons"></a>
+            <div class="hotline">HOTLINE: (028)38305570</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100009526723686">
+                    <img src="../images/FB_icon.jpg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100089018237035">
+                    <img src="../images/Instagram_icon.png" alt="Instagram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/dtp.clo">
+                    <img src="../images/Telegram_icon.png" alt="Telegram Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100036720456189">
+                    <img src="../images/X_icon.png" alt="X Icon" style="width: 20px; height: 20px;">
+                </a>
+                <a href="https://www.facebook.com/vinhthieu.nguyen.982">
+                    <img src="../images/whatsapp_icon.png" alt="WhatsApp Icon" style="width: 20px; height: 20px;">
+                </a>
+            </div>
+        </div>
+        <div>
+            <a class="center" href="../Mainpage.html"><img src="../Images/FlowerShop.png" alt="Logo"></a>
+        </div>
+        <div class="header-right">
+            <a href="#" onclick="openPopup()">Tài Khoản</a>
+            <a href="Cart.html" class="cart">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                Giỏ hàng
+            </a>
+            <a href="Checkout.html">Thanh toán</a>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
+                <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
+                <div id="suggestions"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <ul>
+            <li><a href="../mainpage.html">Trang Chính</a></li>
+            <li><a href="../page/menu/me1.html">Hoa tặng sinh nhật mẹ</a></li>
+            <li><a href="../page/menu/ban1.html">Hoa tặng sinh nhật bạn</a></li>
+            <li><a href="../page/menu/ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
+            <li><a href="../page/menu/sang1.html">Hoa sinh nhật sang trọng</a></li>
+            <li><a href="../page/menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- Quản lý Người Dùng -->
+            <section id="user-management" class="section-box">
+                <h2>Quản Lý Người Dùng</h2>
+                <table id="userTable">
+                    <thead>
+                        <tr>
+                            <th>username</th>
+                            <th>Họ và Tên</th>
+                            <th>Email</th>
+                            <th>Trạng Thái</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- Các dòng người dùng sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    
+
+            <!-- Quản lý Sản Phẩm -->
+            <section id="product-management" class="section-box">
+                <h2>Quản Lý Sản Phẩm</h2>
+                <form id="productForm">
+                    <input type="hidden" id="productId" />
+                    <div class="form-group">
+                        <label for="productName">Tên sản phẩm:</label>
+                        <input type="text" id="productName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Giá sản phẩm:</label>
+                        <input type="number" id="productPrice" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="productImage">Hình ảnh:</label>
+                        <input type="file" id="productImage" />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Chọn loại hoa:</label>
+                        <select id="category">
+                            <option value="mothers_day">Hoa tặng sinh nhật mẹ</option>
+                            <option value="friends_birthday">Hoa tặng sinh nhật bạn</option>
+                            <option value="lovers_birthday">Hoa tặng sinh nhật người yêu</option>
+                            <option value="luxury">Hoa sinh nhật sang trọng</option>
+                            <option value="cheap">Hoa sinh nhật giá rẻ</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" type="submit">Lưu sản phẩm</button>
+                </form>
+                <table id="productTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Giá</th>
+                            <th>Hình</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- Các dòng sản phẩm sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Quản lý Đơn Hàng -->
+            <section id="order-management" class="section-box">
+                <h2>Quản Lý Đơn Hàng</h2>
+                <form id="filterForm" class="filter-form">
+                    <div class="form-group">
+                        <label for="filterStartDate">Từ ngày:</label>
+                        <input type="date" id="filterStartDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="filterEndDate">Đến ngày:</label>
+                        <input type="date" id="filterEndDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="filterStatus">Trạng thái:</label>
+                        <select id="filterStatus">
+                            <option value="">Tất cả</option>
+                            <option value="new">Chưa xử lý</option>
+                            <option value="confirmed">Đã xác nhận</option>
+                            <option value="delivered">Đã giao</option>
+                            <option value="cancelled">Đã hủy</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" type="button" onclick="filterOrders()">Lọc đơn hàng</button>
+                </form>
+                <table id="orderTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Khách Hàng</th>
+                            <th>Ngày</th>
+                            <th>Địa chỉ</th>
+                            <th>Trạng Thái</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody">
+                        <!-- Các dòng đơn hàng sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Thống kê Kinh Doanh -->
+            <section id="business-statistics" class="section-box">
+                <h2>Thống Kê Kinh Doanh</h2>
+                <form id="statisticsForm" class="filter-form">
+                    <div class="form-group">
+                        <label for="statsStartDate">Từ ngày:</label>
+                        <input type="date" id="statsStartDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="statsEndDate">Đến ngày:</label>
+                        <input type="date" id="statsEndDate" />
+                    </div>
+                    <button class="btn-primary" type="button" onclick="generateStatistics()">Thống kê</button>
+                </form>
+                <div id="statisticsResult">
+                    <!-- Kết quả thống kê sẽ được hiển thị ở đây -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

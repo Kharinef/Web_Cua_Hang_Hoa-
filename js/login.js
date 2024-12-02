@@ -16,13 +16,13 @@ function showLoginPopup() {
     closePopup('signupPopup'); // Đóng popup đăng ký nếu đang mở
     closePopup('accountPopup'); // Đảm bảo popup tài khoản bị ẩn khi mở popup đăng nhập
 }
+
 // Hiển thị popup đăng ký
 function showSignupPopup() {
     document.getElementById('signupPopup').style.display = 'flex';
     closePopup('loginPopup'); // Đóng popup đăng nhập nếu đang mở
     closePopup('accountPopup'); // Đảm bảo popup tài khoản bị ẩn khi mở popup đăng ký
 }
-
 
 // Hiển thị popup thông tin tài khoản
 function showAccountPopup() {
@@ -50,23 +50,31 @@ function showAccountPopup() {
 }
 
 // Đăng nhập
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Ngừng hành động mặc định (không gửi form)
+function handleLogin() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
     const users = JSON.parse(localStorage.getItem('users')) || []; // Lấy danh sách người dùng từ localStorage
 
     const account = users.find(user => user.username === username && user.password === password);
     if (account) {
+        // Kiểm tra trạng thái tài khoản
+        if (account.status === 'Locked') {
+            alert('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với quản trị viên.');
+            return; // Ngừng quá trình đăng nhập nếu tài khoản bị khóa
+        }
+
+        // Đăng nhập thành công
         alert('Đăng nhập thành công!');
         localStorage.setItem('userInfo', JSON.stringify(account)); // Lưu thông tin người dùng vào localStorage
+        
+        // Hiển thị popup thông tin tài khoản
         closePopup('loginPopup');
-        showAccountPopup(); // Hiển thị popup thông tin tài khoản
+        showAccountPopup(); // Hiển thị popup tài khoản
         document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật lại liên kết tài khoản
     } else {
         alert('Tên đăng nhập hoặc mật khẩu không đúng!');
     }
-});
+}
 
 // Đăng ký
 function saveAccountData() {
@@ -109,7 +117,7 @@ function saveAccountData() {
     passwordError.textContent = '';
 
     // Lưu thông tin tài khoản vào localStorage
-    const userAccount = { name, username, email, phone, password };
+    const userAccount = { name, username, email, phone, password, status: 'Active' };
     let users = JSON.parse(localStorage.getItem('users')) || [];
 
     // Kiểm tra xem tên đăng nhập đã tồn tại chưa
