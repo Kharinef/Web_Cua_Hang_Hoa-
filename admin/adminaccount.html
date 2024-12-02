@@ -5,104 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Account</title>
     <link rel="stylesheet" href="/css/Style.css">
-    <style>
-/* Container for all sections */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Common box style for all sections */
-.section-box {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-/* Style for tables */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f7f7f7;
-}
-
-table td {
-    background-color: #fafafa;
-}
-
-/* Form and buttons */
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-button.btn-primary {
-    background-color: #FFB6C1;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button.btn-primary:hover {
-    background-color: #e89eb1;
-}
-
-/* Filter form */
-.filter-form .form-group {
-    display: inline-block;
-    width: 30%;
-    margin-right: 2%;
-}
-
-.filter-form .form-group input, 
-.filter-form .form-group select {
-    width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-    .filter-form .form-group {
-        width: 100%;
-        margin-right: 0;
-    }
-}
-
-
-        
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>   
     </style>
 </head>
 <body>
@@ -155,6 +59,23 @@ button.btn-primary:hover {
             <li><a href="../page/menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
         </ul>
     </div>
+    <!-- Modal Popup -->
+<div id="adminPopup">
+    <div class="popup-overlay"></div>
+    <div class="popup-content">
+        <button class="close-popup" onclick="closePopup()">×</button>
+        <h2>Thông Tin Tài Khoản</h2>
+        <label for="username">Tên:</label>
+        <input type="text" id="username" value="Admin" disabled />
+
+        <label for="role">Vai trò:</label>
+        <input type="text" id="role" value="Quản trị viên" disabled />
+
+        <button class="submit-btn" onclick="logout()">Đăng xuất</button>
+    </div>
+</div>
+
+
 
     <main>
         <div class="container">
@@ -198,8 +119,8 @@ button.btn-primary:hover {
                         <input type="file" id="productImage" />
                     </div>
                     <div class="form-group">
-                        <label for="category">Chọn loại hoa:</label>
-                        <select id="category">
+                        <label for="category">Dùng để tặng ai:</label>
+                        <select id="category" required>
                             <option value="mothers_day">Hoa tặng sinh nhật mẹ</option>
                             <option value="friends_birthday">Hoa tặng sinh nhật bạn</option>
                             <option value="lovers_birthday">Hoa tặng sinh nhật người yêu</option>
@@ -209,10 +130,11 @@ button.btn-primary:hover {
                     </div>
                     <button class="btn-primary" type="submit">Lưu sản phẩm</button>
                 </form>
+        
                 <table id="productTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Dùng để tặng ai</th>
                             <th>Tên</th>
                             <th>Giá</th>
                             <th>Hình</th>
@@ -224,6 +146,38 @@ button.btn-primary:hover {
                     </tbody>
                 </table>
             </section>
+        
+            <div id="modalOverlay" class="modal-overlay"></div>
+            <div id="editProductModal" class="modal">
+                <form id="editProductForm">
+                    <input type="hidden" id="modalProductId">
+                    <div class="form-group">
+                        <label for="modalProductName">Tên sản phẩm:</label>
+                        <input type="text" id="modalProductName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="modalProductPrice">Giá sản phẩm:</label>
+                        <input type="number" id="modalProductPrice" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="modalProductImage">Hình ảnh:</label>
+                        <input type="file" id="modalProductImage" />
+                    </div>
+                    <div class="form-group">
+                        <label for="modalCategory">Dùng để tặng ai:</label>
+                        <select id="modalCategory" required>
+                            <option value="Hoa tặng sinh nhật mẹ">Hoa tặng sinh nhật mẹ</option>
+                            <option value="Hoa tặng sinh nhật bạn">Hoa tặng sinh nhật bạn</option>
+                            <option value="Hoa tặng sinh nhật người yêu">Hoa tặng sinh nhật người yêu</option>
+                            <option value="Hoa sinh nhật sang trọng">Hoa sinh nhật sang trọng</option>
+                            <option value="Hoa sinh nhật giá rẻ">Hoa sinh nhật giá rẻ</option>
+                        </select>
+                    </div>
+                    <button type="submit">Lưu Chỉnh Sửa</button>
+                </form>
+                <button onclick="closeModal()">Đóng</button>
+            </div>
+
 
             <!-- Quản lý Đơn Hàng -->
             <section id="order-management" class="section-box">

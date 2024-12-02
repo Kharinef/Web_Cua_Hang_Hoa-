@@ -145,7 +145,7 @@
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 Giỏ hàng
             </a>
-            <a href="Checkout.html">Thanh toán</a>
+            
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
@@ -191,34 +191,34 @@
 
     <script>
         const adminPasswords = ['Admin1@123', 'Admin2@123', 'Admin3@123'];
-
+    
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
         }
-
+    
         function openPopup() {
             document.getElementById('adminPopup').style.display = 'flex';
         }
-
+    
         function closePopup() {
             document.getElementById('adminPopup').style.display = 'none';
         }
-
+    
         document.getElementById('admin-signin-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
-
+    
             if (adminPasswords.includes(password)) {
                 alert('Đăng nhập thành công!');
                 closePopup();
-                window.location.href = '/admin/adminaccount';
+                window.location.href = '../admin/adminaccount.html';  <!-- Thay thế URL ở đây -->
             } else {
                 errorMessage.textContent = 'Mật khẩu không đúng. Vui lòng thử lại.';
                 errorMessage.style.display = 'block';
             }
         });
-    </script>
+    </script>    
 </body>
 </html>
