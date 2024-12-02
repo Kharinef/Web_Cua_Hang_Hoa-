@@ -6,7 +6,6 @@
     <title>Flower Shop - Đăng nhập</title>
     <link rel="stylesheet" href="/css/Style.css">
     <link rel="stylesheet" href="/css/login.css">
-        
 </head>
 <body>
     <div class="header">
@@ -35,18 +34,18 @@
             <a class="center" href="../Mainpage.html"><img src="../Images/FlowerShop.png" alt="Logo"></a>
         </div>
         <div class="header-right">
-            <a href="#" onclick="showLoginPopup()">Tài khoản</a>
+            <a href="javascript:void(0)" id="accountLink" onclick="showAccountPopup()">Tài khoản</a>
             <a href="Cart.html" class="cart">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 Giỏ hàng
             </a>
-            <a href="Checkout.html">Thanh toán</a>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
         </div>
+        
     </div>
 
     <div class="nav-bar">
@@ -67,7 +66,7 @@
     <!-- Popup Đăng Nhập -->
     <div id="loginPopup">
         <form id="loginForm">
-            <button type="button" class="close-popup" onclick="closePopup()">×</button>
+            <button type="button" class="close-popup" onclick="closePopup('loginPopup')">×</button>
             <h3>Đăng nhập</h3>
             <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
             <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
@@ -81,7 +80,7 @@
     <!-- Popup Đăng Ký -->
     <div id="signupPopup">
         <form id="signupForm" onsubmit="return saveAccountData()">
-            <button type="button" class="close-popup" onclick="closeSignupPopup()">×</button>
+            <button type="button" class="close-popup" onclick="closePopup('signupPopup')">×</button>
             <h3>Đăng ký tài khoản</h3>
             <input type="text" id="name" placeholder="Tên khách hàng" required><br>
             <input type="text" id="username" placeholder="Tên đăng nhập" required><br>
@@ -96,9 +95,11 @@
             </div>
         </form>
     </div>
+
+    <!-- Popup Thông Tin Tài Khoản -->
     <div id="accountPopup" style="display: none;">
         <div class="account-content">
-            <button type="button" class="close-popup" onclick="closeAccountPopup()">×</button>
+            <button type="button" class="close-popup" onclick="closePopup('accountPopup')">×</button>
             <h3>Thông tin tài khoản</h3>
             <div id="accountDetails"></div>
             <button onclick="logout()">Đăng xuất</button>
