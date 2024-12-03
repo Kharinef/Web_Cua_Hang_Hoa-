@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
     <link rel="stylesheet" href="/css/Menu.css">
+    <link rel="stylesheet" href="../../css/login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flower Shop - Trang 2</title>
@@ -9,7 +10,8 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <a href="https://www.sgu.edu.vn/"><img src="../../images/SGU-LOGO.png" style="width: 60px; height: 60px;" class="social-icons"></a>
+            <a href="https://www.sgu.edu.vn/"><img src="../../images/SGU-LOGO.png" style="width: 60px; height: 60px;"
+                    class="social-icons"></a>
             <div class="hotline">HOTLINE: (028)38305570</div>
             <div class="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=100009526723686">
@@ -30,30 +32,76 @@
             </div>
         </div>
         <div>
-            <a class="center" href="../../mainpage.html"><img src="../../images/FlowerShop.png" alt="Logo"></a>
+            <a class="center" href="../../Mainpage.html"><img src="../../Images/FlowerShop.png" alt="Logo"></a>
         </div>
         <div class="header-right">
-            <a href="../../Account.html">Tài khoản</a>
-            <a href="Cart.html" class="cart">
-                <i class="cart-icon fas fa-shopping-bag"></i> Giỏ hàng</a>
+            <a href="javascript:void(0)" id="accountLink" onclick="showAccountPopup()">Tài khoản</a>
+            <a href="Cart/cart.html" class="cart">
+                <i class="fa fa-shopping-cart" aria-hidden="true" style="display: none;"></i>
+                Giỏ hàng
+            </a>            
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
                 <img src="../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="../../js/scripts.js"></script>
         </div>
+        
     </div>
 
     <div class="nav-bar">
         <ul>
             <li><a href="../../mainpage.html">Trang Chính</a></li>
-            <li><a href="me1.html">Hoa tặng sinh nhật mẹ</a></li>
-            <li><a href="ban1.html">Hoa tặng sinh nhật bạn</a></li>
-            <li><a href="ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
-            <li><a href="sang1.html">Hoa sinh nhật sang trọng</a></li>
-            <li><a href="re1.html">Hoa sinh nhật giá rẻ</a></li>
+            <li><a href="../menu/me1.html">Hoa tặng sinh nhật mẹ</a></li>
+            <li><a href="../menu/ban1.html">Hoa tặng sinh nhật bạn</a></li>
+            <li><a href="../menu/ny1.html">Hoa tặng sinh nhật người yêu ~ bạn gái</a></li>
+            <li><a href="../menu/sang1.html">Hoa sinh nhật sang trọng</a></li>
+            <li><a href="../menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
         </ul>
+    </div>
+
+    <!-- Popup Đăng Nhập -->
+<div id="loginPopup" style="display: none;">
+    <form onsubmit="handleLogin(); return false;">
+        <button type="button" class="close-popup" onclick="closePopup('loginPopup')">×</button>
+        <h3>Đăng nhập</h3>
+        <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
+        <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
+        <button type="submit">Đăng nhập</button>
+        <div class="signup-link">
+            Chưa có tài khoản? <a href="#" onclick="showSignupPopup()">Đăng ký ngay</a>
+        </div>
+    </form>
+</div>
+
+<!-- Popup Đăng Ký -->
+<div id="signupPopup" style="display: none;">
+    <form id="signupForm" onsubmit="return saveAccountData()">
+        <button type="button" class="close-popup" onclick="closePopup('signupPopup')">×</button>
+        <h3>Đăng ký tài khoản</h3>
+        <input type="text" id="name" placeholder="Tên khách hàng" required><br>
+        <input type="text" id="username" placeholder="Tên đăng nhập" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="text" id="phone" placeholder="Số điện thoại" required><br>
+        <input type="password" id="password" placeholder="Mật khẩu" required><br>
+        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required><br>
+        <div class="error-message" id="passwordError"></div>
+        <button type="submit">Đăng ký</button>
+        <div class="login-link">
+            Đã có tài khoản? <a href="#" onclick="showLoginPopup()">Đăng nhập</a>
+        </div>
+    </form>
+</div>
+
+<!-- Popup Thông Tin Tài Khoản -->
+<div id="accountPopup" style="display: none;">
+    <div class="account-content">
+        <button type="button" class="close-popup" onclick="closePopup('accountPopup')">×</button>
+        <h3>Thông tin tài khoản</h3>
+        <div id="accountDetails"></div>
+        <button onclick="logout()">Đăng xuất</button>
+    </div>
+</div>
     </div>
     
     <div class="content">
@@ -169,7 +217,7 @@
                     productItems.forEach(item => productGrid.appendChild(item));
                 }
                 </script>
-                <script src="/js/searchmenu.js"></script>
-                <script src="/js/login.js"></script>
-                <script src="/js/sp.js"></script>
+                <script src="../../js/searchmenu.js"></script>
+                <script src="../../js/login.js"></script>
+                <script src="../../js/sp.js"></script>
 </html>
