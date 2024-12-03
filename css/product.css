@@ -52,15 +52,6 @@ body {
     }
 }
 
-/* Màn hình desktop */
-@media (min-width: 1024px) {
-    .product-image img {
-        width: 60%;
-        /* Giảm thêm kích thước */
-        height: auto;
-    }
-}
-
 /* Product Information */
 .product-info {
     flex-grow: 1;
@@ -350,59 +341,6 @@ body {
     color: #e74c3c;
 }
 
-/* Mobile Responsive Design */
-@media (max-width: 768px) {
-    .product-details-content {
-        flex-direction: column;
-    }
-
-    .product-image,
-    .product-info {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-
-    .product-card img {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-/* Tablet and Larger Screens */
-@media (min-width: 768px) {
-    .product-details-content {
-        flex-direction: row;
-    }
-
-    .product-image {
-        width: 40%;
-    }
-
-    .product-info {
-        width: 60%;
-    }
-}
-
-/* Desktop and Larger Screens */
-@media (min-width: 1024px) {
-    .product-details-content {
-        gap: 40px;
-    }
-
-    .product-image {
-        width: 50%;
-    }
-
-    .product-info {
-        width: 50%;
-    }
-
-    .product-card img {
-        width: 120px;
-        height: 120px;
-    }
-}
-
 /* Related Products Section */
 .related-products {
     margin-top: 30px;
@@ -625,26 +563,18 @@ body {
     /* Tạo hình tròn */
 }
 
-/* Mobile Responsive Design */
-@media (max-width: 768px) {
-    .product-card {
-        width: 200px;
-        /* Điều chỉnh kích thước sản phẩm trên điện thoại */
-    }
-}
 
 /* Tablet and Larger Screens */
 @media (min-width: 768px) {
-    .product-card {
-        width: 250px;
-        /* Điều chỉnh kích thước sản phẩm trên tablet */
+    .product-details-content {
+        flex-direction: row;
     }
-}
 
-/* Desktop and Larger Screens */
-@media (min-width: 1024px) {
-    .product-card {
-        width: 300px;
-        /* Tăng kích thước sản phẩm trên desktop */
+    .product-image {
+        width: 40%;
+    }
+
+    .product-info {
+        width: 60%;
     }
 }
