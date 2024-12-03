@@ -288,100 +288,278 @@ window.onload = function() {
 
 
 //
-document.addEventListener('DOMContentLoaded', function () {
-    const orders = [
-        { id: 1, customer: 'Nguyễn Văn A', date: '2024-12-01', address: 'Hà Nội, Quận Ba Đình', status: 'new', details: 'order1.html' },
-        { id: 2, customer: 'Trần Thị B', date: '2024-12-02', address: 'Hồ Chí Minh, Quận 1', status: 'confirmed', details: 'order2.html' },
-        { id: 3, customer: 'Lê Minh C', date: '2024-12-03', address: 'Đà Nẵng, Quận Hải Châu', status: 'delivered', details: 'order3.html' },
-        { id: 4, customer: 'Phan Thị D', date: '2024-12-04', address: 'Hà Nội, Quận Cầu Giấy', status: 'cancelled', details: 'order4.html' },
-    ];
+// Hàm để lấy dữ liệu lịch sử thanh toán từ localStorage
+function getPaymentHistory() {
+    try {
+        return JSON.parse(localStorage.getItem('paymentHistory')) || [];
+    } catch (e) {
+        console.error("Lỗi khi đọc lịch sử thanh toán từ localStorage:", e);
+        return [];
+    }
+}
 
-    // Hàm hiển thị tất cả đơn hàng
-    function displayOrders(filteredOrders) {
-        const tableBody = document.getElementById('orderTableBody');
-        tableBody.innerHTML = '';  // Xóa hết các dòng hiện tại
+// Hàm để lấy thông tin tài khoản khách hàng từ localStorage
+function getUserInfo(username) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    return users.find(user => user.username === username);
+}
 
-        filteredOrders.forEach(order => {
-            const row = document.createElement('tr');
+// Hàm để định dạng thời gian (ngày/tháng/năm)
+function formatDate(date) {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// Hàm để lọc lịch sử thanh toán
+function filterOrders() {
+    const startDate = document.getElementById("filterStartDate").value;
+    const endDate = document.getElementById("filterEndDate").value;
+    const status = document.getElementById("filterStatus").value;
+
+    const orderTableBody = document.getElementById("orderTableBody");
+    const paymentHistory = getPaymentHistory();
+
+    // Xóa nội dung cũ trong bảng
+    orderTableBody.innerHTML = '';
+
+    // Lọc dữ liệu
+    const filteredOrders = paymentHistory.filter(order => {
+        const orderDate = new Date(order.date);
+        const isWithinDateRange =
+            (!startDate || orderDate >= new Date(startDate)) &&
+            (!endDate || orderDate <= new Date(endDate));
+
+        // Nếu chọn trạng thái, kiểm tra xem trạng thái có khớp không
+        const matchesStatus =
+            !status || (status === 'new' && !order.status) || order.status === status;
+
+        return isWithinDateRange && matchesStatus;
+    });
+
+    // Hiển thị các đơn hàng đã lọc trong bảng
+    if (filteredOrders.length > 0) {
+        filteredOrders.forEach((order, index) => {
+            const row = document.createElement("tr");
+
             
-            row.innerHTML = `
-                <td>${order.id}</td>
-                <td>${order.customer}</td>
-                <td>${order.date}</td>
-                <td>${order.address}</td>
-                <td>${getStatusText(order.status)}</td>
-                <td>
-                    <a href="${order.details}">Xem chi tiết</a>
-                    <button onclick="updateOrderStatus(${order.id}, 'new')">Chưa xử lý</button>
-                    <button onclick="updateOrderStatus(${order.id}, 'confirmed')">Đã xác nhận</button>
-                    <button onclick="updateOrderStatus(${order.id}, 'delivered')">Đã giao</button>
-                    <button onclick="updateOrderStatus(${order.id}, 'cancelled')">Đã hủy</button>
-                </td>
-            `;
 
-            tableBody.appendChild(row);
+            // Tạo các ô cho mỗi cột
+            const idCell = document.createElement("td");
+            const customerCell = document.createElement("td");
+            const dateCell = document.createElement("td");
+            const addressCell = document.createElement("td");
+            const statusCell = document.createElement("td");
+            const actionCell = document.createElement("td");
+
+            // Điền dữ liệu vào các ô
+            idCell.innerText = index + 1; // ID (tăng dần)
+            const customerInfo = getUserInfo(order.customerUsername); // Lấy thông tin khách hàng từ tên đăng nhập
+            customerCell.innerText = customerInfo ? customerInfo.username : "Tài khoản không xác định"; // Hiển thị tên tài khoản
+            dateCell.innerText = formatDate(order.date); // Định dạng thời gian
+            addressCell.innerText = customerInfo ? customerInfo.address : "Không có địa chỉ"; // Địa chỉ giao hàng từ thông tin khách hàng
+            
+            // Chỉnh trạng thái đơn hàng
+            const orderStatus = order.status === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán'; // Nếu trạng thái là 'paid', hiển thị 'Đã thanh toán'
+            statusCell.innerText = orderStatus; // Trạng thái
+
+            // Hiển thị thông tin khách hàng (email, phone, address)
+            const customerDetailsButton = document.createElement("button");
+            customerDetailsButton.innerText = "Thông tin khách hàng";
+            customerDetailsButton.onclick = function () {
+                showCustomerDetails(customerInfo);
+            };
+
+            // Hành động: Ví dụ, nút chi tiết
+            const detailButton = document.createElement("button");
+            detailButton.innerText = "Chi tiết";
+            detailButton.onclick = function () {
+                showOrderDetails(order);
+            };
+
+            actionCell.appendChild(detailButton);
+            actionCell.appendChild(customerDetailsButton);
+
+            // Gắn các ô vào hàng
+            row.appendChild(idCell);
+            row.appendChild(customerCell);
+            row.appendChild(dateCell);
+            row.appendChild(addressCell);
+            row.appendChild(statusCell);
+            row.appendChild(actionCell);
+
+            // Gắn hàng vào bảng
+            orderTableBody.appendChild(row);
         });
+    } else {
+        // Nếu không có đơn hàng, hiển thị thông báo
+        orderTableBody.innerHTML = '<tr><td colspan="6">Không tìm thấy đơn hàng nào.</td></tr>';
     }
+}
 
-    // Hàm lấy tên trạng thái
-    function getStatusText(status) {
-        const statusMap = {
-            new: 'Chưa xử lý',
-            confirmed: 'Đã xác nhận',
-            delivered: 'Đã giao',
-            cancelled: 'Đã hủy'
-        };
-        return statusMap[status] || 'Không xác định';
+// Hàm để hiển thị chi tiết đơn hàng (ví dụ, trong một hộp thoại)
+function showOrderDetails(order) {
+    alert(`Chi tiết đơn hàng:\n- Ngày: ${order.date}\n- Sản phẩm: ${order.products}\n- Tổng tiền: ${order.totalAmount}`);
+}
+
+// Hàm để hiển thị thông tin khách hàng
+// Hàm để hiển thị thông tin khách hàng
+function showCustomerDetails(customer) {
+    if (customer) {
+        alert(`Thông tin khách hàng:\n- Tên tài khoản: ${customer.username}\n- Email: ${customer.email}\n- Số điện thoại: ${customer.phone}\n- Địa chỉ: ${customer.address}`);
+    } else {
+        alert("Không tìm thấy thông tin khách hàng.");
     }
+}
 
-    // Cập nhật trạng thái đơn hàng
-    function updateOrderStatus(orderId, newStatus) {
-        const order = orders.find(order => order.id === orderId);
-        if (order) {
-            order.status = newStatus;
-            filterOrders();  // Sau khi cập nhật trạng thái, lọc lại danh sách
+
+// Tải lịch sử thanh toán khi tải trang
+window.onload = function () {
+    filterOrders();
+};
+
+
+
+
+
+
+
+//
+// Hàm để lấy dữ liệu lịch sử thanh toán từ localStorage
+function getPaymentHistory() {
+    try {
+        return JSON.parse(localStorage.getItem('paymentHistory')) || [];
+    } catch (e) {
+        console.error("Lỗi khi đọc lịch sử thanh toán từ localStorage:", e);
+        return [];
+    }
+}
+
+// Hàm để định dạng thời gian (ngày/tháng/năm)
+function formatDate(date) {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// Hàm thống kê doanh thu theo mặt hàng
+function generateItemStatistics(paymentHistory, startDate, endDate) {
+    const itemStats = {};
+
+    paymentHistory.forEach(order => {
+        // Kiểm tra ngày đơn hàng có trong khoảng lọc không
+        const orderDate = new Date(order.date);
+        if (orderDate >= new Date(startDate) && orderDate <= new Date(endDate)) {
+            order.products.forEach(product => {
+                const { name, quantity, price } = product;
+                if (!itemStats[name]) {
+                    itemStats[name] = { totalQuantity: 0, totalAmount: 0, orderIds: [] };
+                }
+                itemStats[name].totalQuantity += quantity;
+                itemStats[name].totalAmount += quantity * price;
+                itemStats[name].orderIds.push(order.id);
+            });
         }
-    }
-
-    // Lọc đơn hàng theo thời gian và trạng thái
-    function filterOrders() {
-        const startDate = document.getElementById('filterStartDate').value;
-        const endDate = document.getElementById('filterEndDate').value;
-        const statusFilter = document.getElementById('filterStatus').value;
-
-        const filteredOrders = orders.filter(order => {
-            const orderDate = new Date(order.date);
-            const isDateInRange = (!startDate || orderDate >= new Date(startDate)) && (!endDate || orderDate <= new Date(endDate));
-            const isStatusMatch = !statusFilter || order.status === statusFilter;
-            return isDateInRange && isStatusMatch;
-        });
-
-        // Hiển thị đơn hàng đã lọc
-        displayOrders(filteredOrders);
-    }
-
-    // Hàm sắp xếp đơn hàng theo địa chỉ (quận)
-    function sortOrdersByAddress() {
-        const sortedOrders = [...orders].sort((a, b) => {
-            const addressA = a.address.split(',')[1];  // Lấy phần quận
-            const addressB = b.address.split(',')[1];
-            return addressA.localeCompare(addressB);
-        });
-
-        displayOrders(sortedOrders);
-    }
-
-    // Thêm sự kiện lọc khi thay đổi thông tin lọc
-    document.getElementById('filterForm').addEventListener('submit', function (event) {
-        event.preventDefault();  // Ngừng việc gửi form
-        filterOrders();  // Lọc đơn hàng
     });
 
-    // Sắp xếp đơn hàng theo địa chỉ khi cần
-    document.getElementById('sortButton').addEventListener('click', function () {
-        sortOrdersByAddress();
+    return itemStats;
+}
+
+// Hàm thống kê doanh thu theo khách hàng
+function generateCustomerStatistics(paymentHistory, startDate, endDate) {
+    const customerStats = {};
+
+    paymentHistory.forEach(order => {
+        // Kiểm tra ngày đơn hàng có trong khoảng lọc không
+        const orderDate = new Date(order.date);
+        if (orderDate >= new Date(startDate) && orderDate <= new Date(endDate)) {
+            const customerUsername = order.customerUsername;
+            const totalAmount = order.totalAmount;
+
+            if (!customerStats[customerUsername]) {
+                customerStats[customerUsername] = { totalAmount: 0, orderIds: [] };
+            }
+            customerStats[customerUsername].totalAmount += totalAmount;
+            customerStats[customerUsername].orderIds.push(order.id);
+        }
     });
 
-    // Hiển thị tất cả đơn hàng khi mới tải trang
-    displayOrders(orders);
-});
+    // Sắp xếp khách hàng theo tổng doanh thu giảm dần
+    const sortedCustomers = Object.entries(customerStats)
+        .sort((a, b) => b[1].totalAmount - a[1].totalAmount)
+        .slice(0, 5); // Chỉ lấy 5 khách hàng có doanh thu cao nhất
+
+    return sortedCustomers;
+}
+
+// Hàm tạo thống kê
+function generateStatistics() {
+    const startDate = document.getElementById("statsStartDate").value;
+    const endDate = document.getElementById("statsEndDate").value;
+
+    const paymentHistory = getPaymentHistory();
+
+    if (!startDate || !endDate) {
+        alert("Vui lòng chọn khoảng thời gian.");
+        return;
+    }
+
+    // Tính thống kê mặt hàng
+    const itemStats = generateItemStatistics(paymentHistory, startDate, endDate);
+    let itemStatsHTML = "<h3>Thống kê mặt hàng</h3><table><tr><th>Mặt hàng</th><th>Số lượng bán</th><th>Tổng tiền thu được</th><th>Hóa đơn</th></tr>";
+
+    let totalRevenueItems = 0;
+    let bestSellingItem = { name: "", quantity: 0, totalAmount: 0 };
+    let worstSellingItem = { name: "", quantity: 0, totalAmount: Infinity };
+
+    Object.entries(itemStats).forEach(([itemName, stats]) => {
+        const { totalQuantity, totalAmount, orderIds } = stats;
+        totalRevenueItems += totalAmount;
+
+        // Cập nhật mặt hàng bán chạy nhất và ế nhất
+        if (totalQuantity > bestSellingItem.quantity) {
+            bestSellingItem = { name: itemName, quantity: totalQuantity, totalAmount };
+        }
+        if (totalQuantity < worstSellingItem.quantity) {
+            worstSellingItem = { name: itemName, quantity: totalQuantity, totalAmount };
+        }
+
+        // Tạo dòng cho mỗi mặt hàng
+        itemStatsHTML += `<tr><td>${itemName}</td><td>${totalQuantity}</td><td>${totalAmount.toFixed(2)} VND</td><td><button onclick="viewItemOrders(${JSON.stringify(orderIds)})">Xem hóa đơn</button></td></tr>`;
+    });
+
+    itemStatsHTML += "</table>";
+    itemStatsHTML += `<h4>Tổng doanh thu từ mặt hàng: ${totalRevenueItems.toFixed(2)} VND</h4>`;
+    itemStatsHTML += `<h4>Mặt hàng bán chạy nhất: ${bestSellingItem.name} (${bestSellingItem.quantity} bán, ${bestSellingItem.totalAmount.toFixed(2)} VND)</h4>`;
+    itemStatsHTML += `<h4>Mặt hàng ế nhất: ${worstSellingItem.name} (${worstSellingItem.quantity} bán, ${worstSellingItem.totalAmount.toFixed(2)} VND)</h4>`;
+
+    // Tính thống kê khách hàng
+    const customerStats = generateCustomerStatistics(paymentHistory, startDate, endDate);
+    let customerStatsHTML = "<h3>5 khách hàng chi tiêu nhiều nhất</h3><table><tr><th>Khách hàng</th><th>Tổng doanh thu</th><th>Hóa đơn</th></tr>";
+
+    customerStats.forEach(([username, stats]) => {
+        const { totalAmount, orderIds } = stats;
+
+        // Tạo dòng cho mỗi khách hàng
+        customerStatsHTML += `<tr><td>${username}</td><td>${totalAmount.toFixed(2)} VND</td><td><button onclick="viewCustomerOrders(${JSON.stringify(orderIds)})">Xem hóa đơn</button></td></tr>`;
+    });
+
+    customerStatsHTML += "</table>";
+
+    // Hiển thị kết quả thống kê
+    document.getElementById("statisticsResult").innerHTML = itemStatsHTML + customerStatsHTML;
+}
+
+// Hàm hiển thị các hóa đơn của mặt hàng
+function viewItemOrders(orderIds) {
+    alert(`Các hóa đơn của mặt hàng: ${orderIds.join(", ")}`);
+}
+
+// Hàm hiển thị các hóa đơn của khách hàng
+function viewCustomerOrders(orderIds) {
+    alert(`Các hóa đơn của khách hàng: ${orderIds.join(", ")}`);
+}

@@ -69,6 +69,9 @@ function handleLogin() {
         closePopup('loginPopup');
         showAccountPopup(); // Hiển thị popup tài khoản
         document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật lại liên kết tài khoản
+        
+        // Tải lại trang sau khi đăng nhập
+        location.reload();
     } else {
         alert('Tên đăng nhập hoặc mật khẩu không đúng!');
     }
@@ -137,16 +140,30 @@ function saveAccountData() {
     closePopup('signupPopup');
     showAccountPopup(); // Hiển thị popup thông tin tài khoản
     document.getElementById('accountLink').textContent = 'Tài khoản';
+    
+    // Tải lại trang sau khi đăng ký thành công
+    location.reload();
+
     return false; // Ngăn chặn form gửi lại và tải lại trang
 }
 
 // Đăng xuất
 function logout() {
-    localStorage.removeItem('userInfo');
+    // Xóa thông tin người dùng khỏi localStorage
+    localStorage.removeItem("userInfo");
+
+    // Đóng popup tài khoản (nếu có)
     closePopup('accountPopup');
+
+    // Thông báo đăng xuất thành công
     alert('Bạn đã đăng xuất thành công!');
-    document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết
-    showLoginPopup();
+
+    // Cập nhật lại giao diện
+    document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết tài khoản
+    showLoginPopup(); // Hiển thị popup đăng nhập
+    
+    // Tải lại trang sau khi đăng xuất
+    location.reload();
 }
 
 // Đóng popup

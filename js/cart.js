@@ -1,128 +1,166 @@
-window.onload = function() {
+// Hàm thêm sản phẩm vào giỏ hàng
+function addToCart(product) {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) {
+        alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.");
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const existingProductIndex = cart.findIndex(item => item.name === product.name);
+    if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity += product.quantity;
+    } else {
+        cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
     displayCart();
-    displayPaymentHistory(); // Hiển thị lịch sử thanh toán khi tải trang
-};
+}
 
-// Function to display the cart
+// Hàm hiển thị giỏ hàng
 function displayCart() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || []; // Get cart from localStorage
-    const cartTbody = document.getElementById("cart-tbody");
-    const totalPriceElement = document.getElementById("totalPrice");
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) {
+        document.getElementById('cart-container').innerHTML = "<p>Vui lòng đăng nhập để xem giỏ hàng.</p>";
+        return;
+    }
 
-    // Clear existing content in cart table
-    cartTbody.innerHTML = '';
-
-    // Initialize total price
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartTableBody = document.getElementById('cart-tbody');
+    const totalPriceElement = document.getElementById('totalPrice');
     let totalPrice = 0;
 
-    // Loop through each product in the cart and add it to the table
-    cart.forEach((product, index) => {
-        const row = document.createElement("tr");
+    cartTableBody.innerHTML = '';
 
-        // Create table cells for each product attribute
-        const imgCell = document.createElement("td");
-        const nameCell = document.createElement("td");
-        const priceCell = document.createElement("td");
-        const qtyCell = document.createElement("td");
-        const actionCell = document.createElement("td");
-
-        // Set the content for each cell
-        imgCell.innerHTML = `<img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;">`;
-        nameCell.innerText = product.name;
-        priceCell.innerText = `${product.price} VND`;
-        qtyCell.innerText = product.quantity;
-
-        // Action to remove item from cart
-        const removeButton = document.createElement("button");
-        removeButton.innerText = "Xóa";
-        removeButton.onclick = function() {
-            removeFromCart(index);
-        };
-        actionCell.appendChild(removeButton);
-
-        // Append cells to row
-        row.appendChild(imgCell);
-        row.appendChild(nameCell);
-        row.appendChild(priceCell);
-        row.appendChild(qtyCell);
-        row.appendChild(actionCell);
-
-        // Add the row to the table body
-        cartTbody.appendChild(row);
-
-        // Update total price
-        totalPrice += parseInt(product.price) * parseInt(product.quantity);
+    cart.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
+            <td>${item.name}</td>
+            <td>${item.price.toLocaleString()} VND</td>
+            <td>
+                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+            </td>
+            <td><button onclick="removeFromCart(${index})">Xóa</button></td>
+        `;
+        cartTableBody.appendChild(row);
+        totalPrice += item.price * item.quantity;
     });
 
-    // Update the total price in the cart summary
-    totalPriceElement.innerText = totalPrice.toLocaleString() + " VND";
+    totalPriceElement.innerHTML = totalPrice.toLocaleString() + ' VND';
 }
 
-// Function to remove an item from the cart
+// Hàm cập nhật số lượng sản phẩm trong giỏ hàng
+function updateQuantity(index, quantity) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart[index].quantity = parseInt(quantity);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    displayCart();
+}
+
+// Hàm xóa sản phẩm khỏi giỏ hàng
 function removeFromCart(index) {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.splice(index, 1); // Remove the item at the specified index
-    localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage
-    displayCart(); // Refresh the cart display
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1); 
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    displayCart();
 }
 
-// Function to handle checkout (for now, just an alert)
+// Hàm xóa tất cả sản phẩm trong giỏ hàng
+function deleteAll() {
+    localStorage.removeItem('cart');
+    displayCart();
+}
+
+// Hàm xử lý thanh toán
 function payAll() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const totalPrice = document.getElementById("totalPrice").innerText;
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) {
+        alert("Vui lòng đăng nhập để thực hiện thanh toán.");
+        return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        alert("Giỏ hàng trống. Vui lòng thêm sản phẩm!");
+        return;
+    }
 
     if (confirm("Bạn có chắc chắn muốn thanh toán?")) {
-        // Create payment details
-        const paymentDetails = {
-            date: new Date().toLocaleString(),
-            totalAmount: totalPrice,
-            products: cart.map(product => product.name).join(', '),
+        // Lấy lịch sử thanh toán từ localStorage
+        let paymentHistory = JSON.parse(localStorage.getItem("paymentHistory")) || [];
+
+        // Thêm thông tin thanh toán vào lịch sử
+        const customerHistory = {
+            username: userInfo.username, // Tên tài khoản khách hàng
+            name: userInfo.name, // Tên đầy đủ của khách hàng (nếu có)
+            email: userInfo.email, // Email khách hàng (nếu có)
+            date: new Date().toISOString(),
+            products: cart.map(item => item.name).join(", "),
+            totalAmount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+            status: "paid" // Trạng thái của đơn hàng là "paid"
         };
 
-        // Save the payment history
-        savePaymentHistory(paymentDetails);
+        paymentHistory.push(customerHistory);
+        localStorage.setItem("paymentHistory", JSON.stringify(paymentHistory));
 
-        // Implement your payment process here
+        // Xóa giỏ hàng sau khi thanh toán
+        localStorage.removeItem("cart");
+
         alert("Thanh toán thành công!");
 
-        localStorage.removeItem("cart"); // Clear the cart after payment
-        displayCart(); // Refresh the cart display
+        // Hiển thị lại giỏ hàng và lịch sử thanh toán
+        displayCart();
+        displayPaymentHistory();
     }
 }
 
-// Function to delete all items from the cart
-function deleteAll() {
-    if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?")) {
-        localStorage.removeItem("cart"); // Clear the cart in localStorage
-        displayCart(); // Refresh the cart display
-    }
-}
 
-// Function to save payment history to localStorage
-function savePaymentHistory(paymentDetails) {
-    let paymentHistory = JSON.parse(localStorage.getItem('paymentHistory')) || [];
-    paymentHistory.push(paymentDetails);
-    localStorage.setItem('paymentHistory', JSON.stringify(paymentHistory));
-}
 
-// Function to display payment history
+// Hàm hiển thị lịch sử thanh toán
 function displayPaymentHistory() {
-    const paymentHistory = JSON.parse(localStorage.getItem('paymentHistory')) || [];
-    const paymentHistoryContainer = document.getElementById('payment-history');
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const paymentHistoryDiv = document.getElementById("payment-history");
 
-    if (paymentHistory.length > 0) {
-        paymentHistoryContainer.innerHTML = '<ul style="list-style-type: none; padding: 0; margin: 0;">';
-        paymentHistory.forEach(payment => {
-            paymentHistoryContainer.innerHTML += `
-                <li style="list-style-type: none; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-                    <strong>Ngày:</strong> ${payment.date} <br>
-                    <strong>Sản phẩm:</strong> ${payment.products} <br>
-                    <strong>Số tiền:</strong> ${payment.totalAmount}
-                </li>
-            `;
-        });
-        paymentHistoryContainer.innerHTML += '</ul>';
-    } else {
-        paymentHistoryContainer.innerHTML = 'Không có lịch sử thanh toán.';
+    if (!userInfo) {
+        paymentHistoryDiv.innerHTML = "<p>Vui lòng đăng nhập để xem lịch sử thanh toán.</p>";
+        return;
     }
+
+    const paymentHistory = JSON.parse(localStorage.getItem("paymentHistory")) || [];
+    const userPaymentHistory = paymentHistory.filter(payment => payment.username === userInfo.username);
+
+    if (userPaymentHistory.length === 0) {
+        paymentHistoryDiv.innerHTML = "<p>Không có lịch sử thanh toán.</p>";
+        return;
+    }
+
+    paymentHistoryDiv.innerHTML = "<h3>Lịch sử thanh toán</h3><ul></ul>";
+    const ul = paymentHistoryDiv.querySelector("ul");
+
+    userPaymentHistory.forEach((entry) => {
+        const li = document.createElement("li");
+        li.innerHTML = ` 
+            <strong>Ngày thanh toán:</strong> <span class="payment-date">${new Date(entry.date).toLocaleString()}</span>
+            <ul>
+                ${entry.products
+                    .split(", ")
+                    .map(product => `<li class="payment-item">${product}</li>`)
+                    .join("")}
+            </ul>
+            <strong>Tổng tiền:</strong> ${entry.totalAmount.toLocaleString()} VND
+        `;
+        ul.appendChild(li);
+    });
 }
+
+// Khi tải trang, hiển thị giỏ hàng và lịch sử thanh toán nếu có
+document.addEventListener("DOMContentLoaded", function () {
+    displayCart();
+    displayPaymentHistory();
+});
