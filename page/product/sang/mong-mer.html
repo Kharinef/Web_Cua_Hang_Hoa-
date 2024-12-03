@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flower Shop</title>
+    <link rel="stylesheet" href="../../../css/login.css">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css"> <!-- Bootstrap -->
     <link rel="stylesheet" href="../../../css/product.css"> <!-- Product -->
     <link rel="stylesheet" href="../../../css/product-header.css"> <!-- Header-->
 </head>
 
 <body>
-    <!-- HEADER -->
     <div class="header">
         <div class="header-left">
             <a href="https://www.sgu.edu.vn/"><img src="../../../images/SGU-LOGO.png" style="width: 60px; height: 60px;"
@@ -37,18 +37,21 @@
             </div>
         </div>
         <div>
-            <a class="center" href="../../../mainpage.html"><img src="../../../images/FlowerShop.png" alt="Logo"></a>
+            <a class="center" href="../../../Mainpage.html"><img src="../../../Images/FlowerShop.png" alt="Logo"></a>
         </div>
         <div class="header-right">
-            <a href="../../../Account.html">Tài khoản</a>
-            <a href="../../../cart/cart.html" class="cart"><i class="cart-icon fas fa-shopping-bag"></i> Giỏ hàng</a>
-
+            <a href="javascript:void(0)" id="accountLink" onclick="showAccountPopup()">Tài khoản</a>
+            <a href="../../cart/cart.html" class="cart">
+                <i class="fa fa-shopping-cart" aria-hidden="true" style="display: none;"></i>
+                Giỏ hàng
+            </a>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
                 <img src="../../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
         </div>
+
     </div>
 
     <div class="nav-bar">
@@ -61,7 +64,6 @@
             <li><a href="../../../page/menu/re1.html">Hoa sinh nhật giá rẻ</a></li>
         </ul>
     </div>
-
     <!-- PRODUCT -->
     <section class="product-details my-3 container">
         <div class="product-details-content d-flex">
@@ -240,6 +242,7 @@
     <script src="../../../js/product.js"></script>
     <script src="../../../js/searchproduct.js"></script>
     <script src="../../../js/dathang.js"></script>
+    <script src="../../../js/login.js"></script>
 </body>
 
 </html>
