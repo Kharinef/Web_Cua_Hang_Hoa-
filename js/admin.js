@@ -57,9 +57,9 @@ function showAddUserPopup(index = null) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const isEditing = index !== null;
 
-    const user = isEditing ? users[index] : { username: '', name: '', email: '' };
+    const user = isEditing ? users[index] : { username: '', name: '', email: '', password: '' };
 
-    let username, name, email;
+    let username, name, email, password;
 
     // Hàm kiểm tra nếu người dùng nhấn hủy
     function promptWithCancel(message, defaultValue) {
@@ -114,10 +114,36 @@ function showAddUserPopup(index = null) {
         }
     } while (!email);
 
+    // Validate and prompt for password (edit password only if editing)
+    if (isEditing) {
+        do {
+            password = promptWithCancel('Nhập mật khẩu mới (để trống nếu không thay đổi):', user.password);
+            if (password === 'cancel') {
+                return; // Nếu người dùng chọn Cancel, dừng lại
+            }
+            // If password is provided, validate it (minimum 8 characters, 1 uppercase, 1 special character)
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+            if (password && !passwordRegex.test(password)) {
+                alert('Mật khẩu phải có ít nhất 8 ký tự, bao gồm 1 ký tự đặc biệt và 1 chữ cái in hoa.');
+                password = null; // Reset để buộc nhập lại
+            }
+        } while (password && !/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/.test(password)); // Continue prompting until valid password
+    } else {
+        password = promptWithCancel('Nhập mật khẩu:', '');
+        if (password === 'cancel') {
+            return; // Nếu người dùng chọn Cancel, dừng lại
+        }
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert('Mật khẩu phải có ít nhất 8 ký tự, bao gồm 1 ký tự đặc biệt và 1 chữ cái in hoa.');
+            return;
+        }
+    }
+
     // Set status to 'Active' by default
     const status = 'Active';
 
-    const newUser = { username, name, email, status };
+    const newUser = { username, name, email, password, status };
 
     if (isEditing) {
         users[index] = newUser; // Cập nhật người dùng hiện tại
@@ -128,8 +154,11 @@ function showAddUserPopup(index = null) {
     localStorage.setItem('users', JSON.stringify(users));
     loadUsers();
 }
+
 // Initial load of users when the page is loaded
 document.addEventListener('DOMContentLoaded', loadUsers);
+
+
 
 
 
@@ -304,7 +333,7 @@ function displayOrders() {
             <td>${order.email || "Không có địa chỉ"}</td>
             <td>${order.status === "paid" ? "Đã thanh toán" : "Chưa thanh toán"}</td>
             <td>
-                <button class="btn btn-info" onclick="viewOrderDetails(${index})">Thông tin chi tiết đơn hàng</button>
+                <button class="btn-primary" onclick="viewOrderDetails(${index})">Thông tin chi tiết đơn hàng</button>
             </td>
         `;
         orderTableBody.appendChild(row);
