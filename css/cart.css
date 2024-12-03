@@ -108,30 +108,7 @@ button:hover {
     color: #f44336;
 }
 
-/* Điều chỉnh nút tìm kiếm */
-.search-container {
-    position: relative;
-    display: inline-block;
-    margin-left: 10px;
-}
 
-.search-container input {
-    width: 200px;
-    padding: 5px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.search-container .search-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
 
 /* Hiển thị các sản phẩm không có trong giỏ hàng */
 .cart-items .empty-cart-message {
