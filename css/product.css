@@ -486,6 +486,51 @@ body {
     /* Để có thể đặt nút mũi tên */
 }
 
+.related-products-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Đảm bảo giới hạn vùng hiển thị */
+}
+
+.related-products-list {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+}
+
+.product-card {
+    flex: 0 0 auto;
+    width: 200px; /* Hoặc kích thước mong muốn */
+    margin: 0 10px;
+    text-align: center;
+}
+
+.scroll-left, .scroll-right {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.scroll-left {
+    left: 0;
+}
+
+.scroll-right {
+    right: 0;
+}
+
+.scroll-left:hover, .scroll-right:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 .product-card {
     width: 250px;
     /* Kích thước sản phẩm */
