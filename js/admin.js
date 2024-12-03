@@ -288,137 +288,102 @@ window.onload = function() {
 
 
 //
-// Hàm để lấy dữ liệu lịch sử thanh toán từ localStorage
-function getPaymentHistory() {
-    try {
-        return JSON.parse(localStorage.getItem('paymentHistory')) || [];
-    } catch (e) {
-        console.error("Lỗi khi đọc lịch sử thanh toán từ localStorage:", e);
-        return [];
-    }
-}
-
-// Hàm để lấy thông tin tài khoản khách hàng từ localStorage
-function getUserInfo(username) {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    return users.find(user => user.username === username);
-}
-
-// Hàm để định dạng thời gian (ngày/tháng/năm)
-function formatDate(date) {
-    const d = new Date(date);
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
-    const year = d.getFullYear();
-    return `${day}/${month}/${year}`;
-}
-
-// Hàm để lọc lịch sử thanh toán
-function filterOrders() {
-    const startDate = document.getElementById("filterStartDate").value;
-    const endDate = document.getElementById("filterEndDate").value;
-    const status = document.getElementById("filterStatus").value;
-
+// Hàm hiển thị danh sách đơn hàng
+function displayOrders() {
+    const orders = JSON.parse(localStorage.getItem("paymentHistory")) || [];
     const orderTableBody = document.getElementById("orderTableBody");
-    const paymentHistory = getPaymentHistory();
 
-    // Xóa nội dung cũ trong bảng
-    orderTableBody.innerHTML = '';
+    orderTableBody.innerHTML = ""; // Xóa dữ liệu cũ
 
-    // Lọc dữ liệu
-    const filteredOrders = paymentHistory.filter(order => {
-        const orderDate = new Date(order.date);
-        const isWithinDateRange =
-            (!startDate || orderDate >= new Date(startDate)) &&
-            (!endDate || orderDate <= new Date(endDate));
-
-        // Nếu chọn trạng thái, kiểm tra xem trạng thái có khớp không
-        const matchesStatus =
-            !status || (status === 'new' && !order.status) || order.status === status;
-
-        return isWithinDateRange && matchesStatus;
+    orders.forEach((order, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${order.name || order.username}</td>
+            <td>${new Date(order.date).toLocaleDateString()}</td>
+            <td>${order.email || "Không có địa chỉ"}</td>
+            <td>${order.status === "paid" ? "Đã thanh toán" : "Chưa thanh toán"}</td>
+            <td>
+                <button class="btn btn-info" onclick="viewOrderDetails(${index})">Thông tin chi tiết đơn hàng</button>
+            </td>
+        `;
+        orderTableBody.appendChild(row);
     });
+}
 
-    // Hiển thị các đơn hàng đã lọc trong bảng
-    if (filteredOrders.length > 0) {
-        filteredOrders.forEach((order, index) => {
-            const row = document.createElement("tr");
-
+// Hàm xem chi tiết đơn hàng
+function viewOrderDetails(index) {
+    const orders = JSON.parse(localStorage.getItem("paymentHistory")) || [];
+    const order = orders[index];
+    
+    if (order) {
+        // Hiển thị thông tin chi tiết đơn hàng trong một cửa sổ hoặc phần nội dung mới
+        let orderDetails = `
+            Thông tin chi tiết đơn hàng
+            Tên khách hàng: ${order.name || order.username}
+            Email: ${order.email || "Không có email"}
             
-
-            // Tạo các ô cho mỗi cột
-            const idCell = document.createElement("td");
-            const customerCell = document.createElement("td");
-            const dateCell = document.createElement("td");
-            const addressCell = document.createElement("td");
-            const statusCell = document.createElement("td");
-            const actionCell = document.createElement("td");
-
-            // Điền dữ liệu vào các ô
-            idCell.innerText = index + 1; // ID (tăng dần)
-            const customerInfo = getUserInfo(order.customerUsername); // Lấy thông tin khách hàng từ tên đăng nhập
-            customerCell.innerText = customerInfo ? customerInfo.username : "Tài khoản không xác định"; // Hiển thị tên tài khoản
-            dateCell.innerText = formatDate(order.date); // Định dạng thời gian
-            addressCell.innerText = customerInfo ? customerInfo.address : "Không có địa chỉ"; // Địa chỉ giao hàng từ thông tin khách hàng
-            
-            // Chỉnh trạng thái đơn hàng
-            const orderStatus = order.status === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán'; // Nếu trạng thái là 'paid', hiển thị 'Đã thanh toán'
-            statusCell.innerText = orderStatus; // Trạng thái
-
-            // Hiển thị thông tin khách hàng (email, phone, address)
-            const customerDetailsButton = document.createElement("button");
-            customerDetailsButton.innerText = "Thông tin khách hàng";
-            customerDetailsButton.onclick = function () {
-                showCustomerDetails(customerInfo);
-            };
-
-            // Hành động: Ví dụ, nút chi tiết
-            const detailButton = document.createElement("button");
-            detailButton.innerText = "Chi tiết";
-            detailButton.onclick = function () {
-                showOrderDetails(order);
-            };
-
-            actionCell.appendChild(detailButton);
-            actionCell.appendChild(customerDetailsButton);
-
-            // Gắn các ô vào hàng
-            row.appendChild(idCell);
-            row.appendChild(customerCell);
-            row.appendChild(dateCell);
-            row.appendChild(addressCell);
-            row.appendChild(statusCell);
-            row.appendChild(actionCell);
-
-            // Gắn hàng vào bảng
-            orderTableBody.appendChild(row);
-        });
+            Ngày thanh toán: ${new Date(order.date).toLocaleString()}
+            Sản phẩm: ${order.products.split(", ").join(", ")}
+            Tổng tiền: ${order.totalAmount.toLocaleString()} VND
+            Trạng thái: ${order.status === "paid" ? "Đã thanh toán" : "Chưa thanh toán"}
+        `;
+        alert(orderDetails);  // Hoặc bạn có thể hiển thị trong một modal hoặc phần riêng
     } else {
-        // Nếu không có đơn hàng, hiển thị thông báo
-        orderTableBody.innerHTML = '<tr><td colspan="6">Không tìm thấy đơn hàng nào.</td></tr>';
+        alert("Không tìm thấy đơn hàng.");
     }
 }
 
-// Hàm để hiển thị chi tiết đơn hàng (ví dụ, trong một hộp thoại)
-function showOrderDetails(order) {
-    alert(`Chi tiết đơn hàng:\n- Ngày: ${order.date}\n- Sản phẩm: ${order.products}\n- Tổng tiền: ${order.totalAmount}`);
-}
+// Hàm xử lý thanh toán
+function payAll() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) {
+        alert("Vui lòng đăng nhập để thực hiện thanh toán.");
+        return;
+    }
 
-// Hàm để hiển thị thông tin khách hàng
-// Hàm để hiển thị thông tin khách hàng
-function showCustomerDetails(customer) {
-    if (customer) {
-        alert(`Thông tin khách hàng:\n- Tên tài khoản: ${customer.username}\n- Email: ${customer.email}\n- Số điện thoại: ${customer.phone}\n- Địa chỉ: ${customer.address}`);
-    } else {
-        alert("Không tìm thấy thông tin khách hàng.");
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        alert("Giỏ hàng trống. Vui lòng thêm sản phẩm!");
+        return;
+    }
+
+    if (confirm("Bạn có chắc chắn muốn thanh toán?")) {
+        // Lấy lịch sử thanh toán từ localStorage
+        let paymentHistory = JSON.parse(localStorage.getItem("paymentHistory")) || [];
+
+        // Thêm thông tin thanh toán vào lịch sử
+        const customerHistory = {
+            username: userInfo.username, // Tên tài khoản khách hàng
+            name: userInfo.name, // Tên đầy đủ của khách hàng (nếu có)
+            email: userInfo.email, // Email khách hàng (nếu có)
+            date: new Date().toISOString(),
+            products: cart.map(item => item.name).join(", "),
+            totalAmount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+            status: "paid" // Trạng thái của đơn hàng là "paid"
+        };
+
+        paymentHistory.push(customerHistory);
+        localStorage.setItem("paymentHistory", JSON.stringify(paymentHistory));
+
+        // Xóa giỏ hàng sau khi thanh toán
+        localStorage.removeItem("cart");
+
+        alert("Thanh toán thành công!");
+
+        // Hiển thị lại giỏ hàng và lịch sử thanh toán
+        displayCart();
+        displayPaymentHistory();
+        displayOrders();  // Hiển thị lại danh sách đơn hàng sau khi thanh toán
     }
 }
 
+// Hiển thị danh sách đơn hàng khi tải trang
+document.addEventListener("DOMContentLoaded", function () {
+    displayOrders();
+});
 
-// Tải lịch sử thanh toán khi tải trang
-window.onload = function () {
-    filterOrders();
-};
+
 
 
 
