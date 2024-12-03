@@ -33,35 +33,59 @@ function toggleDescription() {
   }
 }
 
-// Chức năng cuộn ngang
-const scrollContainer = document.querySelector(".related-products-list");
-const scrollLeftButton = document.querySelector(".scroll-left");
-const scrollRightButton = document.querySelector(".scroll-right");
+const productList = document.querySelector(".related-products-list");
+const scrollLeft = document.querySelector(".scroll-left");
+const scrollRight = document.querySelector(".scroll-right");
 
-// Tính toán số lượng sản phẩm hiển thị
-const productWidth = 300; // Kích thước mỗi sản phẩm (bao gồm margin/padding)
-const visibleProducts = 5; // Số sản phẩm hiển thị trong khung
-let currentScroll = 0; // Vị trí cuộn hiện tại
+// Clone sản phẩm đầu và cuối
+const firstProduct = productList.firstElementChild.cloneNode(true);
+const lastProduct = productList.lastElementChild.cloneNode(true);
+productList.appendChild(firstProduct);
+productList.insertBefore(lastProduct, productList.firstElementChild);
 
-scrollLeftButton.addEventListener("click", () => {
-  if (currentScroll > 0) {
-    currentScroll--;
-    scrollContainer.style.transform = `translateX(-${
-      currentScroll * productWidth
-    }px)`;
-  }
+let currentIndex = 1; // Bắt đầu từ phần tử thực đầu tiên
+const productWidth = productList.firstElementChild.offsetWidth + 20; // 20 là margin
+
+// Đặt vị trí ban đầu
+productList.style.transform = `translateX(-${currentIndex * productWidth}px)`;
+
+// Hàm thay đổi vị trí
+const updatePosition = (index) => {
+    productList.style.transition = "transform 0.5s ease-in-out";
+    productList.style.transform = `translateX(-${index * productWidth}px)`;
+};
+
+// Hàm kiểm tra tuần hoàn
+const checkLoop = () => {
+    if (currentIndex === 0) {
+        setTimeout(() => {
+            productList.style.transition = "none";
+            currentIndex = productList.children.length - 2;
+            productList.style.transform = `translateX(-${currentIndex * productWidth}px)`;
+        }, 500);
+    } else if (currentIndex === productList.children.length - 1) {
+        setTimeout(() => {
+            productList.style.transition = "none";
+            currentIndex = 1;
+            productList.style.transform = `translateX(-${currentIndex * productWidth}px)`;
+        }, 500);
+    }
+};
+
+// Hàm cuộn trái
+scrollLeft.addEventListener("click", () => {
+    currentIndex--;
+    updatePosition(currentIndex);
+    checkLoop();
 });
 
-scrollRightButton.addEventListener("click", () => {
-  const maxScroll =
-    document.querySelectorAll(".product-card").length - visibleProducts;
-  if (currentScroll < maxScroll) {
-    currentScroll++;
-    scrollContainer.style.transform = `translateX(-${
-      currentScroll * productWidth
-    }px)`;
-  }
+// Hàm cuộn phải
+scrollRight.addEventListener("click", () => {
+    currentIndex++;
+    updatePosition(currentIndex);
+    checkLoop();
 });
+
 
 //
 function updateItemsPerPage() {
