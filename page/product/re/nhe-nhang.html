@@ -46,7 +46,7 @@
                 <img src="../../../Images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
-            <script src="scripts.js"></script>
+     
         </div>
     </div>
 
@@ -124,16 +124,19 @@
 </footer>
 
 
-    <script>
-        function performSearch() {
-            const query = document.getElementById("searchInput").value;
-            if (query.trim()) {
-                window.location.href = `/search?query=${encodeURIComponent(query)}`;
-            } else {
-                alert("Vui lòng nhập từ khóa để tìm kiếm.");
-            }
+<script>
+    function performSearch() {
+        const query = document.getElementById("searchInput").value;
+        if (query.trim()) {
+            window.location.href = `/search?query=${encodeURIComponent(query)}`;
+        } else {
+            alert("Vui lòng nhập từ khóa để tìm kiếm.");
         }
-    </script>
+    }
+</script>
+<script src="/js/scripts.js"></script>
+<script src="/js/product.js"></script>
+<script src="/js/searchproduct.js"></script>
 
     <script>
         document.querySelector('.qtyplus').addEventListener('click', function() {
