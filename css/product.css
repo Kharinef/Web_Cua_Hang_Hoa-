@@ -1,9 +1,12 @@
-/* General styling for body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    background-color: white;
+    color: black;
+    width: 1200px;
+    margin: 0 auto;
+    overflow-x: hidden;
 }
 
 /* Product Details Section */
@@ -170,13 +173,47 @@ body {
     background-color: #e74c3c;
 }
 
-/* Ẩn phần mô tả chi tiết */
-.product-details-description p {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 400px;
+/* Style cho mô tả sản phẩm */
+.product-details-description {
+    margin-top: 20px;
 }
+
+.description-content {
+    overflow: hidden;
+    max-height: 80px;
+    /* Chiều cao thu gọn */
+    transition: max-height 0.5s ease;
+}
+
+.description-content.expanded {
+    max-height: 500px;
+    /* Chiều cao khi mở rộng */
+}
+
+.more-content {
+    display: none;
+    /* Ẩn nội dung bổ sung */
+}
+
+.description-content.expanded .more-content {
+    display: block;
+    /* Hiển thị nội dung bổ sung */
+}
+
+.read-more {
+    background-color: #FFB6C1;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.read-more:hover {
+    background-color: #e74c3c;
+}
+
 
 .product-details-description.expanded p {
     white-space: normal;
@@ -509,27 +546,38 @@ body {
 /* Xóa mọi nền của nút scroll */
 .related-products .scroll-left,
 .related-products .scroll-right {
-    background: transparent; /* Xóa nền */
-    border: none; /* Bỏ viền */
-    display: flex; /* Đảm bảo mũi tên hiển thị bên trong nút */
-    justify-content: center; /* Canh giữa mũi tên */
-    align-items: center; /* Canh giữa mũi tên theo chiều dọc */
-    cursor: pointer; /* Con trỏ dạng click */
-    padding: 5px; /* Khoảng cách xung quanh */
+    background: transparent;
+    /* Xóa nền */
+    border: none;
+    /* Bỏ viền */
+    display: flex;
+    /* Đảm bảo mũi tên hiển thị bên trong nút */
+    justify-content: center;
+    /* Canh giữa mũi tên */
+    align-items: center;
+    /* Canh giữa mũi tên theo chiều dọc */
+    cursor: pointer;
+    /* Con trỏ dạng click */
+    padding: 5px;
+    /* Khoảng cách xung quanh */
 }
 
 /* Đảm bảo hình ảnh mũi tên có kích thước hợp lý */
 .related-products .scroll-left img,
 .related-products .scroll-right img {
-    width: 30px; /* Kích thước ảnh */
-    height: 30px; /* Kích thước ảnh */
+    width: 30px;
+    /* Kích thước ảnh */
+    height: 30px;
+    /* Kích thước ảnh */
 }
 
 /* Thêm hiệu ứng hover cho các nút */
 .related-products .scroll-left:hover,
 .related-products .scroll-right:hover {
-    background-color: #f0f0f0; /* Màu nền khi hover */
-    border-radius: 50%; /* Tạo hình tròn */
+    background-color: #f0f0f0;
+    /* Màu nền khi hover */
+    border-radius: 50%;
+    /* Tạo hình tròn */
 }
 
 /* Mobile Responsive Design */
