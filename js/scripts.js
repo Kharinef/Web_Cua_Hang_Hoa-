@@ -1,13 +1,3 @@
-// Tìm kiếm sản phẩm
-function performSearch() {
-  const query = document.getElementById("searchInput").value;
-  if (query.trim()) {
-    window.location.href = `/search?query=${encodeURIComponent(query)}`;
-  } else {
-    alert("Vui lòng nhập từ khóa để tìm kiếm.");
-  }
-}
-
 // Gợi ý sản phẩm (placeholder)
 function showSuggestions() {
   const input = document.getElementById("searchInput").value;
