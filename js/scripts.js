@@ -1,25 +1,3 @@
-// Gợi ý sản phẩm (placeholder)
-function showSuggestions() {
-  const input = document.getElementById("searchInput").value;
-  const suggestionsBox = document.getElementById("suggestions");
-
-  // Hiển thị gợi ý (giả lập)
-  if (input.trim()) {
-    suggestionsBox.innerHTML = `<p>Gợi ý: ${input}</p>`;
-  } else {
-    suggestionsBox.innerHTML = "";
-  }
-}
-
-// Placeholder: Gợi ý sản phẩm (có thể fetch từ API trong thực tế)
-function loadRelatedProducts() {
-  console.log("Gợi ý sản phẩm đã được tải.");
-  // Thêm logic fetch dữ liệu nếu cần
-}
-
-document.addEventListener("DOMContentLoaded", loadRelatedProducts);
-
-//
 function updateItemsPerPage() {
   const itemsPerPage = parseInt(document.getElementById("itemsPerPage").value);
 
