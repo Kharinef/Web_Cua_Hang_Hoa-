@@ -22,7 +22,8 @@
                     <img src="../../../images/FB_icon.jpg" alt="Facebook Icon" style="width: 20px; height: 20px;">
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=100089018237035">
-                    <img src="../../../images/Instagram_icon.png" alt="Instagram Icon" style="width: 20px; height: 20px;">
+                    <img src="../../../images/Instagram_icon.png" alt="Instagram Icon"
+                        style="width: 20px; height: 20px;">
                 </a>
                 <a href="https://www.facebook.com/dtp.clo">
                     <img src="../../../images/Telegram_icon.png" alt="Telegram Icon" style="width: 20px; height: 20px;">
@@ -43,14 +44,14 @@
             <a href="../../cart/cart.html" class="cart">
                 <i class="fa fa-shopping-cart" aria-hidden="true" style="display: none;"></i>
                 Giỏ hàng
-            </a>            
+            </a>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="showSuggestions()">
                 <img src="../../../images/search-icon.png" alt="Search Icon" id="searchIcon" class="search-icon">
                 <div id="suggestions"></div>
             </div>
         </div>
-        
+
     </div>
 
     <div class="nav-bar">
@@ -65,48 +66,48 @@
     </div>
 
     <!-- Popup Đăng Nhập -->
-<div id="loginPopup" style="display: none;">
-    <form onsubmit="handleLogin(); return false;">
-        <button type="button" class="close-popup" onclick="closePopup('loginPopup')">×</button>
-        <h3>Đăng nhập</h3>
-        <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
-        <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
-        <button type="submit">Đăng nhập</button>
-        <div class="signup-link">
-            Chưa có tài khoản? <a href="#" onclick="showSignupPopup()">Đăng ký ngay</a>
-        </div>
-    </form>
-</div>
-
-<!-- Popup Đăng Ký -->
-<div id="signupPopup" style="display: none;">
-    <form id="signupForm" onsubmit="return saveAccountData()">
-        <button type="button" class="close-popup" onclick="closePopup('signupPopup')">×</button>
-        <h3>Đăng ký tài khoản</h3>
-        <input type="text" id="name" placeholder="Tên khách hàng" required><br>
-        <input type="text" id="username" placeholder="Tên đăng nhập" required><br>
-        <input type="email" id="email" placeholder="Email" required><br>
-        <input type="text" id="phone" placeholder="Số điện thoại" required><br>
-        <input type="text" id="address" placeholder="Địa chỉ" required><br> <!-- Thêm trường địa chỉ -->
-        <input type="password" id="password" placeholder="Mật khẩu" required><br>
-        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required><br>
-        <div class="error-message" id="passwordError"></div>
-        <button type="submit">Đăng ký</button>
-        <div class="login-link">
-            Đã có tài khoản? <a href="#" onclick="showLoginPopup()">Đăng nhập</a>
-        </div>
-    </form>
-</div>
-
-<!-- Popup Thông Tin Tài Khoản -->
-<div id="accountPopup" style="display: none;">
-    <div class="account-content">
-        <button type="button" class="close-popup" onclick="closePopup('accountPopup')">×</button>
-        <h3>Thông tin tài khoản</h3>
-        <div id="accountDetails"></div>
-        <button onclick="logout()">Đăng xuất</button>
+    <div id="loginPopup" style="display: none;">
+        <form onsubmit="handleLogin(); return false;">
+            <button type="button" class="close-popup" onclick="closePopup('loginPopup')">×</button>
+            <h3>Đăng nhập</h3>
+            <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required><br>
+            <input type="password" id="loginPassword" placeholder="Mật khẩu" required><br>
+            <button type="submit">Đăng nhập</button>
+            <div class="signup-link">
+                Chưa có tài khoản? <a href="#" onclick="showSignupPopup()">Đăng ký ngay</a>
+            </div>
+        </form>
     </div>
-</div>
+
+    <!-- Popup Đăng Ký -->
+    <div id="signupPopup" style="display: none;">
+        <form id="signupForm" onsubmit="return saveAccountData()">
+            <button type="button" class="close-popup" onclick="closePopup('signupPopup')">×</button>
+            <h3>Đăng ký tài khoản</h3>
+            <input type="text" id="name" placeholder="Tên khách hàng" required><br>
+            <input type="text" id="username" placeholder="Tên đăng nhập" required><br>
+            <input type="email" id="email" placeholder="Email" required><br>
+            <input type="text" id="phone" placeholder="Số điện thoại" required><br>
+            <input type="text" id="address" placeholder="Địa chỉ" required><br> <!-- Thêm trường địa chỉ -->
+            <input type="password" id="password" placeholder="Mật khẩu" required><br>
+            <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required><br>
+            <div class="error-message" id="passwordError"></div>
+            <button type="submit">Đăng ký</button>
+            <div class="login-link">
+                Đã có tài khoản? <a href="#" onclick="showLoginPopup()">Đăng nhập</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Popup Thông Tin Tài Khoản -->
+    <div id="accountPopup" style="display: none;">
+        <div class="account-content">
+            <button type="button" class="close-popup" onclick="closePopup('accountPopup')">×</button>
+            <h3>Thông tin tài khoản</h3>
+            <div id="accountDetails"></div>
+            <button onclick="logout()">Đăng xuất</button>
+        </div>
+    </div>
     </div>
 
     <!-- PRODUCT -->
@@ -282,7 +283,7 @@
             }
         }
     </script>
-    
+
     <script src="../../../js/scripts.js"></script>
     <script src="../../../js/product.js"></script>
     <script src="../../../js/dathang.js"></script>
