@@ -1,8 +1,8 @@
-// Kiểm tra trạng thái đăng nhập của người dùng khi trang được tải lại
-window.onload = function() {
+// Kiểm tra trạng thái đăng nhập khi trang được tải lại
+window.onload = function () {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const accountLink = document.getElementById('accountLink');
-    
+
     if (userInfo) {
         accountLink.textContent = 'Tài khoản'; // Đổi liên kết thành "Thông tin tài khoản"
     } else {
@@ -30,7 +30,6 @@ function showAccountPopup() {
     const accountDetails = document.getElementById('accountDetails');
 
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const accountLink = document.getElementById('accountLink');
 
     if (userInfo) {
         // Hiển thị thông tin tài khoản
@@ -38,10 +37,10 @@ function showAccountPopup() {
             <p><strong>Họ tên:</strong> ${userInfo.name}</p>
             <p><strong>Email:</strong> ${userInfo.email}</p>
             <p><strong>Số điện thoại:</strong> ${userInfo.phone}</p>
+            <p><strong>Địa chỉ:</strong> ${userInfo.address}</p>
             <p><strong>Tên đăng nhập:</strong> ${userInfo.username}</p>
         `;
         accountPopup.style.display = 'flex'; // Hiển thị popup thông tin tài khoản
-        accountLink.textContent = 'Tài khoản'; // Cập nhật liên kết thành "Tài khoản"
     } else {
         alert('Bạn chưa đăng nhập!');
         closePopup('accountPopup'); // Ẩn popup tài khoản nếu chưa đăng nhập
@@ -66,8 +65,7 @@ function handleLogin() {
         // Đăng nhập thành công
         alert('Đăng nhập thành công!');
         localStorage.setItem('userInfo', JSON.stringify(account)); // Lưu thông tin người dùng vào localStorage
-        
-        // Hiển thị popup thông tin tài khoản
+
         closePopup('loginPopup');
         showAccountPopup(); // Hiển thị popup tài khoản
         document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật lại liên kết tài khoản
@@ -76,9 +74,7 @@ function handleLogin() {
     }
 }
 
-
-
-
+// Đăng ký tài khoản mới
 function saveAccountData() {
     const name = document.getElementById('name').value;
     const username = document.getElementById('username').value;
@@ -86,6 +82,7 @@ function saveAccountData() {
     const phone = document.getElementById('phone').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
+    const address = document.getElementById('address').value; // Lấy giá trị địa chỉ
     const passwordError = document.getElementById('passwordError');
 
     // Kiểm tra tên khách hàng (không chứa số)
@@ -105,24 +102,23 @@ function saveAccountData() {
     // Kiểm tra mật khẩu có ít nhất 1 ký tự đặc biệt và 1 chữ cái in hoa
     const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     if (!passwordRegex.test(password)) {
-        passwordError.textContent = 'Mật khẩu phải có ít nhất 8 chữ số trong đó ít nhất 1 ký tự đặc biệt và 1 chữ cái in hoa.';
+        passwordError.textContent = 'Mật khẩu phải có ít nhất 8 ký tự, 1 chữ cái in hoa và 1 ký tự đặc biệt.';
         return false;
     }
 
-    // Kiểm tra mật khẩu nhập lại có trùng với mật khẩu
+    // Kiểm tra mật khẩu nhập lại
     if (password !== confirmPassword) {
         passwordError.textContent = 'Mật khẩu nhập lại không khớp.';
         return false;
     }
 
-    // Kiểm tra tên đăng nhập đã tồn tại chưa
+    // Kiểm tra tên đăng nhập và email đã tồn tại chưa
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (users.some(user => user.username === username)) {
         alert("Tên đăng nhập đã tồn tại.");
         return false;
     }
 
-    // Kiểm tra email đã tồn tại chưa
     if (users.some(user => user.email === email)) {
         alert("Email đã được đăng ký.");
         return false;
@@ -131,27 +127,26 @@ function saveAccountData() {
     // Xóa thông báo lỗi nếu hợp lệ
     passwordError.textContent = '';
 
-    // Lưu thông tin tài khoản vào localStorage
-    const userAccount = { name, username, email, phone, password, status: 'Active' };
+    // Lưu thông tin tài khoản
+    const userAccount = { name, username, email, phone, address, password, status: 'Active' };
     users.push(userAccount);
-    localStorage.setItem('users', JSON.stringify(users)); // Lưu danh sách người dùng
-    localStorage.setItem('userInfo', JSON.stringify(userAccount)); // Lưu thông tin người dùng đăng ký
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('userInfo', JSON.stringify(userAccount));
 
     alert("Đăng ký thành công!");
     closePopup('signupPopup');
     showAccountPopup(); // Hiển thị popup thông tin tài khoản
-    document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết tài khoản
+    document.getElementById('accountLink').textContent = 'Tài khoản';
     return false; // Ngăn chặn form gửi lại và tải lại trang
 }
 
-
 // Đăng xuất
 function logout() {
-    localStorage.removeItem('userInfo'); // Xóa thông tin người dùng
+    localStorage.removeItem('userInfo');
     closePopup('accountPopup');
     alert('Bạn đã đăng xuất thành công!');
-    document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật lại liên kết "Tài khoản"
-    showLoginPopup(); // Quay lại popup đăng nhập khi đăng xuất
+    document.getElementById('accountLink').textContent = 'Tài khoản'; // Cập nhật liên kết
+    showLoginPopup();
 }
 
 // Đóng popup
