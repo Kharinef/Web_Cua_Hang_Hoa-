@@ -111,10 +111,10 @@ function displayPaymentHistory() {
     const paymentHistoryContainer = document.getElementById('payment-history');
 
     if (paymentHistory.length > 0) {
-        paymentHistoryContainer.innerHTML = '<ul>';
+        paymentHistoryContainer.innerHTML = '<ul style="list-style-type: none; padding: 0; margin: 0;">';
         paymentHistory.forEach(payment => {
             paymentHistoryContainer.innerHTML += `
-                <li>
+                <li style="list-style-type: none; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
                     <strong>Ngày:</strong> ${payment.date} <br>
                     <strong>Sản phẩm:</strong> ${payment.products} <br>
                     <strong>Số tiền:</strong> ${payment.totalAmount}
